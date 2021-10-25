@@ -1,0 +1,107 @@
+.fixed-all{
+  // position: fixed;
+  // height: 100%;
+  // width: 100%;
+  // top: 0;
+  // z-index: 1000;
+  // overflow: hidden;
+  // background-color: rgba(0,0,0,0);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.sidenav-card{
+  background-color:rgba(17, 17, 17, 0.6); /* Black */
+  border-radius: 30px;
+  font-size: 10px;
+}
+
+.active-data{
+  width: 32px;
+  height: 32px;
+  background-color: #D49511; /* Black */
+  border-radius: 50%;
+}
+
+.active-station{
+  width: 32px;
+  height: 32px;
+  background-color: #D49511; /* Black */
+  border-radius: 50%;
+}
+
+.name-card{
+  :hover{
+    background-color:rgba(17, 17, 17, 0.6); /* Black */
+    border-radius: 40px;
+  }
+}
+
+.sidenav {
+  // width: 160px; /* Set the width of the sidebar */
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin: auto 0;
+  left: 0;
+  background-color: rgba(0,0,0,0);
+  overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+/* The navigation menu links */
+.sidenav p {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  display: block;
+  font-weight: bold;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav p:hover {
+  color: white;
+}
+
+
+.inactive-tab{
+  display: none
+}
+
+.select-date{
+  width: 400px;
+  select{
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+.date-select{
+  font-size: 20px;
+}
+
+.side-title{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+}
+
+.select-layer{
+  button{
+    display: block;
+  }
+}
+
+.sidebar-footer{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  list-style-type: none;
+  padding-bottom: 0.5em;
+}

@@ -24,6 +24,10 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import { initLeaflet } from '../plugins/init_leaflet';
+import { initRange } from '../plugins/init_range';
+
+import { selectLayer, selectDate } from '../plugins/init_sidebar';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -31,4 +35,8 @@ import "bootstrap";
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  initRange();
+  initLeaflet();
+  selectLayer();
+  selectDate();
 });
