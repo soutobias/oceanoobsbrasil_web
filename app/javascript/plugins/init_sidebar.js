@@ -1,4 +1,7 @@
-const selectLayer = () => {
+import { refreshLeaflet } from '../plugins/init_leaflet';
+
+
+const selectStation = () => {
 
   const buttons = document.querySelectorAll('.type-station')
   const buttonsText = document.querySelectorAll('.stations')
@@ -11,6 +14,7 @@ const selectLayer = () => {
           button_1.classList.remove('active-station');
         });
         event.currentTarget.classList.add('active-station');
+        refreshLeaflet();
       });
     });
     buttonsText.forEach((button1) => {
@@ -21,13 +25,14 @@ const selectLayer = () => {
         const idClick = event.currentTarget.id;
         const clicked = document.getElementById(idClick.slice(0,-1));
         clicked.classList.add('active-station');
+        refreshLeaflet();
       });
     });
-
   }
+
 };
 
-const selectDate = () => {
+const selectType = () => {
 
   const buttons = document.querySelectorAll('.data-station')
   const buttonsText = document.querySelectorAll('.stations-data')
@@ -39,6 +44,7 @@ const selectDate = () => {
           button_1.classList.remove('active-data');
         });
         event.currentTarget.classList.add('active-data');
+        refreshLeaflet();
       });
     });
     buttonsText.forEach((button1) => {
@@ -49,10 +55,11 @@ const selectDate = () => {
         const idClick = event.currentTarget.id;
         const clicked = document.getElementById(idClick.slice(0,-1));
         clicked.classList.add('active-data');
+        refreshLeaflet();
       });
     });
 
   }
 };
 
-export { selectLayer, selectDate };
+export { selectStation, selectType };

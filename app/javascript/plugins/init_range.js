@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-import 'leaflet/dist/leaflet'
+import { refreshLeaflet } from '../plugins/init_leaflet';
 
 
 const initRange = () => {
@@ -23,8 +23,8 @@ const initRange = () => {
       rangeBullet.style.left = (bulletPosition*98) + "%";
       var value = (this.value-this.min)/(this.max-this.min)*100
       rangeSlider.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
-       L.DomEvent.disableClickPropagation(this);
-       // e.preventDefault();
+      L.DomEvent.disableClickPropagation(this);
+      refreshLeaflet();
     }
 
     if (rangeSlider) {
@@ -38,6 +38,7 @@ const initRange = () => {
       rangeSlider.addEventListener("input", showSliderValue, false);
     }
 };
+
 export { initRange };
 
 

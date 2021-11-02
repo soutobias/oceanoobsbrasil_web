@@ -27,7 +27,7 @@ import "bootstrap";
 import { initLeaflet } from '../plugins/init_leaflet';
 import { initRange } from '../plugins/init_range';
 
-import { selectLayer, selectDate } from '../plugins/init_sidebar';
+import { selectStation, selectType } from '../plugins/init_sidebar';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -37,6 +37,6 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   initRange();
   initLeaflet();
-  selectLayer();
-  selectDate();
+  selectStation();
+  selectType();
 });

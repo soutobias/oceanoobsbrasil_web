@@ -10,3 +10,37 @@ html, body, #map {
     height: 100%;
 }
 
+.my-label{
+  color: black;
+  font-size: 10px;
+}
+
+.white-icon{
+  background-image: url('https://img.icons8.com/emoji/48/000000/white-circle-emoji.png');
+}
+
+.red-icon{
+  background-image: url('https://img.icons8.com/emoji/48/000000/red-circle-emoji.png');
+}
+
+.blue-icon{
+  background-image: url('https://img.icons8.com/emoji/48/000000/blue-circle-emoji.png');
+}
+
+.orange-icon{
+  background-image: url('https://img.icons8.com/emoji/48/000000/orange-circle-emoji.png');
+}
+
+
+.all-icon{
+  background-size: contain;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  width: 40px !important;
+  height: 40px !important;
+  margin-left: -20px !important;
+  margin-top: -20px !important;
+}

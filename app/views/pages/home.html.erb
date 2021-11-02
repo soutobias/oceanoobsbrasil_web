@@ -1,21 +1,17 @@
-
-<div id="data"
-  data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>">
+<div id='map'>
+  <div id="mapid"> </div>
 </div>
-
-<div id="mapid"
-  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-  data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>">
+<div>
   <div class="d-flex">
     <div class="sidenav d-flex">
       <div class='text-center sidenav-card pl-1 pr-1'>
         <p class='p-1 active-station type-station' id="stations"><i class="fas fa-anchor"></i></i></p>
         <p class='p-1 type-station' id="no-stations"><i class="fas fa-globe-americas"></i></p>
         <br>
-        <p class='p-1 active-data data-station' id="wave"><i class="fas fa-water"></i></p>
-        <p class='p-1 data-station' id="wind"><i class="fas fa-wind"></i></p>
+        <p class='p-1  data-station' id="wave"><i class="fas fa-water"></i></p>
+        <p class='p-1  data-station' id="wind"><i class="fas fa-wind"></i></p>
         <p class='p-1 data-station' id="water-temp"><i class="fas fa-thermometer-half"></i></p>
-        <p class='p-1 data-station' id="air-temp"><i class="fas fa-temperature-low"></i></p>
+        <p class='p-1 active-data data-station' id="air-temp"><i class="fas fa-temperature-low"></i></p>
       </div>
       <div class=''>
         <div class="name-card">
@@ -77,4 +73,8 @@
       </div>
     </div>
   </div>
+</div>
+<div id="data"
+  data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
