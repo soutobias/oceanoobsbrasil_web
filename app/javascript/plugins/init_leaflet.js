@@ -90,18 +90,18 @@ const refreshLeaflet = () => {
 
 
 const markerIcon = (text, limit) => {
-  let hmtlText = text.toFixed(1).toString();
+  let htmlText = text.toFixed(1).toString();
 
   if (text >= limit) {
     const icon = L.divIcon({
-      html: text,
+      html: htmlText,
       className: 'red-icon all-icon',
     });
     return icon;
 
   } else {
     const icon = L.divIcon({
-      html: text,
+      html: htmlText,
       className: 'white-icon all-icon',
     });
     return icon;
