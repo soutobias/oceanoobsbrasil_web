@@ -36,11 +36,15 @@ html, body, #map {
   background-size: contain;
   text-align: center;
   vertical-align: middle;
-  padding-top: 12px;
-  font-size: 10px;
+  padding-top: 11px;
+  font-size: 9px;
   font-weight: bold;
-  width: 40px !important;
-  height: 40px !important;
-  margin-left: -20px !important;
-  margin-top: -20px !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin-left: -16px !important;
+  margin-top: -16px !important;
+}
+
+.pop-up{
+  color: black;
 }

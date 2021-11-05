@@ -20,17 +20,23 @@
 }
 
 .active-data{
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background-color: #D49511; /* Black */
   border-radius: 50%;
+  i {
+    padding-top:2px ;
+  }
 }
 
 .active-station{
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background-color: #D49511; /* Black */
   border-radius: 50%;
+  i {
+    padding-top:2px ;
+  }
 }
 
 .name-card{
@@ -57,10 +63,11 @@
 .sidenav p {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 13px;
   color: rgba(255,255,255,0.7);
   display: block;
   font-weight: bold;
+  line-height: 1.0;
 }
 
 /* When you mouse over the navigation links, change their color */

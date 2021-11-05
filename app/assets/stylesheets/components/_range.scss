@@ -72,12 +72,12 @@
   position: relative;
   transform-origin: center center;
   display: block;
-  width: 150px;
+  width: 120px;
   background: rgb(212,149,0);
   line-height: 20px;
   text-align: center;
   font-weight: bold;
-  padding: 7px;
+  padding: 3px;
   box-sizing: border-box;
   box-shadow: 10px 10px 20px rgba(0,0,0,0.7);
   border-radius: 15px;
@@ -86,11 +86,11 @@
   font-style: normal;
   font-weight: normal;
   line-height: normal;
-  font-size: 17px;
+  font-size: 14px;
 }
 
 .range-hour{
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   p{
     padding: 0;
@@ -101,7 +101,7 @@
 .range-day{
   position: relative;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   p{
     padding: 0 0 3px 0;
     margin: 0;

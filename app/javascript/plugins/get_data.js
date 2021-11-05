@@ -12,17 +12,15 @@ const getData = () => {
     let updateUtc = new Date(utc.valueOf())
     updateUtc.setHours(updateUtc.getHours() + parseInt(rangeSlider.value))
 
-    let startDate = `${updateUtc.getFullYear()}-${updateUtc.getMonth().toString().padStart(2, '0')}-${updateUtc.getDay().toString().padStart(2, '0')}T${updateUtc.toLocaleTimeString('pt-BR')}`
+    let startDate = `${updateUtc.getFullYear()}-${(updateUtc.getMonth() + 1).toString().padStart(2, '0')}-${updateUtc.getDay().toString().padStart(2, '0')}T${updateUtc.toLocaleTimeString('pt-BR')}`
     updateUtc.setHours(updateUtc.getHours() + 6)
-    let endDate = `${updateUtc.getFullYear()}-${updateUtc.getMonth().toString().padStart(2, '0')}-${updateUtc.getDay().toString().padStart(2, '0')}T${updateUtc.toLocaleTimeString('pt-BR')}`
+    let endDate = `${updateUtc.getFullYear()}-${(updateUtc.getMonth() + 1).toString().padStart(2, '0')}-${updateUtc.getDay().toString().padStart(2, '0')}T${updateUtc.toLocaleTimeString('pt-BR')}`
 
     const token = dataElement.dataset.oceanobsApiKey;
 
     const activeStation = document.querySelector('.active-station')
     if (activeStation.id === 'stations') {
       const url = `https://remobsapi.herokuapp.com/api/v1/data_stations/last?start_date=${startDate}&end_date=${endDate}&token=${token}`
-      console.log(startDate)
-      console.log(endDate)
       return fetch(url,{
            method: 'GET',
            mode: 'cors',
@@ -30,9 +28,6 @@ const getData = () => {
         })
     } else {
       const url = `https://remobsapi.herokuapp.com/api/v1/data_no_stations?start_date=${startDate}&end_date=${endDate}&token=${token}`
-      console.log(startDate)
-      console.log(endDate)
-
       return fetch(url,{
            method: 'GET',
            mode: 'cors',
