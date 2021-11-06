@@ -42,6 +42,8 @@
         <p class='p-1 data-station' id="wind"><i class="fas fa-wind"></i></p>
         <p class='p-1 data-station' id="water-temp"><i class="fas fa-thermometer-half"></i></p>
         <p class='p-1 data-station' id="air-temp"><i class="fas fa-temperature-low"></i></p>
+        <p class='p-1 data-station' id="fog"><i class="fas fa-smog"></i></p>
+        <p class='p-1 data-station' id="tide"><i class="fas fa-ship"></i></p>
       </div>
       <div class=''>
         <div class="name-card">
@@ -62,6 +64,12 @@
         </div>
         <div class="name-card">
           <p class='p-1 stations-data' id='air-temp1'>Temperatura do Ar</p>
+        </div>
+        <div class="name-card">
+          <p class='p-1 stations-data' id='fog1'>Visibilidade</p>
+        </div>
+        <div class="name-card">
+          <p class='p-1 stations-data' id='tide1'>Maré Meteorológica</p>
         </div>
       </div>
     </div>
@@ -102,6 +110,9 @@
         <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2] + days_hour[3]  + days_hour[4])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*0)).strftime("%d-%m-%y")%> </p>
       </div>
     </div>
+  </div>
+  <div class='logo inactive-tab'>
+    <%= image_tag "logo2.png", class: "logo-img"  %>
   </div>
 </div>
 <div id="data"

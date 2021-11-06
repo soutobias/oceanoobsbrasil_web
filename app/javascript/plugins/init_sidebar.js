@@ -14,6 +14,18 @@ const selectStation = () => {
           button_1.classList.remove('active-station');
         });
         event.currentTarget.classList.add('active-station');
+        const activeStation = document.querySelector('.active-station')
+        if (activeStation.id === 'no-stations') {
+          document.getElementById('tide').classList.add('inactive-tab')
+          document.getElementById('tide1').classList.add('inactive-tab')
+          document.getElementById('fog').classList.add('inactive-tab')
+          document.getElementById('fog1').classList.add('inactive-tab')
+        } else {
+          document.getElementById('tide').classList.remove('inactive-tab')
+          document.getElementById('tide1').classList.remove('inactive-tab')
+          document.getElementById('fog').classList.remove('inactive-tab')
+          document.getElementById('fog1').classList.remove('inactive-tab')
+        }
         refreshLeaflet();
       });
     });
@@ -25,6 +37,18 @@ const selectStation = () => {
         const idClick = event.currentTarget.id;
         const clicked = document.getElementById(idClick.slice(0,-1));
         clicked.classList.add('active-station');
+        const activeStation = document.querySelector('.active-station')
+        if (activeStation.id === 'no-stations') {
+          document.getElementById('tide').classList.add('inactive-tab')
+          document.getElementById('tide1').classList.add('inactive-tab')
+          document.getElementById('fog').classList.add('inactive-tab')
+          document.getElementById('fog1').classList.add('inactive-tab')
+        } else {
+          document.getElementById('tide').classList.remove('inactive-tab')
+          document.getElementById('tide1').classList.remove('inactive-tab')
+          document.getElementById('fog').classList.remove('inactive-tab')
+          document.getElementById('fog1').classList.remove('inactive-tab')
+        }
         refreshLeaflet();
       });
     });

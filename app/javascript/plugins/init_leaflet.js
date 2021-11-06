@@ -15,7 +15,7 @@ const metarea = {
         [ -44.3, -2.48333333333333 ], [ -38.0, 2.0 ], [ -48.0, 7.0 ], [ -51.55, 4.43333333333333 ], [ -48.0, 7.0 ], [ -38.0, 2.0 ],
         [ -44.3, -2.48333333333333 ], [ -38.0, 2.0 ], [ -29.0, -3.0 ], [ -35.2, -5.75 ], [ -29.0, -3.0 ], [ -29.0, -10.0 ],
         [ -33.0, -15.0 ], [ -20.0, -15.0 ], [ -20.0, 7.0 ], [ -48.0, 7.0 ], [ -38.0, 2.0 ], [ -29.0, -3.0 ], [ -29.0, -10.0 ],
-        [ -33.0, -15.0 ], [ -20.0, -15.0 ], [ -20.0, -36.0 ], [ -48.0, -36.0 ], [ -43.0, -31.0 ], [ -33.0, -21.0 ],
+        [ -33.0, -15.0 ], [ -20.0, -15.0 ], [ -20.0, -36.0 ], [ -48.0, -36.0 ], [ -43.0, -31.0 ], [ -38.0, -26.0 ], [ -33.0, -21.0 ],
         [ -38.0, -26.0 ], [ -43.0, -31.0 ], [ -48.0, -36.0 ], [ -53.366666666666703, -33.733333333333299 ] ]
         ] }
     }
@@ -33,6 +33,8 @@ const waveLimit = 2.5;
 const windLimit = 10;
 const sstLimit = 20;
 const atmpLimit = 15;
+const visibilityLimit = 5.2;
+const tideLimit = 3;
 
 
 const initLeaflet = () => {
@@ -56,6 +58,9 @@ const initLeaflet = () => {
     }).addTo(mymap);
 
     mapData(mymap);
+    mymap.on('click', function(e) {
+        alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+    });
   }
 };
 
@@ -143,13 +148,14 @@ const generatePopupText = (mark) => {
             <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
             <p class='m-0 p-0'><strong>Rajada:</strong> ${parseFloat(mark.gust)} nós</p>
             <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
-            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} °C</p></div>`
+            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p></div>`
   } else if (mark.data_type === 'meteorological_station') {
     text = `<p class='m-0 p-0'><strong>Vel. Vento:</strong> ${parseFloat(mark.wspd)} nós</p>
             <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
             <p class='m-0 p-0'><strong>Rajada:</strong> ${parseFloat(mark.gust)} nós</p>
             <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
-            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} °C</p></div>`
+            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p>
+            <p class='m-0 p-0'><strong>Visibility:</strong> ${parseFloat(mark.visibility)} mi</p></div>`
   } else if (mark.data_type === 'tide') {
     text = `<p class='m-0 p-0'><strong>Maré Meteorológica:</strong> ${parseFloat(mark.meteorological_tide)} m</p>
             <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>
@@ -157,7 +163,7 @@ const generatePopupText = (mark) => {
             <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
             <p class='m-0 p-0'><strong>Rajada:</strong> ${parseFloat(mark.gust)} nós</p>
             <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
-            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} °C</p></div>`
+            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p></div>`
   } else if (mark.data_type === 'cleaning') {
     text = `<p class='m-0 p-0'><strong>Balneabilidade:</strong> ${mark.cleaning}</p></div>`
   } else if (mark.data_type === 'visual') {
@@ -265,6 +271,28 @@ const mapData = (mymap) => {
             marker.bindTooltip(tipText).openTooltip();
             marker.addTo(mymap);
           }
+        } else if (activeData.id === 'fog') {
+          if (mark.visibility != null) {
+            let text = parseFloat(mark.visibility)
+            const icon = markerIcon(text, visibilityLimit);
+            var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
+            const tipText = generateTipText(mark);
+            const popupText = generatePopupText(mark);
+            marker.bindPopup(popupText);
+            marker.bindTooltip(tipText).openTooltip();
+            marker.addTo(mymap);
+          }
+        } else if (activeData.id === 'tide') {
+          if (mark.meteorological_tide != null) {
+            let text = parseFloat(mark.meteorological_tide)
+            const icon = markerIcon(text, tideLimit);
+            var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
+            const tipText = generateTipText(mark);
+            const popupText = generatePopupText(mark);
+            marker.bindPopup(popupText);
+            marker.bindTooltip(tipText).openTooltip();
+            marker.addTo(mymap);
+          }
         }
       });
     } else {
@@ -279,8 +307,6 @@ const mapData = (mymap) => {
             marker.bindPopup(popupText);
             marker.bindTooltip(tipText).openTooltip();
             marker.addTo(mymap);
-
-            marker.addTo(mymap);
           }
         } else if (activeData.id === 'wind') {
           if (mark.wspd != null) {
@@ -291,8 +317,6 @@ const mapData = (mymap) => {
             const popupText = generatePopupTextNo(mark);
             marker.bindPopup(popupText);
             marker.bindTooltip(tipText).openTooltip();
-            marker.addTo(mymap);
-
             marker.addTo(mymap);
           }
         } else if (activeData.id === 'water-temp') {
@@ -305,7 +329,6 @@ const mapData = (mymap) => {
             marker.bindPopup(popupText);
             marker.bindTooltip(tipText).openTooltip();
             marker.addTo(mymap);
-            marker.addTo(mymap);
           }
         } else if (activeData.id === 'air-temp') {
           if (mark.atmp != null) {
@@ -316,7 +339,6 @@ const mapData = (mymap) => {
             const popupText = generatePopupTextNo(mark);
             marker.bindPopup(popupText);
             marker.bindTooltip(tipText).openTooltip();
-            marker.addTo(mymap);
             marker.addTo(mymap);
           }
         }

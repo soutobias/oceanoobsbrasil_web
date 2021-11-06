@@ -1,0 +1,18 @@
+.logo {
+  // width: 160px; /* Set the width of the sidebar */
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  margin: auto 0;
+  right: 0;
+  background-color: rgba(0,0,0,0);
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-right: 20px;
+  padding-top: 10px;
+
+}
+
+.logo-img{
+  height: 50px;
+  width: auto;
+}
