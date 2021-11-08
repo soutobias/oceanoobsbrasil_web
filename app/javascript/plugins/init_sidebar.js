@@ -5,9 +5,48 @@ const selectStation = () => {
 
   const buttons = document.querySelectorAll('.type-station')
   const buttonsText = document.querySelectorAll('.stations')
+  const info = document.getElementById('info')
+  const first = document.getElementById('first-full-screen')
 
-
+  const showPop = document.getElementById('showPop')
   if (buttons) {
+    showPop.addEventListener('click', (event) => {
+      first.classList.remove('inactive-tab');
+    });
+
+    first.addEventListener('click', (event) => {
+      first.classList.add('inactive-tab');
+    });
+    info.addEventListener('click', (event) => {
+      const activeStation = document.querySelector('.active-station')
+      const activeData = document.querySelector('.active-data')
+      const popup = document.getElementById('full-screen');
+      let text
+      if (activeData.id === 'wave') {
+        text =`<div class='text-center'><h2>ONDAS</h2><p>Altura significativa. Unidade: metros</p>
+              <i class="fas fa-times-circle"></i></div>`
+      } else if (activeData.id === 'wind') {
+        text =`<div class='text-center'><h2>VENTO</h2><p>Velocidade do vento em 10 metros. Unidade: metros/segundo</p>
+              <i class="fas fa-times-circle"></i></div>`
+      } else if (activeData.id === 'water-temp') {
+        text =`<div class='text-center'><h2>TEMPERATURA DA ÁGUA</h2><p>Temperatura da água do mar. Unidade: °C</p>
+              <i class="fas fa-times-circle"></i></div>`
+      } else if (activeData.id === 'air-temp') {
+        text =`<div class='text-center'><h2>TEMPERATURA DO AR</h2><p>Temperatura do ar. Unidade: °C</p>
+              <i class="fas fa-times-circle"></i></div>`
+      } else if (activeData.id === 'fog') {
+        text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos. Unidade: milhas</p>
+              <i class="fas fa-times-circle"></i></div>`
+      } else if (activeData.id === 'tide') {
+        text =`<div class='text-center'><h2>MAŔÉ METEOROLÓGICA</h2><p>Diferença entre a maré medida e a maré prevista. Unidade: metros</p>
+              <i class="fas fa-times-circle"></i></div>`
+      }
+      popup.innerHTML = text;
+      popup.classList.remove('inactive-tab');
+      popup.querySelector('i').addEventListener('click', (event) => {
+        popup.classList.add('inactive-tab');
+      });
+    });
     buttons.forEach((button) => {
       button.addEventListener('click', (event) => {
         buttons.forEach((button_1) => {

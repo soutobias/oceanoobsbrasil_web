@@ -1,0 +1,31 @@
+.full-screen {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 2000;
+}
+
+.flex-container-center {
+  displaY: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+.full-screen{
+  color: white;
+  i{
+    font-size: 30px;
+  }
+}
+
+.info-text{
+  font-size: 30px;
+  color: #D49511; /* Black */
+  :hover{
+    color: rgba(255,255,255,0.7);
+  }
+}

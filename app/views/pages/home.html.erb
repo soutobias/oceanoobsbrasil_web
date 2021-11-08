@@ -30,46 +30,48 @@
     </div>
   </div>
 </div>
-
 <div>
   <div class="d-flex">
     <div class="sidenav d-flex">
       <div class='text-center sidenav-card'>
-        <p class='p-1 active-station type-station' id="stations"><i class="fas fa-anchor"></i></i></p>
-        <p class='p-1 type-station' id="no-stations"><i class="fas fa-globe-americas"></i></p>
+        <p class='p-1 active-station type-station' id="stations" title='Estações Fixas'><i class="fas fa-anchor"></i></i></p>
+        <p class='p-1 type-station' id="no-stations"><i class="fas fa-globe-americas" title='Satélites e Mensagens SHIP'></i></p>
         <br>
-        <p class='p-1 active-data data-station' id="wave"><i class="fas fa-water"></i></p>
-        <p class='p-1 data-station' id="wind"><i class="fas fa-wind"></i></p>
-        <p class='p-1 data-station' id="water-temp"><i class="fas fa-thermometer-half"></i></p>
-        <p class='p-1 data-station' id="air-temp"><i class="fas fa-temperature-low"></i></p>
-        <p class='p-1 data-station' id="fog"><i class="fas fa-smog"></i></p>
-        <p class='p-1 data-station' id="tide"><i class="fas fa-ship"></i></p>
+        <br>
+        <p class='p-1 active-data data-station' id="wave" title='Dados de Ondas'><i class="fas fa-water"></i></p>
+        <p class='p-1 data-station' id="wind" title='Dados de Vento'><i class="fas fa-wind"></i></p>
+        <p class='p-1 data-station' id="water-temp" title='Dados de Temperatura da Água'><i class="fas fa-thermometer-half"></i></p>
+        <p class='p-1 data-station' id="air-temp" title='Dados de Temperatura do Ar'><i class="fas fa-temperature-low"></i></p>
+        <p class='p-1 data-station' id="fog" title='Dados de Visibilidade'><i class="fas fa-smog"></i></p>
+        <p class='p-1 data-station' id="tide" title='Dados de Maré'><i class="fas fa-ship"></i></p>
+        <p class='p-1' id="info" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></i></p>
       </div>
       <div class=''>
         <div class="name-card">
-          <p class='p-1 stations' id='stations1'>Estações Fixas</i></i></p>
+          <p class='p-1 stations' id='stations1' title='Estações Fixas'>Estações Fixas</i></i></p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations'  id='no-stations1'>Satélites & SHIP</p>
+          <p class='p-1 stations'  id='no-stations1' title='Satélites e Mensagens SHIP'>Satélites & SHIP</p>
         </div>
         <br>
+        <br>
         <div class="name-card">
-          <p class='p-1 stations-data' id='wave1'>Ondas</i></p>
+          <p class='p-1 stations-data' id='wave1' title='Dados de Ondas'>Ondas</i></p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations-data' id='wind1'>Vento</i></p>
+          <p class='p-1 stations-data' id='wind1' title='Dados de Vento'>Vento</i></p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations-data' id='water-temp1'>Temperatura da Água</p>
+          <p class='p-1 stations-data' id='water-temp1' title='Dados de Temperatura da Água'>Temperatura da Água</p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations-data' id='air-temp1'>Temperatura do Ar</p>
+          <p class='p-1 stations-data' id='air-temp1' title='Dados de Temperatura do Ar'>Temperatura do Ar</p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations-data' id='fog1'>Visibilidade</p>
+          <p class='p-1 stations-data' id='fog1' title='Dados de Visibilidade'>Visibilidade</p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations-data' id='tide1'>Maré Meteorológica</p>
+          <p class='p-1 stations-data' id='tide1' title='Dados de Maré'>Maré Meteorológica</p>
         </div>
       </div>
     </div>
@@ -111,9 +113,31 @@
       </div>
     </div>
   </div>
-  <div class='logo inactive-tab'>
-    <%= image_tag "logo2.png", class: "logo-img"  %>
+  <div>
+    <div class='logo info-text d-flex'>
+      <div id='showPop'>
+        <i class="fas fa-info-circle pr-2"></i>
+      </div>
+      <%= link_to destroy_user_session_path, method: :delete, class: "info-text" do%>
+        <i class="fas fa-sign-out-alt" id='showMapa'></i>
+      <% end %>
+    </div>
   </div>
+  <div class="full-screen inactive-tab flex-container-center" id='first-full-screen'>
+    <p><i class="fas fa-times-circle"></i></p>
+    <h3>DIVISÃO DE OCEANOGRAFIA OPERACIONAL</h3>
+    <p><strong>Dados observacionais em tempo real para a METAREAV provenientes das seguintes fontes:</strong></p>
+    <p>Boias</p>
+    <p>Estações meteorológicas</p>
+    <p>Aeroportos</p>
+    <p>Observações visuais</p>
+    <p>Estações maregráficas</p>
+    <p>Altimetria por satélite</p>
+    <p>Escaterômetros</p>
+  </div>
+  <div class="full-screen inactive-tab flex-container-center" id='full-screen'>
+  </div>
+
 </div>
 <div id="data"
   data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>"

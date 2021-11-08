@@ -58,9 +58,8 @@ const initLeaflet = () => {
     }).addTo(mymap);
 
     mapData(mymap);
-    mymap.on('click', function(e) {
-        alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-    });
+    const first = document.getElementById('first-full-screen')
+    first.classList.remove('inactive-tab');
   }
 };
 
