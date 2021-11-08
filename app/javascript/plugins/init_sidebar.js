@@ -35,7 +35,7 @@ const selectStation = () => {
         text =`<div class='text-center'><h2>TEMPERATURA DO AR</h2><p>Temperatura do ar. Unidade: °C</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'fog') {
-        text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos. Unidade: milhas</p>
+        text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos. Unidade: km</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'tide') {
         text =`<div class='text-center'><h2>MAŔÉ METEOROLÓGICA</h2><p>Diferença entre a maré medida e a maré prevista. Unidade: metros</p>
@@ -43,7 +43,7 @@ const selectStation = () => {
       }
       popup.innerHTML = text;
       popup.classList.remove('inactive-tab');
-      popup.querySelector('i').addEventListener('click', (event) => {
+      popup.addEventListener('click', (event) => {
         popup.classList.add('inactive-tab');
       });
     });

@@ -13,6 +13,17 @@
   z-index: 1000;
 }
 
+.type-station{
+  cursor: pointer;
+}
+
+.data-station{
+  cursor: pointer;
+}
+
+i{
+  cursor: pointer;
+}
 .sidenav-card{
   background-color:rgba(17, 17, 17, 0.6); /* Black */
   border-radius: 30px;
@@ -20,6 +31,7 @@
 }
 
 .active-data{
+  cursor: pointer;
   width: 28px;
   height: 28px;
   background-color: #D49511; /* Black */
@@ -30,6 +42,7 @@
 }
 
 .active-station{
+  cursor: pointer;
   width: 28px;
   height: 28px;
   background-color: #D49511; /* Black */
@@ -40,6 +53,7 @@
 }
 
 .name-card{
+  cursor: pointer;
   background-color:rgba(17, 17, 17, 0); /* Black */
   border-radius: 40px;
   :hover{

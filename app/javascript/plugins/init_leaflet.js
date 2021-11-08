@@ -33,7 +33,7 @@ const waveLimit = 2.5;
 const windLimit = 10;
 const sstLimit = 20;
 const atmpLimit = 15;
-const visibilityLimit = 5.2;
+const visibilityLimit = 6.2;
 const tideLimit = 3;
 
 
@@ -272,7 +272,7 @@ const mapData = (mymap) => {
           }
         } else if (activeData.id === 'fog') {
           if (mark.visibility != null) {
-            let text = parseFloat(mark.visibility)
+            let text = parseFloat(mark.visibility) * 1.6
             const icon = markerIcon(text, visibilityLimit);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
