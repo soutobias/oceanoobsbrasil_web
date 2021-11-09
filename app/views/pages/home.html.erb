@@ -37,41 +37,44 @@
         <p class='p-1 active-station type-station' id="stations" title='Estações Fixas'><i class="fas fa-anchor"></i></i></p>
         <p class='p-1 type-station' id="no-stations"><i class="fas fa-globe-americas" title='Satélites e Mensagens SHIP'></i></p>
         <br>
-        <br>
         <p class='p-1 active-data data-station' id="wave" title='Dados de Ondas'><i class="fas fa-water"></i></p>
         <p class='p-1 data-station' id="wind" title='Dados de Vento'><i class="fas fa-wind"></i></p>
         <p class='p-1 data-station' id="water-temp" title='Dados de Temperatura da Água'><i class="fas fa-thermometer-half"></i></p>
         <p class='p-1 data-station' id="air-temp" title='Dados de Temperatura do Ar'><i class="fas fa-temperature-low"></i></p>
         <p class='p-1 data-station' id="fog" title='Dados de Visibilidade'><i class="fas fa-smog"></i></p>
         <p class='p-1 data-station' id="tide" title='Dados de Maré'><i class="fas fa-ship"></i></p>
-        <p class='p-1' id="info" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></i></p>
+        <p class='p-1' id="moon" title='Maré e Lua'><i class="fas fa-moon"></i></p>
+        <p class='p-1' id="info" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></p>
       </div>
       <div class=''>
         <div class="name-card">
-          <p class='p-1 stations' id='stations1' title='Estações Fixas'>Estações Fixas</i></i></p>
+          <p class='p-1 pt-2 stations' id='stations1' title='Estações Fixas'>Estações Fixas</i></i></p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations'  id='no-stations1' title='Satélites e Mensagens SHIP'>Satélites & SHIP</p>
+         <p class='p-1  pt-2 stations'  id='no-stations1' title='Satélites e Mensagens SHIP'>Satélites & SHIP</p>
         </div>
         <br>
-        <br>
+
         <div class="name-card">
           <p class='p-1 stations-data' id='wave1' title='Dados de Ondas'>Ondas</i></p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations-data' id='wind1' title='Dados de Vento'>Vento</i></p>
+          <p class='p-1  stations-data' id='wind1' title='Dados de Vento'>Vento</i></p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations-data' id='water-temp1' title='Dados de Temperatura da Água'>Temperatura da Água</p>
+          <p class='p-1 stations-data' id='water-temp1' title='Dados de Temperatura da Água'>Temp. da Água</p>
         </div>
         <div class="name-card">
-          <p class='p-1 stations-data' id='air-temp1' title='Dados de Temperatura do Ar'>Temperatura do Ar</p>
+          <p class='p-1 stations-data' id='air-temp1' title='Dados de Temperatura do Ar'>Temp. do Ar</p>
         </div>
         <div class="name-card">
           <p class='p-1 stations-data' id='fog1' title='Dados de Visibilidade'>Visibilidade</p>
         </div>
         <div class="name-card">
           <p class='p-1 stations-data' id='tide1' title='Dados de Maré'>Maré Meteorológica</p>
+        </div>
+        <div class="name-card">
+          <p class='p-1' id='moon1' title='Maré e Lua'>Maré e Lua</p>
         </div>
       </div>
     </div>
@@ -132,8 +135,24 @@
     <p>Altimetria por satélite</p>
     <p>Escaterômetros</p>
     <p>Mensagens SHIP</p>
-
   </div>
+  <div class="full-screen inactive-tab flex-container-center" id='moon-full-screen'>
+    <p><i class="fas fa-times-circle"></i></p>
+    <h3>MARÉ E FASES DA LUA</h3>
+    <% @moons.each do |moon| %>
+      <% if moon.moon == 'cheia' %>
+        <p><%= image_tag("cheia.png", class: "nav-img p-0")%> <%= moon.date_time.strftime('%d/%m/%Y') %>: <%= moon.tide.upcase %></p>
+      <% elsif moon.moon == 'crescente' %>
+        <p><%= image_tag("crescente.png", class: "nav-img p-0")%> <%= moon.date_time.strftime('%d/%m/%Y') %>: <%= moon.tide.upcase %></p>
+      <% elsif moon.moon == 'minguante' %>
+        <p><%= image_tag("minguante.png", class: "nav-img p-0")%> <%= moon.date_time.strftime('%d/%m/%Y') %>: <%= moon.tide.upcase %></p>
+      <% else moon.moon == 'nova' %>
+        <p><%= image_tag("nova.png", class: "nav-img p-0")%> <%= moon.date_time.strftime('%d/%m/%Y') %>: <%= moon.tide.upcase %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+
   <div class="full-screen inactive-tab flex-container-center" id='full-screen'>
   </div>
 

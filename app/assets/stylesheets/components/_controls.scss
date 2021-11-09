@@ -27,7 +27,7 @@ i{
 .sidenav-card{
   background-color:rgba(17, 17, 17, 0.6); /* Black */
   border-radius: 30px;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .active-data{
@@ -66,7 +66,7 @@ i{
   // width: 160px; /* Set the width of the sidebar */
   position: absolute;
   z-index: 1000;
-  top: 50%;
+  top: 46%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   margin: auto 0;
@@ -79,7 +79,7 @@ i{
 .sidenav p {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
   color: rgba(255,255,255,0.7);
   display: block;
   font-weight: bold;

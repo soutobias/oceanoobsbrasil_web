@@ -8,8 +8,25 @@ const selectStation = () => {
   const info = document.getElementById('info')
   const first = document.getElementById('first-full-screen')
 
+  const moon = document.getElementById('moon')
+  const moon1 = document.getElementById('moon1')
+
+  const moonFull = document.getElementById('moon-full-screen')
+
+
   const showPop = document.getElementById('showPop')
   if (buttons) {
+    moon.addEventListener('click', (event) => {
+      moonFull.classList.remove('inactive-tab');
+    });
+    moon1.addEventListener('click', (event) => {
+      moonFull.classList.remove('inactive-tab');
+    });
+
+    moonFull.addEventListener('click', (event) => {
+      moonFull.classList.add('inactive-tab');
+    });
+
     showPop.addEventListener('click', (event) => {
       first.classList.remove('inactive-tab');
     });
