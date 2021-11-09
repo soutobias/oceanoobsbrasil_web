@@ -11,8 +11,6 @@ const getData = () => {
     utc.setSeconds(0)
     let updateUtc = new Date(utc.valueOf())
     updateUtc.setHours(updateUtc.getHours() + parseInt(rangeSlider.value))
-    console.log(updateUtc)
-    console.log(updateUtc.getDate())
 
     let startDate = `${updateUtc.getFullYear()}-${(updateUtc.getMonth() + 1).toString().padStart(2, '0')}-${updateUtc.getDate().toString().padStart(2, '0')}T${updateUtc.toLocaleTimeString('pt-BR')}`
     updateUtc.setHours(updateUtc.getHours() + 6)
