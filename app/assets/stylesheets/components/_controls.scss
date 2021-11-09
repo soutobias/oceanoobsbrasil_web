@@ -65,14 +65,13 @@ i{
 .sidenav {
   // width: 160px; /* Set the width of the sidebar */
   position: absolute;
-  z-index: 1000;
+  z-index: 9999;
   top: 46%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   margin: auto 0;
   left: 0;
   background-color: rgba(0,0,0,0);
-  overflow-x: hidden; /* Disable horizontal scroll */
 }
 
 /* The navigation menu links */

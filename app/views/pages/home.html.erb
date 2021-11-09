@@ -31,6 +31,43 @@
   </div>
 </div>
 <div>
+  <div class="footer">
+    <div class="range-slider">
+      <span id="rs-bullet" class="rs-label"></span>
+      <input id="rs-range-line" class="rs-range" type="range" value="96" min="0" max="96" step='6'>
+      <div class="d-flex justify-content-between mt-0 pt-2 pb-0 mb-0 w-100 range-hour">
+        <% days = [4,3,2,1,0] %>
+        <% hours = [0, 6, 12, 18] %>
+        <% days_hour = [0, 0, 0, 0, 0, 0] %>
+        <% time_now = Time.now.utc %>
+        <% days.each_with_index do |day, idx| %>
+          <% hours.each do |hour| %>
+              <% if day == 4 %>
+                <% time_rest = time_now.hour%6 %>
+                <% if hour >= time_now.hour - time_rest  %>
+                  <% days_hour[idx+1] += 1 %>
+                  <p><%= "%02d" % hour %> </p>
+                <% end %>
+              <% elsif day == 0 %>
+                <% if hour <= time_now.hour.to_i  %>
+                  <p><%= "%02d" % hour %> </p>
+                <% end %>
+              <% else %>
+                <% days_hour[idx+1] += 1 %>
+                <p><%= "%02d" % hour %> </p>
+              <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-between mt-0 w-100 pt-0 range-day">
+        <p style="left: <%=(days_hour[0]/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*4)).strftime("%d-%m-%y")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*3)).strftime("%d-%m-%y")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*2)).strftime("%d-%m-%y")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2]  + days_hour[3])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*1)).strftime("%d-%m-%y")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2] + days_hour[3]  + days_hour[4])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*0)).strftime("%d-%m-%y")%> </p>
+      </div>
+    </div>
+  </div>
   <div class="d-flex">
     <div class="sidenav d-flex">
       <div class='text-center sidenav-card'>
@@ -76,43 +113,6 @@
         <div class="name-card">
           <p class='p-1' id='moon1' title='Maré e Lua'>Maré e Lua</p>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">
-    <div class="range-slider">
-      <span id="rs-bullet" class="rs-label"></span>
-      <input id="rs-range-line" class="rs-range" type="range" value="96" min="0" max="96" step='6'>
-      <div class="d-flex justify-content-between mt-0 pt-2 pb-0 mb-0 w-100 range-hour">
-        <% days = [4,3,2,1,0] %>
-        <% hours = [0, 6, 12, 18] %>
-        <% days_hour = [0, 0, 0, 0, 0, 0] %>
-        <% time_now = Time.now.utc %>
-        <% days.each_with_index do |day, idx| %>
-          <% hours.each do |hour| %>
-              <% if day == 4 %>
-                <% time_rest = time_now.hour%6 %>
-                <% if hour >= time_now.hour - time_rest  %>
-                  <% days_hour[idx+1] += 1 %>
-                  <p><%= "%02d" % hour %> </p>
-                <% end %>
-              <% elsif day == 0 %>
-                <% if hour <= time_now.hour.to_i  %>
-                  <p><%= "%02d" % hour %> </p>
-                <% end %>
-              <% else %>
-                <% days_hour[idx+1] += 1 %>
-                <p><%= "%02d" % hour %> </p>
-              <% end %>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="d-flex justify-content-between mt-0 w-100 pt-0 range-day">
-        <p style="left: <%=(days_hour[0]/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*4)).strftime("%d-%m-%y")%> </p>
-        <p style="left: <%=((days_hour[0] + days_hour[1])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*3)).strftime("%d-%m-%y")%> </p>
-        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*2)).strftime("%d-%m-%y")%> </p>
-        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2]  + days_hour[3])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*1)).strftime("%d-%m-%y")%> </p>
-        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2] + days_hour[3]  + days_hour[4])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*0)).strftime("%d-%m-%y")%> </p>
       </div>
     </div>
   </div>
