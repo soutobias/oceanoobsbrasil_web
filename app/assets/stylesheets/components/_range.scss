@@ -111,3 +111,16 @@
 .inactive-tab{
   display: none !important;
 }
+
+@media (max-width: 720px) {
+  .range-hour{
+    font-size: 7px;
+  }
+  .range-day{
+    font-size: 10px;
+  }
+  .rs-label{
+    font-size: 7px;
+    width: 60px;
+  }
+}

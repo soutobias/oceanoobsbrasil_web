@@ -60,11 +60,11 @@
         <% end %>
       </div>
       <div class="d-flex justify-content-between mt-0 w-100 pt-0 range-day">
-        <p style="left: <%=(days_hour[0]/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*4)).strftime("%d-%m-%y")%> </p>
-        <p style="left: <%=((days_hour[0] + days_hour[1])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*3)).strftime("%d-%m-%y")%> </p>
-        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*2)).strftime("%d-%m-%y")%> </p>
-        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2]  + days_hour[3])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*1)).strftime("%d-%m-%y")%> </p>
-        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2] + days_hour[3]  + days_hour[4])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*0)).strftime("%d-%m-%y")%> </p>
+        <p style="left: <%=(days_hour[0]/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*4)).strftime("%d-%m")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*3)).strftime("%d-%m")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*2)).strftime("%d-%m")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2]  + days_hour[3])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*1)).strftime("%d-%m")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2] + days_hour[3]  + days_hour[4])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*0)).strftime("%d-%m")%> </p>
       </div>
     </div>
   </div>
@@ -125,8 +125,8 @@
   </div>
   <div class="full-screen inactive-tab flex-container-center" id='first-full-screen'>
     <p><i class="fas fa-times-circle"></i></p>
-    <h3>DIV. OCEANOGRAFIA OPERACIONAL</h3>
-    <p><strong>Dados observacionais em tempo real para a METAREAV provenientes de:</strong></p>
+    <h3 class='text-center'>DIV. OCEANOGRAFIA OPERACIONAL</h3>
+    <p class='text-center'><strong>Dados observacionais em tempo real para a METAREAV provenientes de:</strong></p>
     <p>Boias</p>
     <p>Estações meteorológicas</p>
     <p>Aeroportos</p>
