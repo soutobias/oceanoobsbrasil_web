@@ -1,0 +1,24 @@
+.card-git{
+  justify-content: between;
+  line-height: 1.0;
+  text-decoration: none;
+  text-align: center;
+  p{
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+    :hover{
+      text-decoration: none;
+    }
+  }
+
+  a{
+    color: white;
+    :hover{
+      text-decoration: none;
+    }
+    i{
+      font-size: 18px;
+    }
+  }
+}
