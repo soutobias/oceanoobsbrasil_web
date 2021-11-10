@@ -4,6 +4,16 @@
     <title>OceanoobsbrasilWeb</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('logo.png') %>
+
+    <title>OceanoObs Brasil</title>
+
+    <meta name="description" content="Dados meteoceanográficas da costa brasileira em tempo real">
+    <meta property="og:title" content="OceanoObs Brasil" />
+    <meta property="og:url" content="http://oceanobs.herokuapp.com/" />
+    <meta property="og:description" content="Dados meteoceanográficas da costa brasileira em tempo real">
+
+    <meta property="og:image" content="<%= image_url ('meta_image.png') %>">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>

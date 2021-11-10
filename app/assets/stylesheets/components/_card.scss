@@ -3,22 +3,25 @@
   line-height: 1.0;
   text-decoration: none;
   text-align: center;
-  p{
-    color: white;
+  :hover{
     text-decoration: none;
-    font-size: 10px;
-    :hover{
-      text-decoration: none;
-    }
   }
-
   a{
     color: white;
+    text-decoration: none;
     :hover{
       text-decoration: none;
     }
     i{
-      font-size: 18px;
+      font-size: 22px;
+    }
+    p{
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      :hover{
+        text-decoration: none;
+      }
     }
   }
 }
