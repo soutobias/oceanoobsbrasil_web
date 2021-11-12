@@ -40,22 +40,22 @@ const selectStation = () => {
       const popup = document.getElementById('full-screen');
       let text
       if (activeData.id === 'wave') {
-        text =`<div class='text-center'><h2>ONDAS</h2><p>Altura significativa. Unidade: metros. Fuso: ZULU.</p>
+        text =`<div class='text-center'><h2>ONDAS</h2><p>Altura significativa</p><p>Unidade: metros</p><p>Fuso: ZULU</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'wind') {
-        text =`<div class='text-center'><h2>VENTO</h2><p>Velocidade do vento em 10 metros. Unidade: metros/segundo. Fuso: ZULU.</p>
+        text =`<div class='text-center'><h2>VENTO</h2><p>Velocidade do vento em 10 metros</p><p>Unidade: metros/segundo</p><p>Fuso: ZULU</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'water-temp') {
-        text =`<div class='text-center'><h2>TEMPERATURA DA ÁGUA</h2><p>Temperatura da água do mar. Unidade: °C. Fuso: ZULU.</p>
+        text =`<div class='text-center'><h2>TEMPERATURA DA ÁGUA</h2><p>Temperatura da água do mar</p><p>Unidade: °C</p><p>Fuso: ZULU</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'air-temp') {
-        text =`<div class='text-center'><h2>TEMPERATURA DO AR</h2><p>Temperatura do ar. Unidade: °C. Fuso: ZULU.</p>
+        text =`<div class='text-center'><h2>TEMPERATURA DO AR</h2><p>Temperatura do ar</p><p>Unidade: °C</p><p>Fuso: ZULU</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'fog') {
-        text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos. Unidade: km. Fuso: ZULU.</p>
+        text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos</p><p>Unidade: km</p><p>Fuso: ZULU</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'tide') {
-        text =`<div class='text-center'><h2>MAŔÉ METEOROLÓGICA</h2><p>Diferença entre a maré medida e a maré prevista. Unidade: metros. Fuso: ZULU.</p>
+        text =`<div class='text-center'><h2>MAŔÉ METEOROLÓGICA</h2><p>Diferença entre a maré medida e a maré prevista</p><p>Unidade: metros</p><p>Fuso: ZULU</p>
               <i class="fas fa-times-circle"></i></div>`
       }
       popup.innerHTML = text;
@@ -76,6 +76,14 @@ const selectStation = () => {
           document.getElementById('tide1').classList.add('inactive-tab')
           document.getElementById('fog').classList.add('inactive-tab')
           document.getElementById('fog1').classList.add('inactive-tab')
+          const activeData = document.querySelector('.active-data')
+          if (activeData.id === 'fog') {
+            document.getElementById('fog').classList.remove('active-data')
+            document.getElementById('wave').classList.add('active-data')
+          } else if (activeData.id === 'tide') {
+            document.getElementById('tide').classList.remove('active-data')
+            document.getElementById('wave').classList.add('active-data')
+          }
         } else {
           document.getElementById('tide').classList.remove('inactive-tab')
           document.getElementById('tide1').classList.remove('inactive-tab')
@@ -99,6 +107,14 @@ const selectStation = () => {
           document.getElementById('tide1').classList.add('inactive-tab')
           document.getElementById('fog').classList.add('inactive-tab')
           document.getElementById('fog1').classList.add('inactive-tab')
+          const activeData = document.querySelector('.active-data')
+          if (activeData.id === 'fog') {
+            document.getElementById('fog').classList.remove('active-data')
+            document.getElementById('wave').classList.add('active-data')
+          } else if (activeData.id === 'tide') {
+            document.getElementById('tide').classList.remove('active-data')
+            document.getElementById('wave').classList.add('active-data')
+          }
         } else {
           document.getElementById('tide').classList.remove('inactive-tab')
           document.getElementById('tide1').classList.remove('inactive-tab')

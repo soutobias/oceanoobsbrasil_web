@@ -220,7 +220,6 @@ const generatePopupTextNo = (mark) => {
 const mapData = (mymap) => {
   getData().then(response => response.json())
   .then((data) => {
-    console.log(data)
     const activeStation = document.querySelector('.active-station')
     const activeData = document.querySelector('.active-data')
 
@@ -345,7 +344,9 @@ const mapData = (mymap) => {
     }
     const loader = document.getElementById('loader');
     loader.classList.add('inactive-tab');
-
+    if (data.length == 0){
+      alert("Não há dados disponíveis!");
+    }
   });
 };
 
