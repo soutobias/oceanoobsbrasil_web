@@ -119,8 +119,11 @@
   <div>
     <div class='logo info-text d-flex'>
       <div id='showPop'>
-        <i class="fas fa-info-circle pr-2"></i>
+        <i class="fas fa-info-circle pr-2"  title='Informações sobre o Sistema'></i>
       </div>
+      <%= link_to destroy_user_session_path, method: :delete, class: "info-text", title: 'Sair' do %>
+        <i class="fas fa-sign-out-alt"></i>
+      <% end %>      
     </div>
   </div>
   <div class="full-screen inactive-tab flex-container-center" id='first-full-screen'>
