@@ -40,22 +40,22 @@ const selectStation = () => {
       const popup = document.getElementById('full-screen');
       let text
       if (activeData.id === 'wave') {
-        text =`<div class='text-center'><h2>ONDAS</h2><p>Altura significativa. Unidade: metros</p>
+        text =`<div class='text-center'><h2>ONDAS</h2><p>Altura significativa. Unidade: metros. Fuso: ZULU.</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'wind') {
-        text =`<div class='text-center'><h2>VENTO</h2><p>Velocidade do vento em 10 metros. Unidade: metros/segundo</p>
+        text =`<div class='text-center'><h2>VENTO</h2><p>Velocidade do vento em 10 metros. Unidade: metros/segundo. Fuso: ZULU.</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'water-temp') {
-        text =`<div class='text-center'><h2>TEMPERATURA DA ÁGUA</h2><p>Temperatura da água do mar. Unidade: °C</p>
+        text =`<div class='text-center'><h2>TEMPERATURA DA ÁGUA</h2><p>Temperatura da água do mar. Unidade: °C. Fuso: ZULU.</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'air-temp') {
-        text =`<div class='text-center'><h2>TEMPERATURA DO AR</h2><p>Temperatura do ar. Unidade: °C</p>
+        text =`<div class='text-center'><h2>TEMPERATURA DO AR</h2><p>Temperatura do ar. Unidade: °C. Fuso: ZULU.</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'fog') {
-        text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos. Unidade: km</p>
+        text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos. Unidade: km. Fuso: ZULU.</p>
               <i class="fas fa-times-circle"></i></div>`
       } else if (activeData.id === 'tide') {
-        text =`<div class='text-center'><h2>MAŔÉ METEOROLÓGICA</h2><p>Diferença entre a maré medida e a maré prevista. Unidade: metros</p>
+        text =`<div class='text-center'><h2>MAŔÉ METEOROLÓGICA</h2><p>Diferença entre a maré medida e a maré prevista. Unidade: metros. Fuso: ZULU.</p>
               <i class="fas fa-times-circle"></i></div>`
       }
       popup.innerHTML = text;
