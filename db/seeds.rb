@@ -11,23 +11,6 @@ require 'csv'
 User.destroy_all
 Moon.destroy_all
 
-u = User.new(
-  email: "1@gmail.com",
-  username: "chm11",
-  password: "oceanografia",
-  admin: true
-)
-u.save!
-
-u = User.new(
-  email: "2@gmail.com",
-  username: "convidado",
-  password: "teste",
-  admin: false
-)
-u.save!
-
-
 
 CSV.foreach(Rails.root.join('lib/seed/moon.csv'), {:col_sep => "\t"}) do |row|
   Moon.create!( :date_time => Date.strptime(row[0], '%m/%d/%y'), :tide => row[1], :moon => row[2])
