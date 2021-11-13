@@ -83,3 +83,12 @@ production:
   database: oceanoobsbrasil_web_production
   username: oceanoobsbrasil_web
   password: <%= ENV['OCEANOOBSBRASIL_WEB_DATABASE_PASSWORD'] %>
+
+external_oceanoobs: # database you also want to connect to
+  database: oceanobsbrasil
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  host: <%= ENV["OCEANOBS_DB_URL"] %>
+  username: <%= ENV["OCEANOBS_DB_USR"] %>
+  password: <%= ENV["OCEANOBS_DB_PASSWORD"] %>

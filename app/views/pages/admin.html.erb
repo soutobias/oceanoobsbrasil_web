@@ -1,0 +1,59 @@
+<h1 class="text-center font-weight-bold p-3">ADMIN</h1>
+<div class="filtro">
+    <h3 class='text-center p-2'>BUSCA</h2>
+    <%= form_tag admin_path, method: :get, class: 'pb-4 w-100 form-horizontal justify-content-around align-items-center vertical-align-center d-flex' do %>
+        <% if @commit && @data_type != ""%>
+            <%= select_tag :data_type,
+                options_for_select(@data_types),
+                include_blank: "",
+                class: "form-control"
+            %>
+        <% else %>
+            <%= select_tag :data_type,
+                options_for_select(@data_types),
+                include_blank: "",
+                class: "form-control"
+            %>
+        <% end %>
+        <% if @commit && @institution != ""%>
+            <%= select_tag :institution,
+                options_for_select(@institutions),
+                include_blank: "",
+                class: "form-control"
+            %>
+        <% else %>
+            <%= select_tag :institution,
+                options_for_select(@institutions),
+                include_blank: "",
+                class: "form-control"
+            %>
+        <% end %>
+        <%= submit_tag("PROCURAR", class: "btn btn-outline-success w-75 button filtro-btn") %>
+    <% end %>
+</div>
+<div class='results'>
+    <h2 class='text-center p-2'>ESTAÇÕES</h2>
+    <% @stations.each do |station| %>
+        <div class="d-flex">
+            <%= simple_form_for station, html: { class: "results d-flex"} do |f| %>           
+                <%= f.input :name, label: 'NOME' %>
+                <%= f.input :lat, label: 'LAT' %>
+                <%= f.input :lon, label: 'LON' %>
+                <%= f.input :data_type, label: 'TIPO DE DADO' %>
+                <%= f.input :institution, label: 'INSTITUIÇÃO' %>
+                <%= f.input :url, label: 'URL' %>
+                <%= f.button :submit, "ALTERAR", class: "btn btn-outline-success m-1"%>
+            <% end %>
+            <%= link_to "APAGAR", station_path(station), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-outline-danger m-1" %>
+        </div>
+    <% end %>
+    <%= simple_form_for @station, html: { class: "results d-flex"} do |f| %>
+        <%= f.input :name, label: 'NOME' %>
+        <%= f.input :lat, label: 'LAT' %>
+        <%= f.input :lon, label: 'LON' %>
+        <%= f.input :data_type, label: 'TIPO DE DADO' %>
+        <%= f.input :institution, label: 'INSTITUIÇÃO' %>
+        <%= f.input :url, label: 'URL' %>
+        <%= f.button :submit, "NOVA ESTAÇÃO", class: "btn btn-outline-danger m-1"%>
+    <% end %>
+</div>
