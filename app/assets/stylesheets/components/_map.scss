@@ -16,23 +16,23 @@ html, body, #map {
 }
 
 .white-icon{
-  background-image: url('white-circle-emoji.png');
+  background-image: url(asset_path('white-circle-emoji.png'));
 }
 
 .red-icon{
-  background-image: url('red-circle-emoji.png');
+  background-image: url(asset_path('red-circle-emoji.png'));
 }
 
 .blue-icon{
-  background-image: url('blue-circle-emoji.png');
+  background-image: url(asset_path('blue-circle-emoji.png'));
 }
 
 .orange-icon{
-  background-image: url('orange-circle-emoji.png');
+  background-image: url(asset_path('orange-circle-emoji.png'));
 }
 
 .green-icon{
-  background-image: url('green-circle-emoji.png');
+  background-image: url(asset_path('green-circle-emoji.png'));
 }
 
 
