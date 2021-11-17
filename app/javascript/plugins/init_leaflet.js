@@ -147,14 +147,14 @@ const generatePopupText = (mark) => {
             <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
             <p class='m-0 p-0'><strong>Rajada:</strong> ${Math.round(parseFloat(mark.gust)*10)/100} nós</p>
             <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
-            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p></div>`
+            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p>`
     } else if (mark.data_type === 'meteorological_station') {
     text = `<p class='m-0 p-0'><strong>Vel. Vento:</strong> ${Math.round(parseFloat(mark.wspd)*10)/100} nós</p>
             <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
             <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${Math.round(parseFloat(mark.gust)*10)/100} nós</p>
             <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
             <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p>
-            <p class='m-0 p-0'><strong>Visibility:</strong> ${parseFloat(mark.visibility) * 1.6} km</p></div>`
+            <p class='m-0 p-0'><strong>Visibility:</strong> ${parseFloat(mark.visibility) * 1.6} km</p>`
   } else if (mark.data_type === 'tide') {
     text = `<p class='m-0 p-0'><strong>Maré Meteorológica:</strong> ${parseFloat(mark.meteorological_tide)} m</p>
             <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>
@@ -162,17 +162,18 @@ const generatePopupText = (mark) => {
             <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
             <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${Math.round(parseFloat(mark.gust)*10)/100} nós</p>
             <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
-            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p></div>`
+            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p>`
   } else if (mark.data_type === 'cleaning') {
-    text = `<p class='m-0 p-0'><strong>Balneabilidade:</strong> ${mark.cleaning}</p></div>`
+    text = `<p class='m-0 p-0'><strong>Balneabilidade:</strong> ${mark.cleaning}</p>`
   } else if (mark.data_type === 'visual') {
     text = `<p class='m-0 p-0'><strong>Alt. Onda:</strong> ${parseFloat(mark.swvht)} m</p>
             <p class='m-0 p-0'><strong>Dir. Onda:</strong> ${parseFloat(mark.wvdir)} °</p>
             <p class='m-0 p-0'><strong>Per. Onda:</strong> ${parseFloat(mark.tp)} s</p>
-            <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p></div>`
+            <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>`
   }
   text = text.replaceAll("NaN", "--");
-  return `${header}${text}`
+  let textStation = `<a class="btn m-0 p-0 collor-yellow" href="/stations/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
+  return `${header}${text}${textStation}`
 };
 
 const generateTipTextNo = (mark) => {

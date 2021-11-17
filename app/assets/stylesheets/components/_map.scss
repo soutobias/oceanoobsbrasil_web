@@ -35,6 +35,12 @@ html, body, #map {
   background-image: url(asset_path('green-circle-emoji.png'));
 }
 
+.collor-yellow{
+  color: #D49511 !important;
+  :hover{
+    opacity: 0.5;
+  }
+}
 
 .all-icon{
   background-size: contain;

@@ -15,7 +15,7 @@ const selectStation = () => {
 
 
   const showPop = document.getElementById('showPop')
-  if (buttons) {
+  if (info) {
     moon.addEventListener('click', (event) => {
       moonFull.classList.remove('inactive-tab');
     });

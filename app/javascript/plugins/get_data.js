@@ -37,5 +37,20 @@ const getData = () => {
   }
 };
 
-export { getData };
+const getDataStation = () => {
+  const chartElement = document.getElementById('plotdata');
+  const station = JSON.parse(chartElement.dataset.station);
+  const token = chartElement.dataset.oceanobsApiKey;
 
+  const now = new Date();
+  const utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000 - 3600000*24*4);
+  let startDate = `${utc.getFullYear()}-${(utc.getMonth() + 1).toString().padStart(2, '0')}-${utc.getDate().toString().padStart(2, '0')}T${utc.toLocaleTimeString('pt-BR')}`
+  const url = `https://remobsapi.herokuapp.com/api/v1/data_stations/station?station_id=${station.id}start_date=${startDate}&token=${token}`
+  return fetch(url,{
+        method: 'GET',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
+    })
+};
+
+export { getData, getDataStation };

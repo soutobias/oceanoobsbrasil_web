@@ -1,0 +1,62 @@
+<%= render 'shared/navbar' %>
+<div class='all-center' id='loader'>
+	<div class="lds-spinner">
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		<div>
+		</div>
+		</div>
+	</div>
+	</div>
+<div class="graficos  mt-5">
+	<div id="plotdata"
+	data-station="<%= @station.to_json %>"
+	data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>"
+	>
+		<div id="wspd-plot" class='graph'></div>
+		<div id="gust-plot" class='graph'></div>
+		<div id="wdir-plot" class='graph'></div>
+		<div id="wdirg-plot" class='graph'></div>
+
+		<div id="swvht-plot" class='graph'></div>
+		<div id="mxwvht-plot" class='graph'></div>
+		<div id="swvht_swell-plot" class='graph'></div>
+		<div id="swvht_sea-plot" class='graph'></div>
+		<div id="wvdir-plot" class='graph'></div>
+		<div id="wvdirg-plot" class='graph'></div>
+		<div id="wvdir_swell-plot" class='graph'></div>
+		<div id="wvdir_swellg-plot" class='graph'></div>
+		<div id="wvdir_sea-plot" class='graph'></div>
+		<div id="wvdir_seag-plot" class='graph'></div>
+		<div id="tp-plot" class='graph'></div>
+		<div id="wvspread-plot" class='graph'></div>
+
+		<div id="sst-plot" class='graph'></div>
+		<div id="atmp-plot" class='graph'></div>
+		<div id="pres-plot" class='graph'></div>
+		<div id="rh-plot" class='graph'></div>
+		<div id="dewpt-plot" class='graph'></div>
+		<div id="meteorological_tide-plot" class='graph'></div>
+		<div id="visibility-plot" class='graph'></div>
+	</div>
+</div>

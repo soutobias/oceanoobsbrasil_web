@@ -25,6 +25,7 @@ require("channels")
 // External imports
 import "bootstrap";
 import { initLeaflet } from '../plugins/init_leaflet';
+import { initPlotly } from '../plugins/init_plotly';
 import { initRange } from '../plugins/init_range';
 
 import { selectStation, selectType } from '../plugins/init_sidebar';
@@ -36,6 +37,7 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initRange();
+  initPlotly();
   initLeaflet();
   selectStation();
   selectType();
