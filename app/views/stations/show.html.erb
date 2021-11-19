@@ -29,6 +29,20 @@
 	</div>
 	</div>
 <div class="graficos  mt-5 pt-5">
+	<% if @station.data_type == 'buoy' %>
+		<% data_type = 'boia' %>
+	<% elsif @station.data_type == 'meteorological_station' %>
+		<% data_type = 'estação meteorológica' %>
+	<% elsif @station.data_type == 'visual' %>
+		<% data_type = 'observação visual' %>
+	<% elsif @station.data_type == 'tide' %>
+		<% data_type = 'estação maregráfica' %>
+	<% elsif @station.data_type == 'cleaning' %>
+		<% data_type = 'balneabilidade' %>
+	<% end %>
+	<p class='m-0 p-0'>TIPO: <%= data_type.upcase%></p>
+	<p class='m-0 p-0'>INSTITUIÇÃO: <%= @station.institution.upcase%></p>
+	<p class='m-0 p-0'> POSIÇÃO: LAT <%= @station.lat.round(4)%>, LON <%= @station.lon.round(4)%></p> 
 	<div id="plotdata"
 	data-station="<%= @station.to_json %>"
 	data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>"

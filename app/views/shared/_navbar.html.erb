@@ -1,23 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="navbar-brand">
-  <% if @station.data_type == 'buoy' %>
-    <% data_type = 'boia' %>
-  <% elsif @station.data_type == 'meteorological_station' %>
-    <% data_type = 'estação meteorológica' %>
-  <% elsif @station.data_type == 'visual' %>
-    <% data_type = 'observação visual' %>
-  <% elsif @station.data_type == 'tide' %>
-    <% data_type = 'estação maregráfica' %>
-  <% elsif @station.data_type == 'cleaning' %>
-    <% data_type = 'balneabilidade' %>
-  <% end %>
-  <p class='m-0 p-0'>ESTAÇÃO: <%= @station.name.upcase%>, TIPO: <%= data_type.upcase%>, INSTITUIÇÃO: <%= @station.institution.upcase%></p>
-  <p class='m-0 p-0'> POSIÇÃO: LAT <%= @station.lat.round(4)%>, LON <%= @station.lon.round(4)%></p> 
+    <p class='m-0 p-0'><%= @station.name.upcase%></p>
   </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <%= link_to "VOLTAR", root_path, class: "btn btn-yellow font-weight-bold" %>
-  </div>
+  <%= link_to "VOLTAR", root_path, class: "btn btn-yellow font-weight-bold" %>
 </div>
