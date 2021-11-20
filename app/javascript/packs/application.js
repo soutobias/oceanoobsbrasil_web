@@ -28,7 +28,7 @@ import { initLeaflet } from '../plugins/init_leaflet';
 import { initPlotly } from '../plugins/init_plotly';
 import { initRange } from '../plugins/init_range';
 
-import { selectStation, selectType } from '../plugins/init_sidebar';
+import { selectStation, selectType, selectLayer } from '../plugins/init_sidebar';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -41,4 +41,5 @@ document.addEventListener('turbolinks:load', () => {
   initLeaflet();
   selectStation();
   selectType();
+  selectLayer();
 });

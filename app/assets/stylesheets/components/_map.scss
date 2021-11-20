@@ -35,6 +35,152 @@ html, body, #map {
   background-image: url(asset_path('green-circle-emoji.png'));
 }
 
+.rotate-icon0{
+}
+.rotate-icon15{
+  transform: rotate(15deg);
+  p{
+    transform: rotate(-15deg);
+  }
+}
+.rotate-icon30{
+  transform: rotate(30deg);
+  p{
+    transform: rotate(-30deg);
+  }
+}
+.rotate-icon45{
+  transform: rotate(45deg);
+  p{
+    transform: rotate(-45deg);
+  }
+}
+.rotate-icon60{
+  transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  -webkit-transform: rotate(60deg);
+  -o-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  p{
+    transform: rotate(-60deg);
+  }
+}
+.rotate-icon75{
+  transform: rotate(75deg);
+  p{
+    transform: rotate(-75deg);
+  }
+}
+.rotate-icon90{
+  transform: rotate(90deg);
+  p{
+    transform: rotate(-90deg);
+  }
+}
+.rotate-icon105{
+  transform: rotate(105deg);
+  p{
+    transform: rotate(-105deg);
+  }
+}
+.rotate-icon120{
+  transform: rotate(120deg);
+  p{
+    transform: rotate(-120deg);
+  }
+}
+.rotate-icon135{
+  transform: rotate(135deg);
+  p{
+    transform: rotate(-135deg);
+  }
+}
+.rotate-icon150{
+  transform: rotate(150deg);
+  p{
+    transform: rotate(-150deg);
+  }
+}
+.rotate-icon165{
+  transform: rotate(165deg);
+  p{
+    transform: rotate(-165deg);
+  }
+}
+.rotate-icon180{
+  transform: rotate(180deg);
+  p{
+    transform: rotate(-180deg);
+  }
+}
+.rotate-icon195{
+  transform: rotate(195deg);
+  p{
+    transform: rotate(-195deg);
+  }
+}
+.rotate-icon210{
+  transform: rotate(210deg);
+  p{
+    transform: rotate(-210deg);
+  }
+}
+.rotate-icon225{
+  transform: rotate(225deg);
+  p{
+    transform: rotate(-225deg);
+  }
+}
+.rotate-icon240{
+  transform: rotate(240deg);
+  p{
+    transform: rotate(-240deg);
+  }
+}
+.rotate-icon255{
+  transform: rotate(255deg);
+  p{
+    transform: rotate(-255deg);
+  }
+}
+.rotate-icon270{
+  transform: rotate(270deg);
+  p{
+    transform: rotate(-270deg);
+  }
+}
+.rotate-icon285{
+  transform: rotate(285deg);
+  p{
+    transform: rotate(-285deg);
+  }
+}
+.rotate-icon300{
+  transform: rotate(300deg);
+  p{
+    transform: rotate(-300deg);
+  }
+}
+.rotate-icon315{
+  transform: rotate(315deg);
+  p{
+    transform: rotate(-315deg);
+  }
+}
+.rotate-icon330{
+  transform: rotate(330deg);
+  p{
+    transform: rotate(-330deg);
+  }
+}
+.rotate-icon345{
+  transform: rotate(345deg);
+  p{
+    transform: rotate(-345deg);
+  }
+}
+
+
 .collor-yellow{
   color: #D49511 !important;
   :hover{
