@@ -388,7 +388,7 @@ const mapData = (mymap) => {
             value = convertDir(value)
             typeValue = 'no normal'
           }
-          if (value != null) {
+          if (value) {
             const icon = markerIcon(value, windLimit, typeValue, mark.wspd);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipTextNo(mark);
