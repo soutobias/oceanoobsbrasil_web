@@ -13,3 +13,17 @@
     background-color: #D49511;
     color: white;
 }
+
+.btn-yellow-small{
+    background-color: #D49511;
+    opacity: 50%;
+    color: white;
+    font-size: 12px;
+    :hover{
+        opacity: 100% !important;
+    }
+}
+.active{
+    opacity: 100% !important;
+    font-size: 15px;
+}

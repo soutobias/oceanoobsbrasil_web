@@ -95,6 +95,21 @@ const refreshLeaflet = () => {
   }
 };
 
+const convertDir = (dir) => {
+  let newDir
+  if (dir <= 90) {
+    newDir = 90-dir
+  } else if (dir > 90 && dir <=180){
+    newDir = 360 - (dir - 90)
+  } else if (dir > 180 && dir <=270){
+    newDir = 270 - (dir - 180)
+  } else {
+    newDir = 180 - (dir - 270)
+  }
+  return newDir
+}
+
+
 
 const markerIcon = (text, limit) => {
   let htmlText = text.toFixed(1).toString();
@@ -110,6 +125,41 @@ const markerIcon = (text, limit) => {
     const icon = L.divIcon({
       html: htmlText,
       className: 'white-icon all-icon',
+    });
+    return icon;
+  }
+};
+
+
+const markerIcon = (mark, limit, dataType) => {
+
+  if (text >= limit) {
+    let dir
+    if (direction){
+      dir = parseInt(direction)
+      dir = convertDir(dir)
+    }
+    let htmlText = `<div class='all-icon' style='transform: rotate(${dir}deg);'>
+      <i class="fas fa-arrow-circle-right"></i>
+      </div>`;
+    const icon = L.divIcon({
+      html: htmlText,
+      className: '',
+    });
+    return icon;
+
+  } else {
+    let dir
+    if (direction){
+      dir = parseInt(direction)
+      dir = convertDir(dir)
+    }
+    let htmlText = `<div class='all-icon' style='transform: rotate(${dir}deg);'>
+      <i class="fas fa-arrow-circle-right"></i>
+      </div>`;
+    const icon = L.divIcon({
+      html: htmlText,
+      className: '',
     });
     return icon;
   }
@@ -224,13 +274,13 @@ const mapData = (mymap) => {
   .then((data) => {
     const activeStation = document.querySelector('.active-station')
     const activeData = document.querySelector('.active-data')
+    const activeLayer = document.querySelector('.active-layer')
 
     if (activeStation.id === 'stations') {
       data.forEach((mark) => {
         if (activeData.id === 'wave') {
           if (mark.swvht != null) {
-            let text = parseFloat(mark.swvht)
-            const icon = markerIcon(text, waveLimit);
+            const icon = markerIcon(mark, activeData.id);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);
@@ -241,7 +291,7 @@ const mapData = (mymap) => {
         } else if (activeData.id === 'wind') {
           if (mark.wspd != null) {
             let text = parseFloat(mark.wspd)
-            const icon = markerIcon(text, windLimit);
+            const icon = markerIcon(text, windLimit, mark.wvdir, activeData.id);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);

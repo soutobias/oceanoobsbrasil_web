@@ -8,6 +8,10 @@ const selectStation = () => {
   const info = document.getElementById('info')
   const first = document.getElementById('first-full-screen')
 
+  const showLayer = document.getElementById('showLayer')
+  const waveRadio = document.getElementById('wave-radio')
+  const windRadio = document.getElementById('wind-radio')
+
   const moon = document.getElementById('moon')
   const moon1 = document.getElementById('moon1')
 
@@ -16,6 +20,14 @@ const selectStation = () => {
 
   const showPop = document.getElementById('showPop')
   if (info) {
+    showLayer.addEventListener('click', (event) => {
+      const activeData = document.querySelector('.active-data')
+      if (activeData.id === 'wave') {
+        waveRadio.classList.toggle('inactive-tab');
+      } else if (activeData.id === 'wind') {
+        windRadio.classList.toggle('inactive-tab');
+      }
+    });
     moon.addEventListener('click', (event) => {
       moonFull.classList.remove('inactive-tab');
     });
@@ -157,5 +169,6 @@ const selectType = () => {
 
   }
 };
+
 
 export { selectStation, selectType };
