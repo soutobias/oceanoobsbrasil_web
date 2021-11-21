@@ -42,7 +42,7 @@ const initColor = () => {
     } else if (activeData.id === 'wind'){
       limitValue = windLimit;
       maxValue = windMax;
-      variable = 'VELOC. VENTO (m/s)'
+      variable = 'VELOC. VENTO (nós)'
     } else if (activeData.id === 'water-temp'){
       limitValue = sstLimit;
       maxValue = sstMax;
@@ -61,7 +61,7 @@ const initColor = () => {
       variable = 'MARÉ METEOROLÓGICA (m)'
     }
 
-    const scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '8a000b']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
+    const scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
 
     scale.colors(100).forEach((color, index) => {
       let title = Math.round(parseFloat(maxValue*index/100)*100)/100;
@@ -77,7 +77,7 @@ const initColor = () => {
 };
 
 const getColor = (limitValue, maxValue) => {
-  const scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '8a000b']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
+  const scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
   return scale.colors(100)
 };
 

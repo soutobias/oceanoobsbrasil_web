@@ -18,12 +18,13 @@
     background-color: #D49511;
     opacity: 50%;
     color: white;
-    font-size: 12px;
+    padding: 2px !important;
+    font-size: 10px;
     :hover{
         opacity: 100% !important;
     }
 }
 .active{
     opacity: 100% !important;
-    font-size: 15px;
+    font-size: 13px;
 }

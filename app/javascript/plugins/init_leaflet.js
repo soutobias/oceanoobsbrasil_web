@@ -36,6 +36,7 @@ const initLeaflet = () => {
   const mapElement = document.getElementById('mapid');
 
   if (mapElement) {
+    initColor();
 
     const dataElement = document.getElementById('data');
     const token = dataElement.dataset.mapboxApiKey;
@@ -63,6 +64,7 @@ const refreshLeaflet = () => {
   const mapElement = document.getElementById('mapid');
 
   if (mapElement) {
+    initColor();
 
     const mapDiv = document.getElementById('map');
 
@@ -248,7 +250,6 @@ const generatePopupTextNo = (mark) => {
 const mapData = (mymap) => {
   getData().then(response => response.json())
   .then((data) => {
-    initColor();
     const activeStation = document.querySelector('.active-station')
     const activeData = document.querySelector('.active-data')
     const activeLayer = document.querySelector('.active-layer')

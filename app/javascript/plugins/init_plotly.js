@@ -13,7 +13,11 @@ const initPlotly = () => {
 			dataApi.forEach(o => {
 				Object.keys(o).forEach(k => {
 				  dataAll[k] ||= [];
-				  dataAll[k].push(o[k]);
+					if (k === 'visibility' && o[k]){
+						dataAll[k].push(o[k]*(1.6));
+					} else{
+						dataAll[k].push(o[k]);
+					}
 				});
 			});
 			let vari = 'wspd'
@@ -24,15 +28,15 @@ const initPlotly = () => {
 			plotData(dataAll, vari, station.data_type);
 			plotDataDir(dataAll, vari, station.data_type);
 			vari = 'pres'
-			plotData(dataAll, vari, station.data_type);7
+			plotData(dataAll, vari, station.data_type);
 			vari = 'atmp'
-			plotData(dataAll, vari, station.data_type);7
+			plotData(dataAll, vari, station.data_type);
 			vari = 'rh'
-			plotData(dataAll, vari, station.data_type);7
+			plotData(dataAll, vari, station.data_type);
 			vari = 'dewpt'
-			plotData(dataAll, vari, station.data_type);7
+			plotData(dataAll, vari, station.data_type);
 			vari = 'visibility'
-			plotData(dataAll, vari, station.data_type);7
+			plotData(dataAll, vari, station.data_type);
 
 			vari = 'swvht'
 			plotData(dataAll, vari, station.data_type);
@@ -69,15 +73,14 @@ const plotData = (dataApi, variable, dataType) => {
 	let y
 	let title
 	let yLegend
-	console.log(dataApi)
 	if (variable == 'wspd'){
 		y = dataApi.wspd
 		title = "VEL. VENTO"
-		yLegend = "Veloc. Vento (m/s)"
+		yLegend = "Veloc. Vento (nós)"
 	} else if ( variable == 'gust'){
 		y = dataApi.gust
 		title = "VEL. VENTO RAJADA"
-		yLegend = "Dir. Vento (°)"
+		yLegend = "Veloc. Vento (nós)"
 	} else if ( variable == 'wdir'){
 		y = dataApi.wdir
 		title = "DIR. VENTO"
