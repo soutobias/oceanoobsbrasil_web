@@ -54,7 +54,8 @@
       <p class='p-1 data-station' id="fog" title='Dados de Visibilidade'><i class="fas fa-smog"></i></p>
       <p class='p-1 data-station' id="tide" title='Dados de Maré'><i class="fas fa-ship"></i></p>
       <p class='p-1' id="moon" title='Maré e Lua'><i class="fas fa-moon"></i></p>
-      <p class='p-1' id="info" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></p>
+      <p class='inactive-tab' id="info" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></p>
+      <p class='p-1' id="showPop" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></p>
     </div>
     <div class=''>
       <div class="name-card">
@@ -90,7 +91,7 @@
   </div>
   <div class='logo'>
     <div class='info-text d-flex'>
-      <div id='showPop'>
+      <div id='showPop1' class='inactive-tab'>
         <i class="fas fa-info-circle pr-2"  title='Informações sobre o Sistema'></i>
       </div>
       <div id='showLayer' class=''>
@@ -143,7 +144,8 @@
     <p class='m-0'>Altimetria por satélite</p>
     <p class='m-0'>Escaterômetros</p>
     <p class='m-0'>Mensagens SHIP</p>
-    <h4 class='mt-3 text-center'>CÓDIGOS DISPONÍVEIS EM:</h3>
+    <p class='m-0 text-center'><strong>ATENÇÃO: DADOS EM FUSU UTC</strong></p>
+    <h4 class='mt-2 text-center'>CÓDIGOS DISPONÍVEIS EM:</h3>
     <div class="row  justify-content-center ">
       <div class='col-4 card-git text-center  justify-content-center'>
         <a href="https://github.com/soutobias/oceanoobsbrasil" target="_blank" class='text-center'>
