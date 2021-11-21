@@ -88,40 +88,47 @@
       </div>
     </div>
   </div>
-  <div>
-    <div class='logo'>
-      <div class='info-text d-flex'>
-        <div id='showPop'>
-          <i class="fas fa-info-circle pr-2"  title='Informações sobre o Sistema'></i>
-        </div>
-        <div id='showLayer' class=''>
-          <i class="fas fa-layer-group pr-2" title='Selecionar camadas'></i>  
-        </div>
-        <% if current_user.admin? %>
-          <%= link_to admin_path, class: "info-text", title: 'Admin' do %>
-            <i class="fas fa-user-shield pr-2 "></i>
-          <% end %>
+  <div class='logo'>
+    <div class='info-text d-flex'>
+      <div id='showPop'>
+        <i class="fas fa-info-circle pr-2"  title='Informações sobre o Sistema'></i>
+      </div>
+      <div id='showLayer' class=''>
+        <i class="fas fa-layer-group pr-2" title='Selecionar camadas'></i>  
+      </div>
+      <% if current_user.admin? %>
+        <%= link_to admin_path, class: "info-text", title: 'Admin' do %>
+          <i class="fas fa-user-shield pr-2 "></i>
         <% end %>
-        <%= link_to destroy_user_session_path, method: :delete, class: "info-text", title: 'Sair' do %>
-          <i class="fas fa-sign-out-alt"></i>
-        <% end %>
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete, class: "info-text", title: 'Sair' do %>
+        <i class="fas fa-sign-out-alt"></i>
+      <% end %>
+    </div>
+    <div class='layer-text inactive-tab' id='wave-radio'>
+      <div class='p-0'>
+        <p id="heigth-wave" class="btn-wave btn btn-yellow-small font-weight-bold w-100 active">Altura</p>
       </div>
-      <div class='layer-text inactive-tab' id='wave-radio'>
-        <div class='p-0'>
-          <p id="heigth-wave" class="btn-wave btn btn-yellow-small font-weight-bold w-100 active">Altura</p>
-        </div>
-        <div class='p-0'>
-          <p id="direction-wave" class="btn-wave btn btn-yellow-small font-weight-bold w-100">Direção</p>
-        </div>
+      <div class='p-0'>
+        <p id="direction-wave" class="btn-wave btn btn-yellow-small font-weight-bold w-100">Direção</p>
       </div>
-      <div class='layer-text inactive-tab' id='wind-radio'>
-        <div class='p-0'>
-          <p id="velocity-wind" class="btn-wind btn btn-yellow-small font-weight-bold w-100 active">Velocidade</p>
-        </div>
-        <div class='p-0'>
-          <p id="direction-wind" class="btn-wind btn btn-yellow-small font-weight-bold w-100">Direção</p>
-        </div>
+    </div>
+    <div class='layer-text inactive-tab' id='wind-radio'>
+      <div class='p-0'>
+        <p id="velocity-wind" class="btn-wind btn btn-yellow-small font-weight-bold w-100 active">Velocidade</p>
       </div>
+      <div class='p-0'>
+        <p id="direction-wind" class="btn-wind btn btn-yellow-small font-weight-bold w-100">Direção</p>
+      </div>
+    </div>
+  </div>
+  <div class='color-scale' id='color-scale'>
+    <p class='scale-name p-0 m-0'></p>
+    <div class='scale-type p-0 m-0 d-flex'></div>
+    <div class='scale-values d-flex p-0 m-0'>
+      <p class='scale-start'></p>
+      <p class='scale-middle'></p>
+      <p class='scale-end'></p>
     </div>
   </div>
   <div class="full-screen inactive-tab flex-container-center" id='first-full-screen'>

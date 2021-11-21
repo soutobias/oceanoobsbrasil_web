@@ -1,6 +1,7 @@
 // import L from 'leaflet.';
 import 'leaflet/dist/leaflet'
 import { getData } from '../plugins/get_data';
+import { initColor, getColor } from '../plugins/init_color';
 
 
 const metarea = {
@@ -28,13 +29,6 @@ const metareaStyle = {
     "opacity": 0.4,
     "fillOpacity": 0
 };
-
-const waveLimit = 2.5;
-const windLimit = 10;
-const sstLimit = 20;
-const atmpLimit = 15;
-const visibilityLimit = 6.2;
-const tideLimit = 3;
 
 
 const initLeaflet = () => {
@@ -107,35 +101,40 @@ const convertDir = (dir) => {
 
 
 
-const markerIcon = (text, limit, typeValue, value) => {
+const markerIcon = (text, limit, typeValue, value, maxValue) => {
+
+  const colors = getColor(limit, maxValue);
   let htmlText
   if (typeValue === 'normal'){
-    htmlText = text.toFixed(1).toString();
 
-    if (text >= limit) {
-      const icon = L.divIcon({
-        html: htmlText,
-        className: 'red-icon all-icon',
-      });
-      return icon;
-
-    } else {
-      const icon = L.divIcon({
-        html: htmlText,
-        className: 'white-icon all-icon',
-      });
-      return icon;
+    let index = Math.round(text.toFixed(1)/maxValue*100)
+    if (index < 0){
+      index = index * (-1)
     }
+    if (index === 100){
+      index = index - 1;
+    }
+
+    htmlText = `<div class='all-icon'>
+        <div class='circle-color'>
+          <i class="fas fa-circle" style='z-index: 0; color: ${colors[index]};  font-size: 28px;'></i>
+        </div>
+        <p class='p-0 m-0 circle-text' style='z-index:10'>${text.toFixed(1).toString()}</p>
+      </div>`;
+
+    const icon = L.divIcon({
+      html: htmlText,
+      className: '',
+    });
+
+    return icon;
+
   } else{
-    if (value >= limit) {
-      htmlText = `<div class='all-icon' style='transform: rotate(${text}deg);color: red;  font-size: 20px;'>
-        <i class="fas fa-arrow-up"></i>
-        </div>`;
-    } else{
-      htmlText = `<div class='all-icon' style='transform: rotate(${text}deg);color: white; font-size: 20px;'>
-        <i class="fas fa-arrow-up"></i>
-        </div>`;
-    }
+    let index = Math.round(value/maxValue*100)
+    console.log(index);
+    htmlText = `<div class='all-icon' style='transform: rotate(${text}deg);color: ${colors[index]};  font-size: 20px;'>
+      <i class="fas fa-arrow-up"></i>
+      </div>`;
     const icon = L.divIcon({
       html: htmlText,
       className: '',
@@ -249,16 +248,24 @@ const generatePopupTextNo = (mark) => {
 const mapData = (mymap) => {
   getData().then(response => response.json())
   .then((data) => {
+    initColor();
     const activeStation = document.querySelector('.active-station')
     const activeData = document.querySelector('.active-data')
     const activeLayer = document.querySelector('.active-layer')
 
-    const waveLimit = 2.5;
-    const windLimit = 10;
-    const sstLimit = 20;
-    const atmpLimit = 15;
-    const visibilityLimit = 6.2;
-    const tideLimit = 3;
+    const waveLimit = 2.4;
+    const windLimit = 15;
+    const sstLimit = 21;
+    const atmpLimit = 25;
+    const visibilityLimit = 7;
+    const tideLimit = 0.3;
+
+    const waveMax = 8;
+    const windMax = 60;
+    const sstMax = 30;
+    const atmpMax = 50;
+    const visibilityMax = 10;
+    const tideMax = 2;
 
     const waveRadio = document.getElementById('wave-radio')
     const windRadio = document.getElementById('wind-radio')
@@ -278,7 +285,7 @@ const mapData = (mymap) => {
             typeValue = 'no normal'
           }
           if (value) {
-            const icon = markerIcon(value, waveLimit, typeValue, mark.swvht);
+            const icon = markerIcon(value, waveLimit, typeValue, mark.swvht, waveMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);
@@ -297,7 +304,7 @@ const mapData = (mymap) => {
             typeValue = 'no normal';
           }
           if (value) {
-            const icon = markerIcon(value, windLimit, typeValue, mark.wspd);
+            const icon = markerIcon(value, windLimit, typeValue, mark.wspd, windMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);
@@ -309,7 +316,7 @@ const mapData = (mymap) => {
           if (mark.sst != null) {
             let text = parseFloat(mark.sst)
             typeValue = 'normal'
-            const icon = markerIcon(text, sstLimit, typeValue, mark.swvht);
+            const icon = markerIcon(text, sstLimit, typeValue, mark.swvht, sstMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);
@@ -321,7 +328,7 @@ const mapData = (mymap) => {
           if (mark.atmp != null) {
             let text = parseFloat(mark.atmp)
             typeValue = 'normal'
-            const icon = markerIcon(text, atmpLimit, typeValue, mark.swvht);
+            const icon = markerIcon(text, atmpLimit, typeValue, mark.swvht, atmpMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);
@@ -333,7 +340,7 @@ const mapData = (mymap) => {
           if (mark.visibility != null) {
             let text = parseFloat(mark.visibility) * 1.6
             typeValue = 'normal'
-            const icon = markerIcon(text, visibilityLimit, typeValue, mark.swvht);
+            const icon = markerIcon(text, visibilityLimit, typeValue, mark.swvht, visibilityMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);
@@ -345,7 +352,7 @@ const mapData = (mymap) => {
           if (mark.meteorological_tide != null) {
             let text = parseFloat(mark.meteorological_tide)
             typeValue = 'normal'
-            const icon = markerIcon(text, tideLimit, typeValue, mark.swvht);
+            const icon = markerIcon(text, tideLimit, typeValue, mark.swvht, tideMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);
@@ -370,7 +377,7 @@ const mapData = (mymap) => {
             typeValue = 'no normal'
           }
           if (value) {
-            const icon = markerIcon(value, waveLimit, typeValue, mark.swvht);
+            const icon = markerIcon(value, waveLimit, typeValue, mark.swvht, waveMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipTextNo(mark);
             const popupText = generatePopupTextNo(mark);
@@ -389,7 +396,7 @@ const mapData = (mymap) => {
             typeValue = 'no normal'
           }
           if (value) {
-            const icon = markerIcon(value, windLimit, typeValue, mark.wspd);
+            const icon = markerIcon(value, windLimit, typeValue, mark.wspd, windMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipTextNo(mark);
             const popupText = generatePopupTextNo(mark);
@@ -401,7 +408,7 @@ const mapData = (mymap) => {
           if (mark.sst != null) {
             let text = parseFloat(mark.sst)
             typeValue = 'normal'
-            const icon = markerIcon(text, sstLimit, typeValue, mark.swvht);
+            const icon = markerIcon(text, sstLimit, typeValue, mark.swvht, sstMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipTextNo(mark);
             const popupText = generatePopupTextNo(mark);
@@ -413,7 +420,7 @@ const mapData = (mymap) => {
           if (mark.atmp != null) {
             let text = parseFloat(mark.atmp)
             typeValue = 'normal'
-            const icon = markerIcon(text, atmpLimit, typeValue, mark.swvht);
+            const icon = markerIcon(text, atmpLimit, typeValue, mark.swvht, atmpMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipTextNo(mark);
             const popupText = generatePopupTextNo(mark);

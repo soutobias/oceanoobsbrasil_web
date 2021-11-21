@@ -1,0 +1,50 @@
+.color-scale {
+  // width: 160px; /* Set the width of the sidebar */
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  margin: auto 0;
+  left: 0;
+  padding: 4px;
+  background-color: rgba(0,0,0,0.5);
+  overflow-x: hidden; /* Disable horizontal scroll */
+  align-items: center;
+  justify-content: center;
+  color: #D49511;
+  width: 200px;
+  height: 60px;
+}
+
+.scale-name{
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.scale-type{
+  width: 100%;
+  height: 17px;
+}
+
+.color-span{
+  width: 2%;
+  height: 17px;
+}
+
+.scale-values{
+  position: relative;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.scale-start{
+  position: absolute;
+  left: 0%;
+}
+.scale-middle{
+  position: absolute;
+}
+.scale-end{
+  position: absolute;
+  left: 95%;
+}
