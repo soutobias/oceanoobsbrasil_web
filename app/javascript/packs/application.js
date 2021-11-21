@@ -27,6 +27,7 @@ import "bootstrap";
 import { initLeaflet } from '../plugins/init_leaflet';
 import { initPlotly } from '../plugins/init_plotly';
 import { initRange } from '../plugins/init_range';
+import { initColor } from '../plugins/init_color';
 
 import { selectStation, selectType, selectLayer } from '../plugins/init_sidebar';
 
@@ -39,6 +40,7 @@ document.addEventListener('turbolinks:load', () => {
   initRange();
   initPlotly();
   initLeaflet();
+  initColor();
   selectStation();
   selectType();
   selectLayer();
