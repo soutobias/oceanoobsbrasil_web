@@ -48,3 +48,15 @@
   position: absolute;
   left: 95%;
 }
+
+@media (max-width: 720px) {
+  .scale-values{
+    font-size: 9px;
+  }
+  .scale-name{
+    font-size: 10px;
+  }
+  .color-scale{
+    width: 150px;
+  }
+}
