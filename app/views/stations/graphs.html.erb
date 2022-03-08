@@ -13,9 +13,9 @@
 		<% data_type = 'balneabilidade' %>
 	<% end %>
 	<div class='text-center'>
-		<p class='m-0 p-0'><strong>TIPO:</strong> <%= data_type.upcase%></p>
-		<p class='m-0 p-0'><strong>INSTITUIÇÃO:</strong> <%= @station.institution.upcase%></p>
-		<p class='m-0 p-0'><strong>POSIÇÃO:</strong> LAT <%= @station.lat.round(4)%>, LON <%= @station.lon.round(4)%></p> 
+		<p class='m-0 p-0 text-sha text-info'><strong>TIPO:</strong> <%= data_type.upcase%></p>
+		<p class='m-0 p-0 text-sha text-info'><strong>INSTITUIÇÃO:</strong> <%= @station.institution.upcase%></p>
+		<p class='m-0 p-0 text-sha text-info'><strong>POSIÇÃO:</strong> LAT <%= @station.lat.round(4)%>, LON <%= @station.lon.round(4)%></p> 
 	</div>
 	<div id="plotdata"
 	data-station="<%= @station.to_json %>"

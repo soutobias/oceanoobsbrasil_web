@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   get "admin", to: "pages#admin"
-  get "data", to: "pages#data"
+  get "br", to: "pages#data"
   resources :stations
-  get "graphs/:id", to: "stations#graphs"
+  get "br/graphs/:id", to: "stations#graphs"
 end

@@ -209,7 +209,7 @@ const generatePopupText = (mark) => {
   if (admin==="1"){
     textStation = `<a class="btn m-0 p-0 collor-yellow" href="/stations/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
   } else {
-    textStation = `<a class="btn m-0 p-0 collor-yellow" href="/graphs/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
+    textStation = `<a class="btn m-0 p-0 collor-yellow" href="br/graphs/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
   }
   return `${header}${text}${textStation}`
 };
