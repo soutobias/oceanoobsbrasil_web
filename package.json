@@ -14,7 +14,7 @@
     "jquery-ui-slider-pips": "^0.0.1-security",
     "leaflet": "^1.7.1",
     "leaflet.timeline": "^1.4.3",
-    "node-sass": "^6.0",
+    "node-sass": "^7.0.1",
     "plotly": "^1.0.6",
     "plotly.js-basic-dist": "^2.6.3",
     "plotly.js-dist": "^2.6.3",
@@ -22,6 +22,9 @@
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
+  "engines": {
+    "node": "14.x"
+  },
   "devDependencies": {
     "webpack-dev-server": "^4.3.1"
   }
