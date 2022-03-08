@@ -1,0 +1,194 @@
+<div id='map'>
+  <div id="mapid"> </div>
+</div>
+
+<%= render 'shared/loader' %>
+
+<div>
+  <div class="footer">
+    <div class="range-slider">
+      <span id="rs-bullet" class="rs-label" title='Fuso ZULU'></span>
+      <input id="rs-range-line" class="rs-range" type="range" value="96" min="0" max="96" step='6'>
+      <div class="d-flex justify-content-between mt-0 pt-2 pb-0 mb-0 w-100 range-hour">
+        <% days = [4,3,2,1,0] %>
+        <% hours = [0, 6, 12, 18] %>
+        <% days_hour = [0, 0, 0, 0, 0, 0] %>
+        <% time_now = Time.now.utc %>
+        <% days.each_with_index do |day, idx| %>
+          <% hours.each do |hour| %>
+              <% if day == 4 %>
+                <% time_rest = time_now.hour%6 %>
+                <% if hour >= time_now.hour - time_rest  %>
+                  <% days_hour[idx+1] += 1 %>
+                  <p title='Fuso ZULU'><%= "%02d" % hour %> </p>
+                <% end %>
+              <% elsif day == 0 %>
+                <% if hour <= time_now.hour.to_i  %>
+                  <p title='Fuso ZULU'><%= "%02d" % hour %> </p>
+                <% end %>
+              <% else %>
+                <% days_hour[idx+1] += 1 %>
+                <p title='Fuso ZULU'><%= "%02d" % hour %> </p>
+              <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-between mt-0 w-100 pt-0 range-day">
+        <p style="left: <%=(days_hour[0]/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*4)).strftime("%d-%m")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*3)).strftime("%d-%m")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*2)).strftime("%d-%m")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2]  + days_hour[3])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*1)).strftime("%d-%m")%> </p>
+        <p style="left: <%=((days_hour[0] + days_hour[1] + days_hour[2] + days_hour[3]  + days_hour[4])/21.0*100).round() %>%"><%= (Time.now.utc - (3600*24*0)).strftime("%d-%m")%> </p>
+      </div>
+    </div>
+  </div>
+  <div class="sidenav d-flex">
+    <div class='text-center sidenav-card'>
+      <p class='p-1 active-station type-station' id="stations" title='Estações Fixas'><i class="fas fa-anchor"></i></i></p>
+      <p class='p-1 type-station' id="no-stations"><i class="fas fa-globe-americas" title='Satélites e Mensagens SHIP'></i></p>
+      <br>
+      <p class='p-1 active-data data-station' id="wave" title='Dados de Ondas'><i class="fas fa-water"></i></p>
+      <p class='p-1 data-station' id="wind" title='Dados de Vento'><i class="fas fa-wind"></i></p>
+      <p class='p-1 data-station' id="water-temp" title='Dados de Temperatura da Água'><i class="fas fa-thermometer-half"></i></p>
+      <p class='p-1 data-station' id="air-temp" title='Dados de Temperatura do Ar'><i class="fas fa-temperature-low"></i></p>
+      <p class='p-1 data-station' id="fog" title='Dados de Visibilidade'><i class="fas fa-smog"></i></p>
+      <p class='p-1 data-station' id="tide" title='Dados de Maré'><i class="fas fa-ship"></i></p>
+      <p class='p-1' id="moon" title='Maré e Lua'><i class="fas fa-moon"></i></p>
+      <p class='inactive-tab' id="info" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></p>
+      <p class='p-1' id="showPop" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></p>
+    </div>
+    <div class=''>
+      <div class="name-card">
+        <p class='p-1 pt-2 stations' id='stations1' title='Estações Fixas'>Estações Fixas</i></i></p>
+      </div>
+      <div class="name-card">
+        <p class='p-1  pt-2 stations'  id='no-stations1' title='Satélites e Mensagens SHIP'>Satélites & SHIP</p>
+      </div>
+      <br>
+
+      <div class="name-card">
+        <p class='p-1 stations-data' id='wave1' title='Dados de Ondas'>Ondas</p>
+      </div>
+      <div class="name-card">
+        <p class='p-1  stations-data' id='wind1' title='Dados de Vento'>Vento</p>
+      </div>
+      <div class="name-card">
+        <p class='p-1 stations-data' id='water-temp1' title='Dados de Temperatura da Água'>Temp. da Água</p>
+      </div>
+      <div class="name-card">
+        <p class='p-1 stations-data' id='air-temp1' title='Dados de Temperatura do Ar'>Temp. do Ar</p>
+      </div>
+      <div class="name-card">
+        <p class='p-1 stations-data' id='fog1' title='Dados de Visibilidade'>Visibilidade</p>
+      </div>
+      <div class="name-card">
+        <p class='p-1 stations-data' id='tide1' title='Dados de Maré'>Maré Meteorológica</p>
+      </div>
+      <div class="name-card">
+        <p class='p-1' id='moon1' title='Maré e Lua'>Maré e Lua</p>
+      </div>
+    </div>
+  </div>
+  <div class='logo'>
+    <div class='info-text d-flex'>
+      <div id='showPop1' class='inactive-tab'>
+        <i class="fas fa-info-circle pr-3"  title='Informações sobre o Sistema'></i>
+      </div>
+      <div id='showLayer' class=''>
+        <i class="fas fa-layer-group pr-3" title='Selecionar camadas'></i>  
+      </div>
+      <% if current_user.admin? %>
+        <%= link_to admin_path, class: "info-text", title: 'Admin' do %>
+          <i class="fas fa-user-shield pr-3 "></i>
+        <% end %>
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete, class: "info-text", title: 'Sair' do %>
+        <i class="fas fa-sign-out-alt"></i>
+      <% end %>
+    </div>
+    <div class='layer-text inactive-tab' id='wave-radio'>
+      <div class='p-0'>
+        <p id="heigth-wave" class="btn-wave btn btn-yellow-small font-weight-bold w-100 active">Altura</p>
+      </div>
+      <div class='p-0'>
+        <p id="direction-wave" class="btn-wave btn btn-yellow-small font-weight-bold w-100">Direção</p>
+      </div>
+    </div>
+    <div class='layer-text inactive-tab' id='wind-radio'>
+      <div class='p-0'>
+        <p id="velocity-wind" class="btn-wind btn btn-yellow-small font-weight-bold w-100 active">Velocidade</p>
+      </div>
+      <div class='p-0'>
+        <p id="direction-wind" class="btn-wind btn btn-yellow-small font-weight-bold w-100">Direção</p>
+      </div>
+    </div>
+  </div>
+  <div class='color-scale' id='color-scale'>
+    <p class='scale-name p-0 m-0'></p>
+    <div class='scale-type p-0 m-0 d-flex'></div>
+    <div class='scale-values d-flex p-0 m-0'>
+      <p class='scale-start'></p>
+      <p class='scale-middle'></p>
+      <p class='scale-end'></p>
+    </div>
+  </div>
+  <div class="full-screen inactive-tab flex-container-center" id='first-full-screen'>
+    <p><i class="fas fa-times-circle"></i></p>
+    <h3 class='text-center'>DIV. OCEANOGRAFIA OPERACIONAL</h3>
+    <p class='text-center'><strong>Dados observacionais em tempo real para a METAREAV provenientes de:</strong></p>
+    <p class='mb-0 ml-0 mr-0'>Boias</p>
+    <p class='m-0'>Estações meteorológicas</p>
+    <p class='m-0'>Aeroportos</p>
+    <p class='m-0'>Observações visuais</p>
+    <p class='m-0'>Estações maregráficas</p>
+    <p class='m-0'>Altimetria por satélite</p>
+    <p class='m-0'>Escaterômetros</p>
+    <p class='m-0'>Mensagens SHIP</p>
+    <p class='m-0 text-center'><strong>ATENÇÃO: DADOS EM FUSO UTC</strong></p>
+    <h4 class='mt-2 text-center'>CÓDIGOS DISPONÍVEIS EM:</h3>
+    <div class="row  justify-content-center ">
+      <div class='col-4 card-git text-center  justify-content-center'>
+        <a href="https://github.com/soutobias/oceanoobsbrasil" target="_blank" class='text-center'>
+          <i class="fab fa-github m-0  p-0 text-center"></i>
+          <p class='m-0  p-0 text-center'>DATA</p>
+        </a>
+      </div>
+      <div class='col-4 card-git text-center justify-content-center'>
+        <a href="https://github.com/soutobias/oceanoobsbrasil_web" target="_blank" class='text-center'>
+          <i class="fab fa-github m-0 p-0 text-center"></i>
+          <p class='m-0  p-0 text-center'>API</p>
+        </a>
+      </div>
+      <div class='col-4 card-git text-center'>
+        <a href="https://github.com/soutobias/remobs_api" target="_blank" class='text-center'>
+          <i class="fab fa-github m-0  p-0 text-center"></i>
+          <p class='m-0  p-0 text-center'>WEB</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="full-screen inactive-tab flex-container-center" id='moon-full-screen'>
+    <p><i class="fas fa-times-circle"></i></p>
+    <h3>MARÉ E FASES DA LUA</h3>
+    <% @moons.each do |moon| %>
+      <% if moon.moon == 'cheia' %>
+        <p><%= image_tag("cheia.png", class: "nav-img p-0")%> <%= moon.date_time.strftime('%d/%m/%Y') %>: <%= moon.tide.upcase %></p>
+      <% elsif moon.moon == 'crescente' %>
+        <p><%= image_tag("crescente.png", class: "nav-img p-0")%> <%= moon.date_time.strftime('%d/%m/%Y') %>: <%= moon.tide.upcase %></p>
+      <% elsif moon.moon == 'minguante' %>
+        <p><%= image_tag("minguante.png", class: "nav-img p-0")%> <%= moon.date_time.strftime('%d/%m/%Y') %>: <%= moon.tide.upcase %></p>
+      <% else moon.moon == 'nova' %>
+        <p><%= image_tag("nova.png", class: "nav-img p-0")%> <%= moon.date_time.strftime('%d/%m/%Y') %>: <%= moon.tide.upcase %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="full-screen inactive-tab flex-container-center" id='full-screen'>
+  </div>
+
+</div>
+<div id="data"
+  data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY2'] %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
