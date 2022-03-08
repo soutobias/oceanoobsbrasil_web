@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get "admin", to: "pages#admin"
   get "data", to: "pages#data"
   resources :stations
+  get "graphs/:id", to: "stations#graphs"
 end

@@ -97,11 +97,6 @@
       <div id='showLayer' class=''>
         <i class="fas fa-layer-group pr-3" title='Selecionar camadas'></i>  
       </div>
-      <% if current_user.admin? %>
-        <%= link_to admin_path, class: "info-text", title: 'Admin' do %>
-          <i class="fas fa-user-shield pr-3 "></i>
-        <% end %>
-      <% end %>
       <%= link_to destroy_user_session_path, method: :delete, class: "info-text", title: 'Sair' do %>
         <i class="fas fa-sign-out-alt"></i>
       <% end %>
@@ -189,6 +184,7 @@
 
 </div>
 <div id="data"
+  data-admin="0"
   data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY2'] %>"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>

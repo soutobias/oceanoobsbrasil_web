@@ -1,6 +1,10 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="navbar-brand">
-    <p class='m-0 p-0'><%= @station.name.upcase%></p>
+  <div class="navbar-brand text-center">
+    <p class='m-0 p-0 font-weight-bold'><%= @station.name.upcase%></p>
   </div>
-  <%= link_to "VOLTAR", root_path, class: "btn btn-yellow font-weight-bold" %>
+  <% if current_user %>
+    <%= link_to "VOLTAR", root_path, class: "btn btn-yellow font-weight-bold" %>
+  <% else %>
+    <%= link_to "VOLTAR", data_path, class: "btn btn-yellow font-weight-bold" %>
+  <% end %>
 </div>

@@ -162,6 +162,9 @@ const generateTipText = (mark) => {
 }
 
 const generatePopupText = (mark) => {
+  const dataElement = document.getElementById('data');
+  const admin = dataElement.dataset.admin;
+
   let dateTime = `${mark.date_time.slice(8,10)}/${mark.date_time.slice(5,7)} ${mark.date_time.slice(11,16)}`
   let header = `<div class='pop-up'>
           <p class='m-0 p-0'><strong>LAT:</strong> ${Math.round(parseFloat(mark.lat)*1000)/1000}, <strong>LON:</strong> ${Math.round(parseFloat(mark.lon)*1000)/1000}</p>
@@ -202,7 +205,12 @@ const generatePopupText = (mark) => {
             <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>`
   }
   text = text.replaceAll("NaN", "--");
-  let textStation = `<a class="btn m-0 p-0 collor-yellow" href="/stations/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
+  let textStation
+  if (admin==="1"){
+    textStation = `<a class="btn m-0 p-0 collor-yellow" href="/stations/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
+  } else {
+    textStation = `<a class="btn m-0 p-0 collor-yellow" href="/graphs/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
+  }
   return `${header}${text}${textStation}`
 };
 
