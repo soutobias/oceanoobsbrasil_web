@@ -1,13 +1,10 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :data ]
+  skip_before_action :authenticate_user!, only: [ :home ]
 
   def home
     @moons = Moon.where("date_time <  '#{Time.now.utc + (3600*24*15)}' AND date_time > '#{Time.now.utc - (3600*24*15)}'")
   end
 
-  def data
-    @moons = Moon.where("date_time <  '#{Time.now.utc + (3600*24*15)}' AND date_time > '#{Time.now.utc - (3600*24*15)}'")
-  end
 
   def admin
     if current_user.admin

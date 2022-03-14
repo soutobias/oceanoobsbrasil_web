@@ -97,14 +97,20 @@
       <div id='showLayer' class=''>
         <i class="fas fa-layer-group pr-3" title='Selecionar camadas'></i>  
       </div>
-      <% if current_user.admin? %>
-        <%= link_to admin_path, class: "info-text", title: 'Admin' do %>
-          <i class="fas fa-user-shield pr-3 "></i>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <%= link_to admin_path, class: "info-text", title: 'Admin' do %>
+            <i class="fas fa-user-shield pr-3 "></i>
+          <% end %>
         <% end %>
-      <% end %>
-      <%= link_to destroy_user_session_path, method: :delete, class: "info-text", title: 'Sair' do %>
-        <i class="fas fa-sign-out-alt"></i>
-      <% end %>
+        <%= link_to destroy_user_session_path, method: :delete, class: "info-text", title: 'Sair' do %>
+          <i class="fas fa-sign-out-alt"></i>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path, class: "info-text", title: 'Logar' do %>
+          <i class="fas fa-sign-in-alt"></i>
+        <% end %>
+      <% end %>        
     </div>
     <div class='layer-text inactive-tab' id='wave-radio'>
       <div class='p-0'>
@@ -134,8 +140,8 @@
   </div>
   <div class="full-screen inactive-tab flex-container-center" id='first-full-screen'>
     <p><i class="fas fa-times-circle"></i></p>
-    <h3 class='text-center'>DIV. OCEANOGRAFIA OPERACIONAL</h3>
-    <p class='text-center'><strong>Dados observacionais em tempo real para a METAREAV provenientes de:</strong></p>
+    <h2 class='text-center text-info'><strong>OCEANO.LIVE</strong></h2>
+    <p class='text-center'><strong>Dados observacionais em tempo real:</strong></p>
     <p class='mb-0 ml-0 mr-0'>Boias</p>
     <p class='m-0'>Estações meteorológicas</p>
     <p class='m-0'>Aeroportos</p>
@@ -154,13 +160,13 @@
         </a>
       </div>
       <div class='col-4 card-git text-center justify-content-center'>
-        <a href="https://github.com/soutobias/oceanoobsbrasil_web" target="_blank" class='text-center'>
+        <a href="https://github.com/soutobias/remobs_api" target="_blank" class='text-center'>
           <i class="fab fa-github m-0 p-0 text-center"></i>
           <p class='m-0  p-0 text-center'>API</p>
         </a>
       </div>
       <div class='col-4 card-git text-center'>
-        <a href="https://github.com/soutobias/remobs_api" target="_blank" class='text-center'>
+        <a href="https://github.com/soutobias/oceanoobsbrasil_web" target="_blank" class='text-center'>
           <i class="fab fa-github m-0  p-0 text-center"></i>
           <p class='m-0  p-0 text-center'>WEB</p>
         </a>
@@ -188,8 +194,17 @@
   </div>
 
 </div>
-<div id="data"
-  data-admin="1"
-  data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>"
-  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-</div>
+<% if user_signed_in? %>
+  <div id="data"
+    data-admin="1"
+    data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+<% else %>
+  <div id="data"
+    data-admin="0"
+    data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY2'] %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+<% end %>
+
