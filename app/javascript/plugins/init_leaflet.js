@@ -222,6 +222,8 @@ const generateTipTextNo = (mark) => {
     dataType = 'ESCATERÔMETRO';
   } else if (mark.data_type === 'altimeter') {
     dataType = 'ALTIMETRIA';
+  } else if (mark.data_type === 'drifter') {
+    dataType = 'DERIVADOR';
   }
   return `${dataType} - ${mark.institution.toUpperCase()}`
 }
@@ -250,6 +252,13 @@ const generatePopupTextNo = (mark) => {
   } else if (mark.data_type === 'altimeter') {
     text = `<p class='m-0 p-0'><strong>Alt. Onda:</strong> ${parseFloat(mark.swvht)} m</p>
             <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${parseFloat(mark.wspd)} nós</p></div>`
+  } else if (mark.data_type === 'drifter'){
+    text = `<p class='m-0 p-0'><strong>Alt. Onda:</strong> ${parseFloat(mark.swvht)} m</p>
+            <p class='m-0 p-0'><strong>Dir. Onda:</strong> ${parseFloat(mark.wvdir)} °</p>
+            <p class='m-0 p-0'><strong>Per. Onda:</strong> ${parseFloat(mark.tp)} s</p>
+            <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>
+            <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${parseFloat(mark.wspd)} nós</p>
+            <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p></div>`
   }
   text = text.replaceAll("NaN", "--");
   return `${header}${text}`
