@@ -90,6 +90,14 @@
   </div>
   <div class='logo'>
     <div class='info-text d-flex'>
+      <div class="dropdown pr-3">
+        <div class="dropbtn"><%= image_tag "brazil_flag.png", class: "flag p-0 pr-1"%></div>
+        <div class="dropdown-content">
+          <%= link_to en_path, class: 'd-flex' do %>
+            <%=image_tag("us_flag.png", class: "flag p-0 pr-1", title: 'English Version') %>EN
+          <% end %>          
+        </div>
+      </div>
       <div id='showPop' class=''>
         <i class="fas fa-info-circle pr-3"  title='Informações sobre o Sistema'></i>
       </div>
