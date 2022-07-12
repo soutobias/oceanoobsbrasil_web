@@ -19,19 +19,29 @@ const getData = () => {
     const token = dataElement.dataset.oceanobsApiKey;
 
     const activeStation = document.querySelector('.active-station')
+    const activeData = document.querySelector('.active-data')
     if (activeStation.id === 'stations') {
-      const url = `https://remobsapi.herokuapp.com/api/v1/data_stations/last?start_date=${startDate}&end_date=${endDate}&token=${token}`
-      return fetch(url,{
-           method: 'GET',
-           mode: 'cors',
-           headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
-        })
+      if (activeData.id === 'moon'){
+        const url = `https://remobsapi.herokuapp.com/api/v1/stations?token=${token}`
+        return fetch(url,{
+            method: 'GET',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
+          })
+      } else {
+        const url = `https://remobsapi.herokuapp.com/api/v1/data_stations/last?start_date=${startDate}&end_date=${endDate}&token=${token}`
+        return fetch(url,{
+            method: 'GET',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
+          })
+      }
     } else {
       const url = `https://remobsapi.herokuapp.com/api/v1/data_no_stations?start_date=${startDate}&end_date=${endDate}&token=${token}`
       return fetch(url,{
-           method: 'GET',
-           mode: 'cors',
-           headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
+          method: 'GET',
+          mode: 'cors',
+          headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
         })
     }
   }

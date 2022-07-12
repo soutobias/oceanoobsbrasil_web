@@ -45,14 +45,8 @@ const selectStation = () => {
   const waveRadio = document.getElementById('wave-radio')
   const windRadio = document.getElementById('wind-radio')
 
-  const moon = document.getElementById('moon')
-  const moon1 = document.getElementById('moon1')
-
-  const moonFull = document.getElementById('moon-full-screen')
-
-
   const showPop = document.getElementById('showPop')
-  if (info) {
+  if (showPop) {
     showLayer.addEventListener('click', (event) => {
       const activeData = document.querySelector('.active-data')
       if (activeData.id === 'wave') {
@@ -61,17 +55,6 @@ const selectStation = () => {
         windRadio.classList.toggle('inactive-tab');
       }
     });
-    moon.addEventListener('click', (event) => {
-      moonFull.classList.remove('inactive-tab');
-    });
-    moon1.addEventListener('click', (event) => {
-      moonFull.classList.remove('inactive-tab');
-    });
-
-    moonFull.addEventListener('click', (event) => {
-      moonFull.classList.add('inactive-tab');
-    });
-
     showPop.addEventListener('click', (event) => {
       first.classList.remove('inactive-tab');
     });
@@ -124,11 +107,16 @@ const selectStation = () => {
           document.getElementById('tide1').classList.add('inactive-tab')
           document.getElementById('fog').classList.add('inactive-tab')
           document.getElementById('fog1').classList.add('inactive-tab')
+          document.getElementById('moon').classList.add('inactive-tab')
+          document.getElementById('moon1').classList.add('inactive-tab')
           if (activeData.id === 'fog') {
             document.getElementById('fog').classList.remove('active-data')
             document.getElementById('wave').classList.add('active-data')
           } else if (activeData.id === 'tide') {
             document.getElementById('tide').classList.remove('active-data')
+            document.getElementById('wave').classList.add('active-data')
+          } else if (activeData.id === 'moon') {
+            document.getElementById('moon').classList.remove('active-data')
             document.getElementById('wave').classList.add('active-data')
           }
         } else {
@@ -136,6 +124,8 @@ const selectStation = () => {
           document.getElementById('tide1').classList.remove('inactive-tab')
           document.getElementById('fog').classList.remove('inactive-tab')
           document.getElementById('fog1').classList.remove('inactive-tab')
+          document.getElementById('moon').classList.remove('inactive-tab')
+          document.getElementById('moon1').classList.remove('inactive-tab')
         }
         if (activeData.id != 'wave' && activeData.id != 'wind') {
           showLayer.classList.add('inactive-tab');
@@ -212,7 +202,6 @@ const selectStation = () => {
       });
     });
   }
-
 };
 
 const selectType = () => {
@@ -220,18 +209,29 @@ const selectType = () => {
   const buttons = document.querySelectorAll('.data-station')
   const buttonsText = document.querySelectorAll('.stations-data')
   const showLayer = document.getElementById('showLayer')
+  const moonFull = document.getElementById('moon-full-screen')
+
+  moonFull.addEventListener('click', (event) => {
+    moonFull.classList.add('inactive-tab');
+  });
+  const colorElement = document.getElementById('color-scale');
 
   if (buttons) {
     buttons.forEach((button) => {
       button.addEventListener('click', (event) => {
         document.getElementById('wave-radio').classList.add('inactive-tab')
         document.getElementById('wind-radio').classList.add('inactive-tab')      
-
         buttons.forEach((button_1) => {
           button_1.classList.remove('active-data');
         });
         event.currentTarget.classList.add('active-data');
         const activeData = document.querySelector('.active-data')
+        if (activeData.id === 'moon') {
+          colorElement.classList.add('inactive-tab');
+          moonFull.classList.remove('inactive-tab');
+        } else{
+          colorElement.classList.remove('inactive-tab');
+        }
         if (activeData.id !== 'wave' && activeData.id !== 'wind') {
           showLayer.classList.add('inactive-tab');
         } else {
@@ -266,6 +266,12 @@ const selectType = () => {
         const clicked = document.getElementById(idClick.slice(0,-1));
         clicked.classList.add('active-data');
         const activeData = document.querySelector('.active-data')
+        if (activeData.id === 'moon') {
+          colorElement.classList.add('inactive-tab');
+          moonFull.classList.remove('inactive-tab');
+        } else{
+          colorElement.classList.remove('inactive-tab');
+        }
         if (activeData.id !== 'wave' && activeData.id !== 'wind') {
           showLayer.classList.add('inactive-tab');
         } else {
