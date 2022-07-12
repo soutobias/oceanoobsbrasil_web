@@ -1,5 +1,5 @@
 // import L from 'leaflet.';
-import 'leaflet/dist/leaflet'
+import 'leaflet/dist/leaflet';
 import { getData } from '../plugins/get_data';
 import { initColor, getColor } from '../plugins/init_color';
 
@@ -21,7 +21,7 @@ const metarea = {
         ] }
     }
   ]
-}
+};
 
 const metareaStyle = {
     "color": "#5a5c5a",
@@ -99,7 +99,7 @@ const convertDir = (dir) => {
     newDir = dir - 180;
   }
   return newDir
-}
+};
 
 
 
@@ -146,38 +146,92 @@ const markerIcon = (text, limit, typeValue, value, maxValue) => {
 };
 
 const generateTipText = (mark) => {
+  const dataElement = document.getElementById('data');
+  const language = dataElement.dataset.language;
+
   let dataType
   let institution
-  if (mark.data_type === 'buoy'){
-    dataType = 'Boia';
-    institution = mark.institution.toUpperCase();
-  } else if (mark.data_type === 'meteorological_station') {
-    dataType = 'Estação Meteorológica';
-    institution = mark.institution.toUpperCase();
-  } else if (mark.data_type === 'tide') {
-    dataType = 'Estação Maregráfica';
-    if (mark.institution === 'tide_table') {
-      institution = 'TÁBUA DE MARÉS';
-    } else{
+
+  if (language === 'pt-br'){
+    if (mark.data_type === 'buoy'){
+      dataType = 'Boia';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'meteorological_station') {
+      dataType = 'Estação Meteorológica';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'tide') {
+      dataType = 'Estação Maregráfica';
+      if (mark.institution === 'tide_table') {
+        institution = 'TÁBUA DE MARÉS';
+      } else{
+        institution = mark.institution.toUpperCase();
+      }
+    } else if (mark.data_type === 'cleaning') {
+      dataType = 'Balneabilidade';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'visual') {
+      dataType = 'Observação Visual';
       institution = mark.institution.toUpperCase();
     }
-  } else if (mark.data_type === 'cleaning') {
-    dataType = 'Balneabilidade';
-    institution = mark.institution.toUpperCase();
-  } else if (mark.data_type === 'visual') {
-    dataType = 'Observação Visual';
-    institution = mark.institution.toUpperCase();
+  } else if (language === 'en'){
+    if (mark.data_type === 'buoy'){
+      dataType = 'Buoy';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'meteorological_station') {
+      dataType = 'Weather Station';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'tide') {
+      dataType = 'Tide Gauge';
+      if (mark.institution === 'tide_table') {
+        institution = 'TIDE TABLE';
+      } else{
+        institution = mark.institution.toUpperCase();
+      }
+    } else if (mark.data_type === 'cleaning') {
+      dataType = 'Cleaning';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'visual') {
+      dataType = 'Visual Observations';
+      institution = mark.institution.toUpperCase();
+    }
   }
+
   return `${dataType} - ${institution}: ${mark.name.toUpperCase()}`
-}
+};
 
 const generatePopupText = (mark) => {
   const dataElement = document.getElementById('data');
+
   const admin = dataElement.dataset.admin;
+  const language = dataElement.dataset.language;
+
+  let waveHeightText
+  let waveMaxText
+  let visibilityText
+  let waveDirText
+  let wavePerText
+  let sstText
+  let windDirText
+  let windSpeedText
+  let windGustText
+  let unitWindText
+  let airTempText
+  let dateTime
+  let dateTimeText
+  let tideTableText
+  let tideText
+  let cleaningText
+
+  if (language === 'pt-br'){
+    tideTableText = 'Tábua de Marés'
+  } else if (language === 'en'){
+    tideTableText = 'Tide Table'
+  }
+
   if (mark.institution === 'tide_table'){
     let header = `<div class='pop-up'>
       <p class='m-0 p-0'><strong>LAT:</strong> ${Math.round(parseFloat(mark.lat)*1000)/1000}, <strong>LON:</strong> ${Math.round(parseFloat(mark.lon)*1000)/1000}</p>
-      <p class='m-0 p-0'><strong>Tabua de Marés:</strong>
+      <p class='m-0 p-0'><strong>${tideTableText}:</strong>
         <a class="btn m-0 p-0 collor-yellow" href="https://www.marinha.mil.br/chm/sites/www.marinha.mil.br.chm/files/dados_de_mare/${mark.url}" target="_blank">
           <i class="fas fa-chart-pie"></i>
         </a>
@@ -185,44 +239,78 @@ const generatePopupText = (mark) => {
     </div>`
     return `${header}`
   } else {
-    let dateTime = `${mark.date_time.slice(8,10)}/${mark.date_time.slice(5,7)} ${mark.date_time.slice(11,16)}`
+    if (language === 'pt-br'){
+      tideTableText = 'Tábua de Marés'
+      waveHeightText = 'Alt. Onda'
+      waveMaxText = 'Max. Onda'
+      visibilityText = 'Visibilidade'
+      waveDirText = 'Dir. Onda'
+      wavePerText = 'Per. Onda'
+      sstText = 'Temp. Água'
+      windDirText = 'Dir. Vento'
+      windSpeedText = 'Vel. Vento'
+      windGustText = 'Rajada'
+      unitWindText = 'nós'
+      airTempText = 'Temp. Ar'
+      dateTime = `${mark.date_time.slice(8,10)}/${mark.date_time.slice(5,7)} ${mark.date_time.slice(11,16)}`
+      dateTimeText = 'DATAHORA'
+      tideText = 'Maré Meteorológica'
+      cleaningText = 'Balneabilidade'
+    } else if (language === 'en'){
+      tideTableText = 'Tide Table'
+      waveHeightText = 'Wave Height'
+      waveMaxText = 'Max. Wave'
+      visibilityText = 'Visibility'
+      waveDirText = 'Wave Dir.'
+      wavePerText = 'Wave Period'
+      sstText = 'SST'
+      windDirText = 'Wind Dir.'
+      windSpeedText = 'Wind Speed'
+      windGustText = 'Gust'
+      unitWindText = 'knots'
+      airTempText = 'Air Temp.'
+      dateTime = `${mark.date_time.slice(5,7)}/${mark.date_time.slice(8,10)} ${mark.date_time.slice(11,16)}`
+      dateTimeText = 'DATETIME'
+      tideText = 'Meteorological Tide'
+      cleaningText = 'Cleaning'
+    }
     let header = `<div class='pop-up'>
             <p class='m-0 p-0'><strong>LAT:</strong> ${Math.round(parseFloat(mark.lat)*1000)/1000}, <strong>LON:</strong> ${Math.round(parseFloat(mark.lon)*1000)/1000}</p>
-            <p class='m-0 p-0'><strong>DATAHORA:</strong> ${dateTime}</p>`
+            <p class='m-0 p-0'><strong>${dateTimeText}:</strong> ${dateTime}</p>`
     let text
     if (mark.data_type === 'buoy'){
-      text = `<p class='m-0 p-0'><strong>Alt. Onda:</strong> ${parseFloat(mark.swvht)} m</p>
-              <p class='m-0 p-0'><strong>Max. Onda:</strong> ${parseFloat(mark.mxwvht)} m</p>
-              <p class='m-0 p-0'><strong>Dir. Onda:</strong> ${parseFloat(mark.wvdir)} °</p>
-              <p class='m-0 p-0'><strong>Per. Onda:</strong> ${parseFloat(mark.tp)} s</p>
-              <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>
-              <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${Math.round(parseFloat(mark.wspd)*100)/100} nós</p>
-              <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
-              <p class='m-0 p-0'><strong>Rajada:</strong> ${Math.round(parseFloat(mark.gust)*100)/100} nós</p>
-              <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
+      text = `<p class='m-0 p-0'><strong>${waveHeightText}:</strong> ${parseFloat(mark.swvht)} m</p>
+              <p class='m-0 p-0'><strong>${waveMaxText}:</strong> ${parseFloat(mark.mxwvht)} m</p>
+              <p class='m-0 p-0'><strong>${waveDirText}:</strong> ${parseFloat(mark.wvdir)} °</p>
+              <p class='m-0 p-0'><strong>${wavePerText}:</strong> ${parseFloat(mark.tp)} s</p>
+              <p class='m-0 p-0'><strong>${sstText}:</strong> ${parseFloat(mark.sst)} °C</p>
+              <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${Math.round(parseFloat(mark.wspd)*100)/100} ${unitWindText}</p>
+              <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p>
+              <p class='m-0 p-0'><strong>${windGustText}:</strong> ${Math.round(parseFloat(mark.gust)*100)/100} ${unitWindText}</p>
+              <p class='m-0 p-0'><strong>${airTempText}:</strong> ${parseFloat(mark.atmp)} °C</p>
               <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p>`
       } else if (mark.data_type === 'meteorological_station') {
-      text = `<p class='m-0 p-0'><strong>Vel. Vento:</strong> ${Math.round(parseFloat(mark.wspd)*100)/100} nós</p>
-              <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
-              <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${Math.round(parseFloat(mark.gust)*100)/100} nós</p>
-              <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
+      text = `<p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${Math.round(parseFloat(mark.wspd)*100)/100} nós</p>
+              <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p>
+              <p class='m-0 p-0'><strong>${windGustText}:</strong> ${Math.round(parseFloat(mark.gust)*100)/100} nós</p>
+              <p class='m-0 p-0'><strong>${airTempText}:</strong> ${parseFloat(mark.atmp)} °C</p>
               <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p>
-              <p class='m-0 p-0'><strong>Visibility:</strong> ${Math.round(parseFloat(mark.visibility)*1.6*100)/100} km</p>`
+              <p class='m-0 p-0'><strong>${visibilityText}:</strong> ${Math.round(parseFloat(mark.visibility)*1.6*100)/100} km</p>`
     } else if (mark.data_type === 'tide') {
-      text = `<p class='m-0 p-0'><strong>Maré Meteorológica:</strong> ${parseFloat(mark.meteorological_tide)} m</p>
-              <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>
-              <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${Math.round(parseFloat(mark.wspd)*100)/100} nós</p>
-              <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
-              <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${Math.round(parseFloat(mark.gust)*100)/100} nós</p>
-              <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
+      text = `<p class='m-0 p-0'><strong>${tideText}:</strong> ${parseFloat(mark.meteorological_tide)} m</p>
+              <p class='m-0 p-0'><strong>${sstText}:</strong> ${parseFloat(mark.sst)} °C</p>
+              <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${Math.round(parseFloat(mark.wspd)*100)/100} ${unitWindText}</p>
+              <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p>
+              <p class='m-0 p-0'><strong>${windGustText}:</strong> ${Math.round(parseFloat(mark.gust)*100)/100} ${unitWindText}</p>
+              <p class='m-0 p-0'><strong>${airTempText}:</strong> ${parseFloat(mark.atmp)} °C</p>
               <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p>`
     } else if (mark.data_type === 'cleaning') {
-      text = `<p class='m-0 p-0'><strong>Balneabilidade:</strong> ${mark.cleaning}</p>`
+      text = `<p class='m-0 p-0'><strong>${cleaningText}:</strong> ${mark.cleaning}</p>`
     } else if (mark.data_type === 'visual') {
-      text = `<p class='m-0 p-0'><strong>Alt. Onda:</strong> ${parseFloat(mark.swvht)} m</p>
-              <p class='m-0 p-0'><strong>Dir. Onda:</strong> ${parseFloat(mark.wvdir)} °</p>
-              <p class='m-0 p-0'><strong>Per. Onda:</strong> ${parseFloat(mark.tp)} s</p>
-              <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>`
+      text = `<p class='m-0 p-0'><strong>${waveHeightText}:</strong> ${parseFloat(mark.swvht)} m</p>
+              <p class='m-0 p-0'><strong>${waveDirText}:</strong> ${parseFloat(mark.wvdir)} °</p>
+              <p class='m-0 p-0'><strong>${wavePerText}:</strong> ${parseFloat(mark.tp)} s</p>
+              <p class='m-0 p-0'><strong>${sstText}:</strong> ${parseFloat(mark.sst)} °C</p>`
     }
     text = text.replaceAll("NaN", "--");
     let textStation
@@ -236,54 +324,109 @@ const generatePopupText = (mark) => {
 };
 
 const generateTipTextNo = (mark) => {
+  const dataElement = document.getElementById('data');
+  const language = dataElement.dataset.language;
   let dataType
-  if (mark.data_type === 'gts'){
-    dataType = 'GTS';
-  } else if (mark.data_type === 'scatterometer') {
-    dataType = 'ESCATERÔMETRO';
-  } else if (mark.data_type === 'altimeter') {
-    dataType = 'ALTIMETRIA';
-  } else if (mark.data_type === 'drifter') {
-    dataType = 'DERIVADOR';
+
+  if (language === 'pt-br'){
+    if (mark.data_type === 'gts'){
+      dataType = 'GTS';
+    } else if (mark.data_type === 'scatterometer') {
+      dataType = 'ESCATERÔMETRO';
+    } else if (mark.data_type === 'altimeter') {
+      dataType = 'ALTIMETRIA';
+    } else if (mark.data_type === 'drifter') {
+      dataType = 'DERIVADOR';
+    }
+  } else if (language === 'en'){
+    if (mark.data_type === 'gts'){
+      dataType = 'GTS';
+    } else if (mark.data_type === 'scatterometer') {
+      dataType = 'SCATTEROMETER';
+    } else if (mark.data_type === 'altimeter') {
+      dataType = 'ALTIMETER';
+    } else if (mark.data_type === 'drifter') {
+      dataType = 'DRIFTER';
+    }
   }
   return `${dataType} - ${mark.institution.toUpperCase()}`
-}
+};
 
 const generatePopupTextNo = (mark) => {
-  let dateTime = `${mark.date_time.slice(8,10)}/${mark.date_time.slice(5,7)} ${mark.date_time.slice(11,16)}`
-  let header = `<div class='pop-up'>
-          <p class='m-0 p-0'><strong>LAT:</strong> ${Math.round(parseFloat(mark.lat)*1000)/1000}, <strong>LON:</strong> ${Math.round(parseFloat(mark.lon)*1000)/1000}</p>
-          <p class='m-0 p-0'><strong>DATAHORA:</strong> ${dateTime}</p>`
+  const dataElement = document.getElementById('data');
+  const language = dataElement.dataset.language;
+
   let text
+  let waveHeightText
+  let waveDirText
+  let wavePerText
+  let sstText
+  let windDirText
+  let windSpeedText
+  let windGustText
+  let unitWindText
+  let airTempText
+  let dateTime
+  let header
+  if (language === 'pt-br'){
+    waveHeightText = 'Alt. Onda'
+    waveDirText = 'Dir. Onda'
+    wavePerText = 'Per. Onda'
+    sstText = 'Temp. Água'
+    windDirText = 'Dir. Vento'
+    windSpeedText = 'Vel. Vento'
+    windGustText = 'Rajada'
+    unitWindText = 'nós'
+    airTempText = 'Temp. Ar'  
+    dateTime = `${mark.date_time.slice(8,10)}/${mark.date_time.slice(5,7)} ${mark.date_time.slice(11,16)}`
+    header = `<div class='pop-up'>
+            <p class='m-0 p-0'><strong>LAT:</strong> ${Math.round(parseFloat(mark.lat)*1000)/1000}, <strong>LON:</strong> ${Math.round(parseFloat(mark.lon)*1000)/1000}</p>
+            <p class='m-0 p-0'><strong>DATAHORA:</strong> ${dateTime}</p>`
+  } else if (language === 'en'){
+    waveHeightText = 'Wave Height'
+    waveDirText = 'Wave Dir.'
+    wavePerText = 'Wave Period'
+    sstText = 'SST'
+    windDirText = 'Wind Dir.'
+    windSpeedText = 'Wind Speed'
+    windGustText = 'Gust'
+    unitWindText = 'knots'
+    airTempText = 'Air Temp.'
+    dateTime = `${mark.date_time.slice(5,7)}/${mark.date_time.slice(8,10)} ${mark.date_time.slice(11,16)}`
+    header = `<div class='pop-up'>
+            <p class='m-0 p-0'><strong>LAT:</strong> ${Math.round(parseFloat(mark.lat)*1000)/1000}, <strong>LON:</strong> ${Math.round(parseFloat(mark.lon)*1000)/1000}</p>
+            <p class='m-0 p-0'><strong>DATETIME:</strong> ${dateTime}</p>`
+  }
+
   if (mark.data_type === 'gts'){
-    text = `<p class='m-0 p-0'><strong>Alt. Onda:</strong> ${parseFloat(mark.swvht)} m</p>
-            <p class='m-0 p-0'><strong>Alt. Onda Swell:</strong> ${parseFloat(mark.swvht_swell)} m</p>
-            <p class='m-0 p-0'><strong>Dir. Onda:</strong> ${parseFloat(mark.wvdir)} °</p>
-            <p class='m-0 p-0'><strong>Dir. Onda Swell:</strong> ${parseFloat(mark.wvdir_swell)} °</p>
-            <p class='m-0 p-0'><strong>Per. Onda:</strong> ${parseFloat(mark.tp)} s</p>
-            <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>
-            <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${parseFloat(mark.wspd)} nós</p>
-            <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p>
-            <p class='m-0 p-0'><strong>Rajada:</strong> ${parseFloat(mark.gust)} nós</p>
-            <p class='m-0 p-0'><strong>Temp. Ar:</strong> ${parseFloat(mark.atmp)} °C</p>
-            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} °C</p></div>`
+    text = `<p class='m-0 p-0'><strong>${waveHeightText}:</strong> ${parseFloat(mark.swvht)} m</p>
+            <p class='m-0 p-0'><strong>${waveHeightText} Swell:</strong> ${parseFloat(mark.swvht_swell)} m</p>
+            <p class='m-0 p-0'><strong>${waveDirText}:</strong> ${parseFloat(mark.wvdir)} °</p>
+            <p class='m-0 p-0'><strong>${waveDirText} Swell:</strong> ${parseFloat(mark.wvdir_swell)} °</p>
+            <p class='m-0 p-0'><strong>${wavePerText}:</strong> ${parseFloat(mark.tp)} s</p>
+            <p class='m-0 p-0'><strong>${sstText}:</strong> ${parseFloat(mark.sst)} °C</p>
+            <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} ${unitWindText}</p>
+            <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p>
+            <p class='m-0 p-0'><strong>${windGustText}:</strong> ${parseFloat(mark.gust)} ${unitWindText}</p>
+            <p class='m-0 p-0'><strong>${airTempText}:</strong> ${parseFloat(mark.atmp)} °C</p>
+            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p></div>`
   } else if (mark.data_type === 'scatterometer') {
-    text = `<p class='m-0 p-0'><strong>Vel. Vento:</strong> ${parseFloat(mark.wspd)} nós</p>
-            <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p></div>`
+    text = `<p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} nós</p>
+            <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p></div>`
   } else if (mark.data_type === 'altimeter') {
-    text = `<p class='m-0 p-0'><strong>Alt. Onda:</strong> ${parseFloat(mark.swvht)} m</p>
-            <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${parseFloat(mark.wspd)} nós</p></div>`
+    text = `<p class='m-0 p-0'><strong>${waveHeightText}:</strong> ${parseFloat(mark.swvht)} m</p>
+            <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} nós</p></div>`
   } else if (mark.data_type === 'drifter'){
-    text = `<p class='m-0 p-0'><strong>Alt. Onda:</strong> ${parseFloat(mark.swvht)} m</p>
-            <p class='m-0 p-0'><strong>Dir. Onda:</strong> ${parseFloat(mark.wvdir)} °</p>
-            <p class='m-0 p-0'><strong>Per. Onda:</strong> ${parseFloat(mark.tp)} s</p>
-            <p class='m-0 p-0'><strong>Temp. Água:</strong> ${parseFloat(mark.sst)} °C</p>
-            <p class='m-0 p-0'><strong>Vel. Vento:</strong> ${parseFloat(mark.wspd)} nós</p>
-            <p class='m-0 p-0'><strong>Dir. Vento:</strong> ${parseFloat(mark.wdir)} °</p></div>`
+    text = `<p class='m-0 p-0'><strong>${waveHeightText}:</strong> ${parseFloat(mark.swvht)} m</p>
+            <p class='m-0 p-0'><strong>${waveDirText}:</strong> ${parseFloat(mark.wvdir)} °</p>
+            <p class='m-0 p-0'><strong>${wavePerText}:</strong> ${parseFloat(mark.tp)} s</p>
+            <p class='m-0 p-0'><strong>${sstText}:</strong> ${parseFloat(mark.sst)} °C</p>
+            <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} nós</p>
+            <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p></div>`
   }
   text = text.replaceAll("NaN", "--");
   return `${header}${text}`
-};
+}
 
 const mapData = (mymap) => {
   getData().then(response => response.json())
@@ -491,8 +634,14 @@ const mapData = (mymap) => {
     }
     const loader = document.getElementById('loader');
     loader.classList.add('inactive-tab');
+    const dataElement = document.getElementById('data');
+    const language = dataElement.dataset.language;
     if (data.length == 0){
-      alert("Não há dados disponíveis!");
+      if (language === 'pt-br'){
+        alert("Não há dados disponíveis!");
+      } else if (language === 'en'){
+        alert("No data available!");
+      }
     }
   });
 };

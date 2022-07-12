@@ -67,24 +67,48 @@ const selectStation = () => {
       const activeData = document.querySelector('.active-data')
       const popup = document.getElementById('full-screen');
       let text
-      if (activeData.id === 'wave') {
-        text =`<div class='text-center'><h2>ONDAS</h2><p>Altura significativa</p><p>Unidade: metros</p><p>Fuso: ZULU</p>
-              <i class="fas fa-times-circle"></i></div>`
-      } else if (activeData.id === 'wind') {
-        text =`<div class='text-center'><h2>VENTO</h2><p>Velocidade do vento em 10 metros</p><p>Unidade: metros/segundo</p><p>Fuso: ZULU</p>
-              <i class="fas fa-times-circle"></i></div>`
-      } else if (activeData.id === 'water-temp') {
-        text =`<div class='text-center'><h2>TEMPERATURA DA ÁGUA</h2><p>Temperatura da água do mar</p><p>Unidade: °C</p><p>Fuso: ZULU</p>
-              <i class="fas fa-times-circle"></i></div>`
-      } else if (activeData.id === 'air-temp') {
-        text =`<div class='text-center'><h2>TEMPERATURA DO AR</h2><p>Temperatura do ar</p><p>Unidade: °C</p><p>Fuso: ZULU</p>
-              <i class="fas fa-times-circle"></i></div>`
-      } else if (activeData.id === 'fog') {
-        text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos</p><p>Unidade: km</p><p>Fuso: ZULU</p>
-              <i class="fas fa-times-circle"></i></div>`
-      } else if (activeData.id === 'tide') {
-        text =`<div class='text-center'><h2>MAŔÉ METEOROLÓGICA</h2><p>Diferença entre a maré medida e a maré prevista</p><p>Unidade: metros</p><p>Fuso: ZULU</p>
-              <i class="fas fa-times-circle"></i></div>`
+      const dataElement = document.getElementById('data');
+      const language = dataElement.dataset.language;
+      if (language === 'pt-br') {
+        if (activeData.id === 'wave') {
+          text =`<div class='text-center'><h2>ONDAS</h2><p>Altura significativa</p><p>Unidade: metros</p><p>Fuso: ZULU</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'wind') {
+          text =`<div class='text-center'><h2>VENTO</h2><p>Velocidade do vento em 10 metros</p><p>Unidade: metros/segundo</p><p>Fuso: ZULU</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'water-temp') {
+          text =`<div class='text-center'><h2>TEMPERATURA DA ÁGUA</h2><p>Temperatura da água do mar</p><p>Unidade: °C</p><p>Fuso: ZULU</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'air-temp') {
+          text =`<div class='text-center'><h2>TEMPERATURA DO AR</h2><p>Temperatura do ar</p><p>Unidade: °C</p><p>Fuso: ZULU</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'fog') {
+          text =`<div class='text-center'><h2>VISIBILIDADE</h2><p>Visibilidade medida em aeroportos</p><p>Unidade: km</p><p>Fuso: ZULU</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'tide') {
+          text =`<div class='text-center'><h2>MAŔÉ METEOROLÓGICA</h2><p>Diferença entre a maré medida e a maré prevista</p><p>Unidade: metros</p><p>Fuso: ZULU</p>
+                <i class="fas fa-times-circle"></i></div>`
+        }
+      } else if (language === 'en') {
+        if (activeData.id === 'wave') {
+          text =`<div class='text-center'><h2>WAVES</h2><p>Significant height</p><p>Unit: meters</p><p>Time zone: GMT</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'wind') {
+          text =`<div class='text-center'><h2>WIND</h2><p>Wind speed in 10 meters</p><p>Unit: meters/second</p><p>Time zone: GMT</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'water-temp') {
+          text =`<div class='text-center'><h2>WATER TEMPERATURE</h2><p>Sea water temperature</p><p>Unit: °C</p><p>Time zone: GMT</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'air-temp') {
+          text =`<div class='text-center'><h2>AIR TEMPERATURE</h2><p>Air Temperature</p><p>Unit: °C</p><p>Time zone: GMT</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'fog') {
+          text =`<div class='text-center'><h2>VISIBILITY</h2><p>Visibilidade medida em aeroportos</p><p>Unit: km</p><p>Time zone: GMT</p>
+                <i class="fas fa-times-circle"></i></div>`
+        } else if (activeData.id === 'tide') {
+          text =`<div class='text-center'><h2>METEOROLOGICAL TIDE</h2><p>Difference between measured tide and predicted tide</p><p>Unit: meters</p><p>Time zone: GMT</p>
+                <i class="fas fa-times-circle"></i></div>`
+        }        
       }
       popup.innerHTML = text;
       popup.classList.remove('inactive-tab');
