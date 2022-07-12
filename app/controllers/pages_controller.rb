@@ -3,6 +3,12 @@ class PagesController < ApplicationController
 
   def home
     @moons = Moon.where("date_time <  '#{Time.now.utc + (3600*24*15)}' AND date_time > '#{Time.now.utc - (3600*24*15)}'")
+    @language = 'pt-br'
+    if params[:language] == "en"
+      @language = 'en'
+    elsif params[:language] == "pt-br"
+      @language = 'pt-br'
+    end
   end
 
 
