@@ -16,6 +16,7 @@
 
 
 .dropbtn {
+  align-items: center;
 }
 
 .dropdown {
@@ -40,8 +41,9 @@
   }
 }
 .flag{
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: auto;
+  opacity: 0.7;
 }
 .dropdown:hover .dropdown-content {display: block;}
 
