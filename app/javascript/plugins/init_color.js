@@ -9,7 +9,7 @@ const initColor = () => {
   const visibilityLimit = 7;
   const tideLimit = 0.3;
 
-  const waveMax = 8;
+  const waveMax = 9;
   const windMax = 60;
   const sstMax = 30;
   const atmpMax = 50;
@@ -19,6 +19,10 @@ const initColor = () => {
 
   const colorElement = document.getElementById('color-scale');
   if (colorElement) {
+
+    const dataElement = document.getElementById('data');
+    const language = dataElement.dataset.language;
+
     const colorName = document.querySelector('.scale-name');
     const colorScale = document.querySelector('.scale-type');
     const scaleStart = document.querySelector('.scale-start');
@@ -35,30 +39,60 @@ const initColor = () => {
     let maxValue
     let variable
     const activeData = document.querySelector('.active-data')
-    if (activeData.id === 'wave') {
-      limitValue = waveLimit;
-      maxValue = waveMax;
-      variable = 'ALT. ONDAS (m)'
-    } else if (activeData.id === 'wind'){
-      limitValue = windLimit;
-      maxValue = windMax;
-      variable = 'VELOC. VENTO (nós)'
-    } else if (activeData.id === 'water-temp'){
-      limitValue = sstLimit;
-      maxValue = sstMax;
-      variable = 'TEMP. ÁGUA (°C)'
-    } else if (activeData.id === 'air-temp'){
-      limitValue =  atmpLimit;
-      maxValue =  atmpMax;
-      variable = 'TEMP. AR (°C)'
-    } else if (activeData.id === 'fog'){
-      limitValue = visibilityLimit;
-      maxValue = visibilityMax;
-      variable = 'VISIBILIDADE (km)'
-    } else if (activeData.id === 'tide'){
-      limitValue = tideLimit;
-      maxValue = tideMax;
-      variable = 'MARÉ METEOROLÓGICA (m)'
+
+    if (language === 'pt-br'){
+      if (activeData.id === 'wave') {
+        limitValue = waveLimit;
+        maxValue = waveMax;
+        variable = 'ALT. ONDAS (m)'
+      } else if (activeData.id === 'wind'){
+        limitValue = windLimit;
+        maxValue = windMax;
+        variable = 'VELOC. VENTO (nós)'
+      } else if (activeData.id === 'water-temp'){
+        limitValue = sstLimit;
+        maxValue = sstMax;
+        variable = 'TEMP. ÁGUA (°C)'
+      } else if (activeData.id === 'air-temp'){
+        limitValue =  atmpLimit;
+        maxValue =  atmpMax;
+        variable = 'TEMP. AR (°C)'
+      } else if (activeData.id === 'fog'){
+        limitValue = visibilityLimit;
+        maxValue = visibilityMax;
+        variable = 'VISIBILIDADE (km)'
+      } else if (activeData.id === 'tide'){
+        limitValue = tideLimit;
+        maxValue = tideMax;
+        variable = 'MARÉ METEOROLÓGICA (m)'
+      }
+    } else if (language === 'en'){
+      if (activeData.id === 'wave') {
+        limitValue = waveLimit;
+        maxValue = waveMax;
+        variable = 'WAVE HEIGHT (m)'
+      } else if (activeData.id === 'wind'){
+        limitValue = windLimit;
+        maxValue = windMax;
+        variable = 'WIND SPEED (knots)'
+      } else if (activeData.id === 'water-temp'){
+        limitValue = sstLimit;
+        maxValue = sstMax;
+        variable = 'WATER TEMP. (°C)'
+      } else if (activeData.id === 'air-temp'){
+        limitValue =  atmpLimit;
+        maxValue =  atmpMax;
+        variable = 'AIR TEMP. (°C)'
+      } else if (activeData.id === 'fog'){
+        limitValue = visibilityLimit;
+        maxValue = visibilityMax;
+        variable = 'VISIBILITY (km)'
+      } else if (activeData.id === 'tide'){
+        limitValue = tideLimit;
+        maxValue = tideMax;
+        variable = 'METEOROLOGICAL TIDE (m)'
+      }
+
     }
 
     const scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
