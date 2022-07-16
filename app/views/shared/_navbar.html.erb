@@ -2,5 +2,12 @@
   <div class="navbar-brand text-center">
     <p class='m-0 p-0 font-weight-bold text-info text-sha'><%= @station.name.upcase%></p>
   </div>
-  <%= link_to "VOLTAR", root_path, class: "btn btn-yellow font-weight-bold" %>
+  <%= form_tag root_path, method: :get do %>
+    <%= text_field_tag :language, @language, class: "inactive-tab"  %>
+    <% if @language == 'pt-br' %>
+      <%= submit_tag "VOLTAR", class: "btn btn-yellow font-weight-bold", title: "Voltar" %>
+    <% elsif @language == 'en' %>
+      <%= submit_tag "RETURN", class: "btn btn-yellow font-weight-bold", title: "Return" %>
+    <% end %>
+  <% end %>
 </div>

@@ -3,9 +3,11 @@ class StationsController < ApplicationController
     skip_before_action :authenticate_user!, only: [ :graphs ]
 
     def show
+        @language = params[:language]
     end
 
     def graphs
+        @language = params[:language]
     end
     
     def create
@@ -66,3 +68,11 @@ class StationsController < ApplicationController
       params.require(:station).permit(:id, :name, :lat, :lon, :data_type, :institution, :url)
     end
 end
+
+# `<form action="/stations/${mark.station_id}" accept-charset="UTF-8" method="get">
+#       <input type="text" name="language" id="language" value=${language} class="inactive-tab">
+#       <input type="text" name="admin" id="admin" value=${admin} class="inactive-tab">
+#       <button type="submit" class="btn m-0 p-0 collor-yellow" target="_blank">
+#         <i class="fas fa-chart-pie"></i>
+#       </button>
+#     </form>`

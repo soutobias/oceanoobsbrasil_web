@@ -241,13 +241,11 @@ const selectType = () => {
   const buttonsText = document.querySelectorAll('.stations-data')
   const showLayer = document.getElementById('showLayer')
   const moonFull = document.getElementById('moon-full-screen')
-
-  moonFull.addEventListener('click', (event) => {
-    moonFull.classList.add('inactive-tab');
-  });
   const colorElement = document.getElementById('color-scale');
-
-  if (buttons) {
+  if (moonFull) {
+    moonFull.addEventListener('click', (event) => {
+      moonFull.classList.add('inactive-tab');
+    });
     buttons.forEach((button) => {
       button.addEventListener('click', (event) => {
         document.getElementById('wave-radio').classList.add('inactive-tab')

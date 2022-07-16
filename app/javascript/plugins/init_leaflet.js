@@ -315,9 +315,19 @@ const generatePopupText = (mark) => {
     text = text.replaceAll("NaN", "--");
     let textStation
     if (admin==="1"){
-      textStation = `<a class="btn m-0 p-0 collor-yellow" href="/stations/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
+      textStation = `<form action="/stations/${mark.station_id}" accept-charset="UTF-8" method="get">
+        <input type="text" name="language" id="language" value=${language} class="inactive-tab">
+        <button type="submit" class="btn m-0 p-0 collor-yellow" formtarget="_blank">
+          <i class="fas fa-chart-pie"></i>
+        </button>
+      </form>`
     } else {
-      textStation = `<a class="btn m-0 p-0 collor-yellow" href="/graphs/${mark.station_id}" target="_blank"><i class="fas fa-chart-pie"></i></a></div>`
+      textStation = `<form action="/graphs/${mark.station_id}" accept-charset="UTF-8" method="get">
+        <input type="text" name="language" id="language" value=${language} class="inactive-tab">
+        <button type="submit" class="btn m-0 p-0 collor-yellow" formtarget="_blank">
+          <i class="fas fa-chart-pie"></i>
+        </button>
+      </form>`
     }
     return `${header}${text}${textStation}`
   }

@@ -3,7 +3,7 @@ import { getDataStation } from '../plugins/get_data';
 
 const initPlotly = () => {
   const chartElement = document.getElementById('plotdata');
-  if (chartElement) {
+	if (chartElement) {
     const loader = document.getElementById('loader');
     loader.classList.remove('inactive-tab');
 		getDataStation().then(response => response.json())
@@ -69,86 +69,171 @@ const initPlotly = () => {
 };
 
 const plotData = (dataApi, variable, dataType) => {
+  const chartElement = document.getElementById('plotdata');
+	const language = chartElement.dataset.language;
 
 	let y
 	let title
 	let yLegend
-	if (variable == 'wspd'){
-		y = dataApi.wspd
-		title = "VEL. VENTO"
-		yLegend = "Veloc. Vento (nós)"
-	} else if ( variable == 'gust'){
-		y = dataApi.gust
-		title = "VEL. VENTO RAJADA"
-		yLegend = "Veloc. Vento (nós)"
-	} else if ( variable == 'wdir'){
-		y = dataApi.wdir
-		title = "DIR. VENTO"
-		yLegend = "Dir. Vento (°)"
-	} else if ( variable == 'swvht'){
-		y = dataApi.swvht
-		title = "ALTURA SIG. ONDA"
-		yLegend = "Altura Onda (m)"
-	} else if ( variable == 'mxwvht'){
-		y = dataApi.mxwvht
-		title = "ALTURA MAX. ONDA"
-		yLegend = "Altura Onda (m)"
-	} else if ( variable == 'swvht_swell'){
-		y = dataApi.swvht_swell
-		title = "ALTURA SIG. ONDA SWELL"
-		yLegend = "Altura Onda (m)"
-	} else if ( variable == 'swvht_sea'){
-		y = dataApi.swvht_sea
-		title = "ALTURA SIG. ONDA MAR LOCAL"
-		yLegend = "Altura Onda (m)"
-	} else if ( variable == 'wvdir'){
-		y = dataApi.wvdir
-		title = "DIR. ONDA"
-		yLegend = "Dir. Onda (°)"
-	} else if ( variable == 'wvdir_swell'){
-		y = dataApi.wvdir_swell
-		title = "DIR. ONDA SWELL"
-		yLegend = "Dir. Onda (°)"
-	} else if ( variable == 'wvdir_sea'){
-		y = dataApi.wvdir_sea
-		title = "DIR. ONDA MAR LOCAL"
-		yLegend = "Dir. Onda (°)"
-	} else if ( variable == 'tp'){
-		y = dataApi.tp
-		title = "PER. ONDA"
-		yLegend = "Período Onda (s)"
-	} else if ( variable == 'wvspread'){
-		y = dataApi.wvspread
-		title = "ESPALHAMENTO ONDA"
-		yLegend = "Espalhamento Onda (°)"
-	} else if ( variable == 'sst'){
-		y = dataApi.sst
-		title = "TEMP. ÁGUA"
-		yLegend = "Temperatura (°C)"
-	} else if ( variable == 'atmp'){
-		y = dataApi.atmp
-		title = "TEMP. AR"
-		yLegend = "Temperatura (°C)"
-	} else if ( variable == 'pres'){
-		y = dataApi.pres
-		title = "PRESSÃO"
-		yLegend = "Pressão Atmosférica (mb)"
-	} else if ( variable == 'rh'){
-		y = dataApi.rh
-		title = "UMIDADE RELATIVA"
-		yLegend = "Umidade Relativa (%)"
-	} else if ( variable == 'dewpt'){
-		y = dataApi.dewpt
-		title = "TEMP. PONTO ORVALHO"
-		yLegend = "Temp. Orvalho (°C)"
-	} else if ( variable == 'visibility'){
-		y = dataApi.visibility
-		title = "VISIBILIDADE"
-		yLegend = "Visibilidade (km)"
-	} else if ( variable == 'meteorological_tide'){
-		y = dataApi.meteorological_tide
-		title = "MARÉ METEOROLÓGICA"
-		yLegend = "Maré Meteorológica (m)"
+	let tickFormat
+	if (language === 'pt-br'){
+		if (variable == 'wspd'){
+			y = dataApi.wspd
+			title = "VEL. VENTO"
+			yLegend = "Veloc. Vento (nós)"
+		} else if ( variable == 'gust'){
+			y = dataApi.gust
+			title = "VEL. VENTO RAJADA"
+			yLegend = "Veloc. Vento (nós)"
+		} else if ( variable == 'wdir'){
+			y = dataApi.wdir
+			title = "DIR. VENTO"
+			yLegend = "Dir. Vento (°)"
+		} else if ( variable == 'swvht'){
+			y = dataApi.swvht
+			title = "ALTURA SIG. ONDA"
+			yLegend = "Altura Onda (m)"
+		} else if ( variable == 'mxwvht'){
+			y = dataApi.mxwvht
+			title = "ALTURA MAX. ONDA"
+			yLegend = "Altura Onda (m)"
+		} else if ( variable == 'swvht_swell'){
+			y = dataApi.swvht_swell
+			title = "ALTURA SIG. ONDA SWELL"
+			yLegend = "Altura Onda (m)"
+		} else if ( variable == 'swvht_sea'){
+			y = dataApi.swvht_sea
+			title = "ALTURA SIG. ONDA MAR LOCAL"
+			yLegend = "Altura Onda (m)"
+		} else if ( variable == 'wvdir'){
+			y = dataApi.wvdir
+			title = "DIR. ONDA"
+			yLegend = "Dir. Onda (°)"
+		} else if ( variable == 'wvdir_swell'){
+			y = dataApi.wvdir_swell
+			title = "DIR. ONDA SWELL"
+			yLegend = "Dir. Onda (°)"
+		} else if ( variable == 'wvdir_sea'){
+			y = dataApi.wvdir_sea
+			title = "DIR. ONDA MAR LOCAL"
+			yLegend = "Dir. Onda (°)"
+		} else if ( variable == 'tp'){
+			y = dataApi.tp
+			title = "PER. ONDA"
+			yLegend = "Período Onda (s)"
+		} else if ( variable == 'wvspread'){
+			y = dataApi.wvspread
+			title = "ESPALHAMENTO ONDA"
+			yLegend = "Espalhamento Onda (°)"
+		} else if ( variable == 'sst'){
+			y = dataApi.sst
+			title = "TEMP. ÁGUA"
+			yLegend = "Temperatura (°C)"
+		} else if ( variable == 'atmp'){
+			y = dataApi.atmp
+			title = "TEMP. AR"
+			yLegend = "Temperatura (°C)"
+		} else if ( variable == 'pres'){
+			y = dataApi.pres
+			title = "PRESSÃO"
+			yLegend = "Pressão Atmosférica (mb)"
+		} else if ( variable == 'rh'){
+			y = dataApi.rh
+			title = "UMIDADE RELATIVA"
+			yLegend = "Umidade Relativa (%)"
+		} else if ( variable == 'dewpt'){
+			y = dataApi.dewpt
+			title = "TEMP. PONTO ORVALHO"
+			yLegend = "Temp. Orvalho (°C)"
+		} else if ( variable == 'visibility'){
+			y = dataApi.visibility
+			title = "VISIBILIDADE"
+			yLegend = "Visibilidade (km)"
+		} else if ( variable == 'meteorological_tide'){
+			y = dataApi.meteorological_tide
+			title = "MARÉ METEOROLÓGICA"
+			yLegend = "Maré Meteorológica (m)"
+		}
+		tickFormat = '%d/%m %Hh'
+	} else if (language === 'en'){
+		if (variable == 'wspd'){
+			y = dataApi.wspd
+			title = "WIND SPEED"
+			yLegend = "Wind Speed (knots)"
+		} else if ( variable == 'gust'){
+			y = dataApi.gust
+			title = "WIND GUST"
+			yLegend = "Wind Speed (knots)"
+		} else if ( variable == 'wdir'){
+			y = dataApi.wdir
+			title = "WIND DIRECTION"
+			yLegend = "Wind Dir. (°)"
+		} else if ( variable == 'swvht'){
+			y = dataApi.swvht
+			title = "SIG. WAVE HEIGHT"
+			yLegend = "Wave Height (m)"
+		} else if ( variable == 'mxwvht'){
+			y = dataApi.mxwvht
+			title = "MAX. WAVE HEIGHT"
+			yLegend = "Wave Height (m)"
+		} else if ( variable == 'swvht_swell'){
+			y = dataApi.swvht_swell
+			title = "SIG. WAVE HEIGHT SWELL"
+			yLegend = "Wave Height (m)"
+		} else if ( variable == 'swvht_sea'){
+			y = dataApi.swvht_sea
+			title = "SIG. WAVE HEIGHT SEA"
+			yLegend = "Wave Height (m)"
+		} else if ( variable == 'wvdir'){
+			y = dataApi.wvdir
+			title = "WAVE DIR."
+			yLegend = "Wave Dir. (°)"
+		} else if ( variable == 'wvdir_swell'){
+			y = dataApi.wvdir_swell
+			title = "WAVE DIR. SWELL"
+			yLegend = "Wave Dir. (°)"
+		} else if ( variable == 'wvdir_sea'){
+			y = dataApi.wvdir_sea
+			title = "WAVE DIR. LOCAL"
+			yLegend = "Wave Dir. (°)"
+		} else if ( variable == 'tp'){
+			y = dataApi.tp
+			title = "WAVE PERIOD"
+			yLegend = "Wave Period (s)"
+		} else if ( variable == 'wvspread'){
+			y = dataApi.wvspread
+			title = "WAVE SPREADING"
+			yLegend = "Wave Spreading (°)"
+		} else if ( variable == 'sst'){
+			y = dataApi.sst
+			title = "WATER TEMP."
+			yLegend = "Temperature (°C)"
+		} else if ( variable == 'atmp'){
+			y = dataApi.atmp
+			title = "AIR TEMP."
+			yLegend = "Temperature (°C)"
+		} else if ( variable == 'pres'){
+			y = dataApi.pres
+			title = "PRESSURE"
+			yLegend = "Atmospheric Pressure (mb)"
+		} else if ( variable == 'rh'){
+			y = dataApi.rh
+			title = "RELATIVE HUMIDITY"
+			yLegend = "Relative Humidity (%)"
+		} else if ( variable == 'dewpt'){
+			y = dataApi.dewpt
+			title = "DEW POINT TEMP."
+			yLegend = "Dew Point Temp. (°C)"
+		} else if ( variable == 'visibility'){
+			y = dataApi.visibility
+			title = "VISIBILITY"
+			yLegend = "Visibility (km)"
+		} else if ( variable == 'meteorological_tide'){
+			y = dataApi.meteorological_tide
+			title = "METEOROLOGICAL TIDE"
+			yLegend = "Meteorological Tide (m)"
+		}
+		tickFormat = '%m/%d %Hh'
 	}
 	if (y.every(element => element === null)) {
 		let ok
@@ -179,7 +264,7 @@ const plotData = (dataApi, variable, dataType) => {
 			xaxis: {
 				showgrid: true,
 				zeroline: false,
-				tickformat: '%d/%m %Hh',
+				tickformat: tickFormat,
 				gridcolor: 'rgba(0,0,0,0.2)'
 			},
 			yaxis: {
@@ -199,26 +284,47 @@ const plotData = (dataApi, variable, dataType) => {
 };
 
 const plotDataDir = (dataApi, variable, dataType) => {
-
+  const chartElement = document.getElementById('plotdata');
+	const language = chartElement.dataset.language;
 	let y
 	let title
 	let yLegend
-	if ( variable == 'wdir'){
-		y = dataApi.wdir
-		title = "DIR. VENTO"
-		yLegend = "Dir. Vento (°)"
-	} else if ( variable == 'wvdir'){
-		y = dataApi.wvdir
-		title = "DIR. ONDA"
-		yLegend = "Dir. Onda (m)"
-	} else if ( variable == 'wvdir_swell'){
-		y = dataApi.wvdir_swell
-		title = "DIR. ONDA SWELL"
-		yLegend = "Dir. Onda (m)"
-	} else if ( variable == 'wvdir_sea'){
-		y = dataApi.wvdir_sea
-		title = "DIR. ONDA MAR LOCAL"
-		yLegend = "Dir. Onda (m)"
+	if (language === 'pt-br'){
+		if ( variable == 'wdir'){
+			y = dataApi.wdir
+			title = "DIR. VENTO"
+			yLegend = "Dir. Vento (°)"
+		} else if ( variable == 'wvdir'){
+			y = dataApi.wvdir
+			title = "DIR. ONDA"
+			yLegend = "Dir. Onda (°)"
+		} else if ( variable == 'wvdir_swell'){
+			y = dataApi.wvdir_swell
+			title = "DIR. ONDA SWELL"
+			yLegend = "Dir. Onda (°)"
+		} else if ( variable == 'wvdir_sea'){
+			y = dataApi.wvdir_sea
+			title = "DIR. ONDA MAR LOCAL"
+			yLegend = "Dir. Onda (°)"
+		}
+	} else if (language === 'en'){
+		if ( variable == 'wdir'){
+			y = dataApi.wdir
+			title = "WIND DIR."
+			yLegend = "Wind Dir. (°)"
+		} else if ( variable == 'wvdir'){
+			y = dataApi.wvdir
+			title = "WAVE DIR."
+			yLegend = "Wave Dir. (°)"
+		} else if ( variable == 'wvdir_swell'){
+			y = dataApi.wvdir_swell
+			title = "WAVE DIR. SWELL"
+			yLegend = "Wave Dir. (°)"
+		} else if ( variable == 'wvdir_sea'){
+			y = dataApi.wvdir_sea
+			title = "WAVE DIR. SEA"
+			yLegend = "Wade Dir. (°)"
+		}
 	}
 	if (y.every(element => element === null)) {
 		let ok

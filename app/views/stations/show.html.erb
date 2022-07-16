@@ -1,24 +1,45 @@
 <%= render 'shared/navbar' %>
 <%= render 'shared/loader' %>
 <div class="graficos  mt-5 pt-5">
-	<% if @station.data_type == 'buoy' %>
-		<% data_type = 'boia' %>
-	<% elsif @station.data_type == 'meteorological_station' %>
-		<% data_type = 'estação meteorológica' %>
-	<% elsif @station.data_type == 'visual' %>
-		<% data_type = 'observação visual' %>
-	<% elsif @station.data_type == 'tide' %>
-		<% data_type = 'estação maregráfica' %>
-	<% elsif @station.data_type == 'cleaning' %>
-		<% data_type = 'balneabilidade' %>
+	<% if @language == 'pt-br' %>
+		<% if @station.data_type == 'buoy' %>
+			<% data_type = 'boia' %>
+		<% elsif @station.data_type == 'meteorological_station' %>
+			<% data_type = 'estação meteorológica' %>
+		<% elsif @station.data_type == 'visual' %>
+			<% data_type = 'observação visual' %>
+		<% elsif @station.data_type == 'tide' %>
+			<% data_type = 'estação maregráfica' %>
+		<% elsif @station.data_type == 'cleaning' %>
+			<% data_type = 'balneabilidade' %>
+		<% end %>
+		<% @type_name = "TIPO" %>
+		<% @institution_name =  "INSTITUIÇÃO" %>
+		<% @position_name = "POSIÇÃO" %>
+	<% elsif @language == 'en' %>
+		<% if @station.data_type == 'buoy' %>
+			<% data_type = 'buoy' %>
+		<% elsif @station.data_type == 'meteorological_station' %>
+			<% data_type = 'weather station' %>
+		<% elsif @station.data_type == 'visual' %>
+			<% data_type = 'visual obervation' %>
+		<% elsif @station.data_type == 'tide' %>
+			<% data_type = 'tide gauge' %>
+		<% elsif @station.data_type == 'cleaning' %>
+			<% data_type = 'cleaning' %>
+		<% end %>
+		<% @type_name = "TYPE" %>
+		<% @institution_name =  "INSTITUTION" %>
+		<% @position_name = "POSITION" %>
 	<% end %>
 	<div class='text-center'>
-		<p class='m-0 p-0'><strong>TIPO:</strong> <%= data_type.upcase%></p>
-		<p class='m-0 p-0'><strong>INSTITUIÇÃO:</strong> <%= @station.institution.upcase%></p>
-		<p class='m-0 p-0'><strong>POSIÇÃO:</strong> LAT <%= @station.lat.round(4)%>, LON <%= @station.lon.round(4)%></p> 
+		<p class='m-0 p-0'><strong><%= @type_name.upcase%>:</strong> <%= data_type.upcase%></p>
+		<p class='m-0 p-0'><strong><%= @institution_name.upcase%>:</strong> <%= @station.institution.upcase%></p>
+		<p class='m-0 p-0'><strong><%= @position_name.upcase%>:</strong> LAT <%= @station.lat.round(4)%>, LON <%= @station.lon.round(4)%></p> 
 	</div>
 	<div id="plotdata"
 	data-station="<%= @station.to_json %>"
+	data-language="<%= @language %>"
 	data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>"
 	>
 		<div id="wspd-plot" class='graph'></div>
