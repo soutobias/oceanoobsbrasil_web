@@ -37,7 +37,7 @@ const initRange = () => {
       var bulletPosition = (rangeSlider.value /rangeSlider.max);
       rangeBullet.style.left = (bulletPosition*98) + "%";
       var value = (this.value-this.min)/(this.max-this.min)*100
-      rangeSlider.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
+      rangeSlider.style.background = 'linear-gradient(to right, rgb(130, 207, 208) 0%, rgb(130, 207, 208) ' + value + '%, #fff ' + value + '%, white 100%)'
       L.DomEvent.disableClickPropagation(this);
       refreshLeaflet();
     }
@@ -59,7 +59,7 @@ const initRange = () => {
       rangeBullet.innerHTML = dateStr;
       rangeBullet.style.left = (bulletPosition*98) + "%";
       var value = (rangeSlider.value-rangeSlider.min)/(rangeSlider.max-rangeSlider.min)*100
-      rangeSlider.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
+      rangeSlider.style.background = 'linear-gradient(to right, rgb(130, 207, 208) 0%, rgb(130, 207, 208) ' + value + '%, #fff ' + value + '%, white 100%)'
       rangeSlider.addEventListener("input", showSliderValue, false);
     }
 };

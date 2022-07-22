@@ -2,7 +2,17 @@
 import 'leaflet/dist/leaflet';
 import { getData } from '../plugins/get_data';
 import { initColor, getColor } from '../plugins/init_color';
+import { getImage } from '../plugins/get_image';
 
+const imageExists = (img) => {
+
+  var http = new XMLHttpRequest();
+
+  http.open('HEAD', img, false);
+  http.send();
+
+  return http.status != 404;
+}
 
 const metarea = {
   "type": "FeatureCollection",
@@ -73,12 +83,59 @@ const refreshLeaflet = () => {
     const dataElement = document.getElementById('data');
     const token = dataElement.dataset.mapboxApiKey;
     const mymap = L.map('mapid', { zoomControl: false }).setView([-19.039108, -38.954733], 4);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    const synoLayers = document.querySelector('.btn-syno')
+    const language = dataElement.dataset.language;
+
+    if (synoLayers.classList.contains('active')){
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox/satellite-v9',
         accessToken: token
-    }).addTo(mymap);
+      }).addTo(mymap);
+
+      const rangeSlider = document.getElementById('rs-range-line')
+      const now = new Date();
+      const utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000 - 3600000*24*4);
+      utc.setHours(utc.getHours() - utc.getHours() % 6)
+      utc.setMinutes(0)
+      utc.setSeconds(0)
+      let updateUtc = new Date(utc.valueOf())
+      updateUtc.setHours(updateUtc.getHours() + parseInt(rangeSlider.value))
+      if (updateUtc.getHours() === 18){
+        updateUtc.setHours(12)
+      } else if (updateUtc.getHours() === 6){
+        updateUtc.setHours(0)
+      }
+
+      let startDate = `${(updateUtc.getYear()-100).toString().padStart(2, '0')}${(updateUtc.getMonth()+1).toString().padStart(2, '0')}${updateUtc.getDate().toString().padStart(2, '0')}${updateUtc.getHours().toString().padStart(2,'0')}`
+
+      const img = getImage(startDate);
+      const imageBounds = [[20, -90], [-70, 0]];
+      if (imageExists(img)){
+        L.imageOverlay(img, imageBounds).addTo(mymap);
+      } else {
+        if (language === 'pt-br'){
+          alert("Não há carta sinótica disponível!");
+        } else if (language === 'en'){
+          alert("No synoptic chart available!");
+        }  
+      }
+      // L.tileLayer.wms('https://idem.dhn.mar.mil.br/geoserver/ows?', {
+      //   layers: `carta_sinotica:C22061612`,
+      //   format: 'image/png',
+      //   transparent: true,
+      //   version: '1.1.0'
+      // }).addTo(mymap);
+      
+    } else {
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox/satellite-v9',
+          accessToken: token
+      }).addTo(mymap);
+    }
 
     L.geoJSON(metarea, {
       style: metareaStyle

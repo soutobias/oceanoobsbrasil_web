@@ -7,6 +7,17 @@ const selectLayer = () => {
   if (showLayer) {
     const windLayers = document.querySelectorAll('.btn-wind')
     const waveLayers = document.querySelectorAll('.btn-wave')
+    const synoLayers = document.querySelector('.btn-syno')
+
+    synoLayers.addEventListener('click', (event) => {
+      if (!event.currentTarget.classList.contains('active')){
+        synoLayers.classList.add('active')
+        refreshLeaflet();
+      } else {
+        synoLayers.classList.remove('active')
+        refreshLeaflet();
+      }
+    });
     waveLayers.forEach((wave) => {
       wave.addEventListener('click', (event) => {
         if (!event.currentTarget.classList.contains('active')){
@@ -44,15 +55,20 @@ const selectStation = () => {
   const showLayer = document.getElementById('showLayer')
   const waveRadio = document.getElementById('wave-radio')
   const windRadio = document.getElementById('wind-radio')
+  const synopticRadio = document.getElementById('synoptic-radio')
 
   const showPop = document.getElementById('showPop')
   if (showPop) {
     showLayer.addEventListener('click', (event) => {
       const activeData = document.querySelector('.active-data')
       if (activeData.id === 'wave') {
+        synopticRadio.classList.toggle('inactive-tab');
         waveRadio.classList.toggle('inactive-tab');
       } else if (activeData.id === 'wind') {
+        synopticRadio.classList.toggle('inactive-tab');
         windRadio.classList.toggle('inactive-tab');
+      } else {
+        synopticRadio.classList.toggle('inactive-tab');
       }
     });
     showPop.addEventListener('click', (event) => {
@@ -119,7 +135,8 @@ const selectStation = () => {
     buttons.forEach((button) => {
       button.addEventListener('click', (event) => {
         document.getElementById('wave-radio').classList.add('inactive-tab')
-        document.getElementById('wind-radio').classList.add('inactive-tab')      
+        document.getElementById('wind-radio').classList.add('inactive-tab')  
+        document.getElementById('synoptic-radio').classList.add('inactive-tab')
         buttons.forEach((button_1) => {
           button_1.classList.remove('active-station');
         });
@@ -152,9 +169,7 @@ const selectStation = () => {
           document.getElementById('moon1').classList.remove('inactive-tab')
         }
         if (activeData.id != 'wave' && activeData.id != 'wind') {
-          showLayer.classList.add('inactive-tab');
         } else {
-          showLayer.classList.remove('inactive-tab');
           const windLayers = document.querySelectorAll('.btn-wind');
           const waveLayers = document.querySelectorAll('.btn-wave');
           waveLayers.forEach((wave) => {
@@ -176,7 +191,8 @@ const selectStation = () => {
     buttonsText.forEach((button1) => {
       button1.addEventListener('click', (event) => {
         document.getElementById('wave-radio').classList.add('inactive-tab')
-        document.getElementById('wind-radio').classList.add('inactive-tab')      
+        document.getElementById('wind-radio').classList.add('inactive-tab') 
+        document.getElementById('synoptic-radio').classList.add('inactive-tab')
         buttons.forEach((button) => {
           button.classList.remove('active-station');
         });
@@ -211,9 +227,7 @@ const selectStation = () => {
           document.getElementById('moon1').classList.remove('inactive-tab')
         }
         if (activeData.id !== 'wave' && activeData.id !== 'wind') {
-          showLayer.classList.add('inactive-tab');
         } else {
-          showLayer.classList.remove('inactive-tab');
           const windLayers = document.querySelectorAll('.btn-wind');
           const waveLayers = document.querySelectorAll('.btn-wave');
           waveLayers.forEach((wave) => {
@@ -249,7 +263,9 @@ const selectType = () => {
     buttons.forEach((button) => {
       button.addEventListener('click', (event) => {
         document.getElementById('wave-radio').classList.add('inactive-tab')
-        document.getElementById('wind-radio').classList.add('inactive-tab')      
+        document.getElementById('wind-radio').classList.add('inactive-tab')
+        document.getElementById('synoptic-radio').classList.add('inactive-tab')
+
         buttons.forEach((button_1) => {
           button_1.classList.remove('active-data');
         });
@@ -262,9 +278,7 @@ const selectType = () => {
           colorElement.classList.remove('inactive-tab');
         }
         if (activeData.id !== 'wave' && activeData.id !== 'wind') {
-          showLayer.classList.add('inactive-tab');
         } else {
-          showLayer.classList.remove('inactive-tab');
           const windLayers = document.querySelectorAll('.btn-wind');
           const waveLayers = document.querySelectorAll('.btn-wave');
           waveLayers.forEach((wave) => {
@@ -286,8 +300,8 @@ const selectType = () => {
     buttonsText.forEach((button1) => {
       button1.addEventListener('click', (event) => {
         document.getElementById('wave-radio').classList.add('inactive-tab')
-        document.getElementById('wind-radio').classList.add('inactive-tab')      
-
+        document.getElementById('wind-radio').classList.add('inactive-tab')
+        document.getElementById('synoptic-radio').classList.add('inactive-tab')
         buttons.forEach((button) => {
           button.classList.remove('active-data');
         });
@@ -302,9 +316,7 @@ const selectType = () => {
           colorElement.classList.remove('inactive-tab');
         }
         if (activeData.id !== 'wave' && activeData.id !== 'wind') {
-          showLayer.classList.add('inactive-tab');
         } else {
-          showLayer.classList.remove('inactive-tab');
           const windLayers = document.querySelectorAll('.btn-wind');
           const waveLayers = document.querySelectorAll('.btn-wave');
           waveLayers.forEach((wave) => {

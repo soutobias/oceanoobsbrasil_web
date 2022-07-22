@@ -23,6 +23,7 @@
   <% @height = "Altura" %>
   <% @direction = "Direção" %>
   <% @veloc = "Velocidade" %>
+  <% @synoptic = "Carta Sinótica" %>
 <% elsif @language == 'en' %>
   <% @fuso = 'GMT' %>
   <% @date_format = "%m-%d" %>
@@ -42,6 +43,7 @@
   <% @height = "Height" %>
   <% @direction = "Direction" %>
   <% @veloc = "Velocity" %> 
+  <% @synoptic = "Synoptic Chart" %>
 <% end %>
 <div>
   <div class="footer">
@@ -169,6 +171,11 @@
         <% end %>
       <% end %>        
     </div>
+    <div class='layer-text inactive-tab' id='synoptic-radio'>
+      <div class='p-0'>
+         <p id="synoptic-chart" class="btn-syno btn btn-yellow-small font-weight-bold w-100"><%= @synoptic %></p>
+      </div>
+    </div>
     <div class='layer-text inactive-tab' id='wave-radio'>
       <div class='p-0'>
         <p id="heigth-wave" class="btn-wave btn btn-yellow-small font-weight-bold w-100 active"><%= @height %></p>
@@ -285,6 +292,7 @@
   <div id="data"
     data-admin="1"
     data-language="<%= @language %>"
+    data-cloudinary="<%= ENV['CLOUDINARY_URL'] %>"
     data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY'] %>"
     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
@@ -292,6 +300,7 @@
   <div id="data"
     data-admin="0"
     data-language="<%= @language %>"
+    data-cloudinary="<%= ENV['CLOUDINARY_URL'] %>"
     data-oceanobs-api-key="<%= ENV['OCEANOBS_API_KEY2'] %>"
     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
