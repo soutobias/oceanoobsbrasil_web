@@ -8,7 +8,7 @@ const imageExists = (img) => {
 
   var http = new XMLHttpRequest();
 
-  http.open('HEAD', img, false);
+  http.open('HEAD', `https${img.slice(4,)}`, false);
   http.send();
 
   return http.status != 404;
