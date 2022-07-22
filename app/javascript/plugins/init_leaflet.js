@@ -162,7 +162,7 @@ const convertDir = (dir) => {
 
 const markerIcon = (text, limit, typeValue, value, maxValue) => {
 
-  const colors = getColor(limit, maxValue);
+  const colors = getColor(limit, maxValue, typeValue);
   let htmlText
   if (typeValue === 'normal'){
 
@@ -187,7 +187,31 @@ const markerIcon = (text, limit, typeValue, value, maxValue) => {
     });
 
     return icon;
+  } else if (typeValue === 'normal-pres'){
+    let pressMin = 940;
 
+    let index = Math.round((text.toFixed(1)-pressMin)/(maxValue-pressMin)*100)
+    if (index < 0){
+      index = index * (-1)
+    }
+    if (index === 100){
+      index = index - 1;
+    }
+
+    htmlText = `<div class='all-icon'>
+        <div class='circle-color'>
+          <i class="fas fa-circle" style='z-index: 0; color: ${colors[index]};  font-size: 28px;'></i>
+        </div>
+        <p class='p-0 m-0 circle-text' style='z-index:10'>${text.toFixed(0).toString()}</p>
+      </div>`;
+
+    const icon = L.divIcon({
+      html: htmlText,
+      className: '',
+    });
+
+    return icon;
+  
   } else{
     let index = Math.round(value/maxValue*100)
     console.log(index);
@@ -213,6 +237,12 @@ const generateTipText = (mark) => {
     if (mark.data_type === 'buoy'){
       dataType = 'Boia';
       institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'drifter') {
+      dataType = 'Drifter';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'float') {
+      dataType = 'Float';
+      institution = mark.institution.toUpperCase();
     } else if (mark.data_type === 'meteorological_station') {
       dataType = 'Estação Meteorológica';
       institution = mark.institution.toUpperCase();
@@ -233,6 +263,12 @@ const generateTipText = (mark) => {
   } else if (language === 'en'){
     if (mark.data_type === 'buoy'){
       dataType = 'Buoy';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'drifter') {
+      dataType = 'Derivador';
+      institution = mark.institution.toUpperCase();
+    } else if (mark.data_type === 'float') {
+      dataType = 'Flutuador';
       institution = mark.institution.toUpperCase();
     } else if (mark.data_type === 'meteorological_station') {
       dataType = 'Weather Station';
@@ -404,6 +440,8 @@ const generateTipTextNo = (mark) => {
       dataType = 'ALTIMETRIA';
     } else if (mark.data_type === 'drifter') {
       dataType = 'DERIVADOR';
+    } else if (mark.data_type === 'float') {
+      dataType = 'FLUTUADOR';
     }
   } else if (language === 'en'){
     if (mark.data_type === 'gts'){
@@ -414,6 +452,8 @@ const generateTipTextNo = (mark) => {
       dataType = 'ALTIMETER';
     } else if (mark.data_type === 'drifter') {
       dataType = 'DRIFTER';
+    } else if (mark.data_type === 'float') {
+      dataType = 'FLOAT';
     }
   }
   return `${dataType} - ${mark.institution.toUpperCase()}`
@@ -444,7 +484,7 @@ const generatePopupTextNo = (mark) => {
     windSpeedText = 'Vel. Vento'
     windGustText = 'Rajada'
     unitWindText = 'nós'
-    airTempText = 'Temp. Ar'  
+    airTempText = 'Temp. Ar'
     dateTime = `${mark.date_time.slice(8,10)}/${mark.date_time.slice(5,7)} ${mark.date_time.slice(11,16)}`
     header = `<div class='pop-up'>
             <p class='m-0 p-0'><strong>LAT:</strong> ${Math.round(parseFloat(mark.lat)*1000)/1000}, <strong>LON:</strong> ${Math.round(parseFloat(mark.lon)*1000)/1000}</p>
@@ -478,17 +518,26 @@ const generatePopupTextNo = (mark) => {
             <p class='m-0 p-0'><strong>${airTempText}:</strong> ${parseFloat(mark.atmp)} °C</p>
             <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p></div>`
   } else if (mark.data_type === 'scatterometer') {
-    text = `<p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} nós</p>
+    text = `<p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} ${unitWindText}</p>
             <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p></div>`
   } else if (mark.data_type === 'altimeter') {
     text = `<p class='m-0 p-0'><strong>${waveHeightText}:</strong> ${parseFloat(mark.swvht)} m</p>
-            <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} nós</p></div>`
+            <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} ${unitWindText}</p></div>`
   } else if (mark.data_type === 'drifter'){
     text = `<p class='m-0 p-0'><strong>${waveHeightText}:</strong> ${parseFloat(mark.swvht)} m</p>
             <p class='m-0 p-0'><strong>${waveDirText}:</strong> ${parseFloat(mark.wvdir)} °</p>
             <p class='m-0 p-0'><strong>${wavePerText}:</strong> ${parseFloat(mark.tp)} s</p>
             <p class='m-0 p-0'><strong>${sstText}:</strong> ${parseFloat(mark.sst)} °C</p>
-            <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} nós</p>
+            <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} ${unitWindText}</p>
+            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p></div>
+            <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p></div>`
+  } else if (mark.data_type === 'float'){
+    text = `<p class='m-0 p-0'><strong>${waveHeightText}:</strong> ${parseFloat(mark.swvht)} m</p>
+            <p class='m-0 p-0'><strong>${waveDirText}:</strong> ${parseFloat(mark.wvdir)} °</p>
+            <p class='m-0 p-0'><strong>${wavePerText}:</strong> ${parseFloat(mark.tp)} s</p>
+            <p class='m-0 p-0'><strong>${sstText}:</strong> ${parseFloat(mark.sst)} °C</p>
+            <p class='m-0 p-0'><strong>${windSpeedText}:</strong> ${parseFloat(mark.wspd)} ${unitWindText}</p>
+            <p class='m-0 p-0'><strong>Pres:</strong> ${parseFloat(mark.pres)} mb</p></div>
             <p class='m-0 p-0'><strong>${windDirText}:</strong> ${parseFloat(mark.wdir)} °</p></div>`
   }
   text = text.replaceAll("NaN", "--");
@@ -508,6 +557,7 @@ const mapData = (mymap) => {
     const atmpLimit = 25;
     const visibilityLimit = 7;
     const tideLimit = 0.3;
+    const pressLimit = 1015;
 
     const waveMax = 8;
     const windMax = 60;
@@ -515,6 +565,7 @@ const mapData = (mymap) => {
     const atmpMax = 50;
     const visibilityMax = 10;
     const tideMax = 2;
+    const pressMax = 1040;
 
     const waveRadio = document.getElementById('wave-radio')
     const windRadio = document.getElementById('wind-radio')
@@ -590,6 +641,18 @@ const mapData = (mymap) => {
             let text = parseFloat(mark.visibility) * 1.6
             typeValue = 'normal'
             const icon = markerIcon(text, visibilityLimit, typeValue, mark.swvht, visibilityMax);
+            var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
+            const tipText = generateTipText(mark);
+            const popupText = generatePopupText(mark);
+            marker.bindPopup(popupText);
+            marker.bindTooltip(tipText).openTooltip();
+            marker.addTo(mymap);
+          }
+        } else if (activeData.id === 'pressure') {
+          if (mark.pres != null) {
+            let text = parseFloat(mark.pres)
+            typeValue = 'normal-pres'
+            const icon = markerIcon(text, pressLimit, typeValue, mark.pres, pressMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipText(mark);
             const popupText = generatePopupText(mark);
@@ -689,6 +752,18 @@ const mapData = (mymap) => {
             let text = parseFloat(mark.atmp)
             typeValue = 'normal'
             const icon = markerIcon(text, atmpLimit, typeValue, mark.swvht, atmpMax);
+            var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
+            const tipText = generateTipTextNo(mark);
+            const popupText = generatePopupTextNo(mark);
+            marker.bindPopup(popupText);
+            marker.bindTooltip(tipText).openTooltip();
+            marker.addTo(mymap);
+          }
+        } else if (activeData.id === 'pressure') {
+          if (mark.pres != null) {
+            let text = parseFloat(mark.pres)
+            typeValue = 'normal-pres'
+            const icon = markerIcon(text, pressLimit, typeValue, mark.swvht, pressMax);
             var marker = L.marker([parseFloat(mark.lat), parseFloat(mark.lon)], {icon: icon, riseOnHover: true});
             const tipText = generateTipTextNo(mark);
             const popupText = generatePopupTextNo(mark);

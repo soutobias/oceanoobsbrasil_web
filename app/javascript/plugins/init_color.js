@@ -8,6 +8,7 @@ const initColor = () => {
   const atmpLimit = 25;
   const visibilityLimit = 7;
   const tideLimit = 0.3;
+  const pressLimit = 1015
 
   const waveMax = 9;
   const windMax = 60;
@@ -15,6 +16,9 @@ const initColor = () => {
   const atmpMax = 50;
   const visibilityMax = 10;
   const tideMax = 2;
+  const pressMax = 1040
+
+  const pressMin = 940;
 
 
   const colorElement = document.getElementById('color-scale');
@@ -65,6 +69,10 @@ const initColor = () => {
         limitValue = tideLimit;
         maxValue = tideMax;
         variable = 'MARÉ METEOROLÓGICA (m)'
+      } else if (activeData.id === 'pressure'){
+        limitValue = pressLimit;
+        maxValue = pressMax;
+        variable = 'PRESSÃO (mb)'
       }
     } else if (language === 'en'){
       if (activeData.id === 'wave') {
@@ -91,27 +99,56 @@ const initColor = () => {
         limitValue = tideLimit;
         maxValue = tideMax;
         variable = 'METEOROLOGICAL TIDE (m)'
+      } else if (activeData.id === 'pressure'){
+        limitValue = pressLimit;
+        maxValue = pressMax;
+        variable = 'PRESSURE (mb)'
       }
-
     }
 
-    const scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
+    let scale
+    let startValue
+    if (activeData.id === 'pressure'){
+      scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([pressMin, limitValue-(maxValue-pressMin)/10, limitValue, maxValue]);
+      startValue = pressMin
+    } else{
+      scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
+      startValue = 0
+    }
 
     scale.colors(100).forEach((color, index) => {
-      let title = Math.round(parseFloat(maxValue*index/100)*100)/100;
+      let title
+      if (activeData.id === 'pressure'){
+        title = Math.round(parseFloat((maxValue-pressMin)*index/100)*100)/100+pressMin;
+      } else{
+        title = Math.round(parseFloat(maxValue*index/100)*100)/100;
+      }
       let html = `<div class='color-span p-0 m-0' title='${title}' style='background-color: ${color};'></div>`
       colorScale.insertAdjacentHTML('beforeend', html)
-      scaleStart.innerHTML = 0;
+      scaleStart.innerHTML = startValue;
       scaleMiddle.innerHTML = limitValue;
       scaleEnd.innerHTML = maxValue;
     });
     colorName.innerHTML = variable;
-    scaleMiddle.style.left = `${Math.round(100*limitValue/maxValue)-3}%`;
+    if (activeData.id === 'pressure'){
+      scaleMiddle.style.left = `${Math.round(100*(limitValue-pressMin)/(maxValue-pressMin))-10}%`;
+      scaleEnd.style.left = '85%';
+
+    } else{
+      scaleMiddle.style.left = `${Math.round(100*limitValue/maxValue)-3}%`;
+    }
+
   }
 };
 
-const getColor = (limitValue, maxValue) => {
-  const scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
+const getColor = (limitValue, maxValue, typeValue) => {
+  let scale
+  let pressMin = 940 
+  if (typeValue === 'normal-pres'){
+    scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([pressMin, limitValue-(maxValue-pressMin)/10, limitValue, maxValue]);
+  } else{
+    scale = chroma.scale(['00eaff', '0033ff', 'ff7b57', '590007']).domain([0, limitValue-maxValue/10, limitValue, maxValue]);
+  }
   return scale.colors(100)
 };
 

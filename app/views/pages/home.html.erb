@@ -16,6 +16,7 @@
   <% @data_type5 = "Visibilidade" %>
   <% @data_type6 = "Maré Meteorológica" %>
   <% @data_type7 = "Maré e Lua" %>
+  <% @data_type8 = "Pressão" %>
   <% @show_pop = "Informações sobre o Sistema" %>
   <% @show_layer = "Selecionar Camadas" %>
   <% @exit = "Sair" %>
@@ -36,6 +37,7 @@
   <% @data_type5 = "Visibility" %>
   <% @data_type6 = "Meteorological Tide" %>
   <% @data_type7 = "Tide and Moon" %>
+  <% @data_type8 = "Pressure" %>
   <% @show_pop = "System Information" %>
   <% @show_layer = "Select Layers" %>
   <% @exit = "Log out" %>
@@ -93,6 +95,7 @@
       <p class='p-1 data-station' id="water-temp" title='<%=@data_type3%>'><i class="fas fa-thermometer-half"></i></p>
       <p class='p-1 data-station' id="air-temp" title='<%=@data_type4%>'><i class="fas fa-temperature-low"></i></p>
       <p class='p-1 data-station' id="fog" title='<%=@data_type5%>'><i class="fas fa-smog"></i></p>
+      <p class='p-1 data-station' id="pressure" title='<%=@data_type8%>'><i class="fas fa-weight"></i></i></p>
       <p class='p-1 data-station' id="tide" title='<%=@data_type6%>'><i class="fas fa-ship"></i></p>
       <p class='p-1 data-station' id="moon" title='<%=@data_type7%>'><i class="fas fa-moon"></i></p>
       <p class='inactive-tab' id="info" title='Informações sobre os dados'><i class="fas fa-info-circle"></i></p>
@@ -120,6 +123,9 @@
       </div>
       <div class="name-card">
         <p class='p-1 stations-data' id='fog1' title='<%=@data_type5%>'><%=@data_type5%></p>
+      </div>
+      <div class="name-card">
+        <p class='p-1 stations-data' id='pressure1' title='<%=@data_type8%>'><%=@data_type8%></p>
       </div>
       <div class="name-card">
         <p class='p-1 stations-data' id='tide1' title='<%=@data_type6%>'><%=@data_type6%></p>
