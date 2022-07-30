@@ -28,6 +28,7 @@ import { initLeaflet } from '../plugins/init_leaflet';
 import { initPlotly } from '../plugins/init_plotly';
 import { initRange } from '../plugins/init_range';
 import { initColor } from '../plugins/init_color';
+import { countStations } from '../plugins/display_counter';
 
 import { selectStation, selectType, selectLayer } from '../plugins/init_sidebar';
 
@@ -37,6 +38,7 @@ import { selectStation, selectType, selectLayer } from '../plugins/init_sidebar'
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  countStations();
   initRange();
   initPlotly();
   initLeaflet();

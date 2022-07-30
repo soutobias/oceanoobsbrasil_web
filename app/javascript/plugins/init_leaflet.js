@@ -214,7 +214,6 @@ const markerIcon = (text, limit, typeValue, value, maxValue) => {
   
   } else{
     let index = Math.round(value/maxValue*100)
-    console.log(index);
     htmlText = `<div class='all-icon' style='transform: rotate(${text}deg);color: ${colors[index]};  font-size: 20px;'>
       <i class="fas fa-arrow-up"></i>
       </div>`;

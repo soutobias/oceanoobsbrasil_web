@@ -1,6 +1,9 @@
 {
   "name": "oceanoobsbrasil_web",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -10,6 +13,8 @@
     "chroma-js": "^2.1.2",
     "cloudinary": "^1.30.1",
     "cors": "^2.8.5",
+    "counterup2": "^2.0.2",
+    "countup": "^1.8.2",
     "jquery": "^3.6.0",
     "jquery-ui": "^1.13.0",
     "jquery-ui-slider-pips": "^0.0.1-security",
@@ -23,9 +28,6 @@
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
-  "engines": {
-    "node": "14.x"
-  },
   "devDependencies": {
     "webpack-dev-server": "^4.3.1"
   }

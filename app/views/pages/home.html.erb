@@ -213,27 +213,28 @@
     <% if @language == 'pt-br' %>
       <h2 class='text-center text-info'><strong>OCEANO.LIVE</strong></h2>
       <p class='text-center'><strong>Dados observacionais em tempo real:</strong></p>
-      <p class='mb-0 ml-0 mr-0'>Boias</p>
-      <p class='m-0'>Estações meteorológicas</p>
-      <p class='m-0'>Aeroportos</p>
-      <p class='m-0'>Observações visuais</p>
-      <p class='m-0'>Estações maregráficas</p>
-      <p class='m-0'>Altimetria por satélite</p>
-      <p class='m-0'>Escaterômetros</p>
+      <p class='mb-0 ml-0 mr-0'>Boias, Estações meteorológicas,</p>
+      <p class='m-0'>Aeroportos, Observações visuais</p>
+      <p class='m-0'>Estações maregráficas,</p>
+      <p class='m-0'>Altimetria por satélite,</p>
+      <p class='m-0'>Escaterômetros, Boias de Deriva,</p>
+      <p class='m-0'>Gliders, Flutuadores ARGO,</p>
       <p class='m-0'>Mensagens SHIP</p>
+      <h2 class='mt-3 mb-0 text-center font-weight-bold' id='counter'><%=@total_stations[:total]%></h2>
+      <p class='mb-3 mt-0 text-center'>ESTAÇÕES NOS ÚLTIMOS 5 DIAS</p>
       <p class='m-0 text-center'><strong>ATENÇÃO: DADOS EM FUSO UTC</strong></p>
       <h4 class='mt-2 text-center'>CÓDIGOS DISPONÍVEIS EM:</h3>
     <% elsif @language == 'en' %>
       <h2 class='text-center text-info'><strong>OCEANO.LIVE</strong></h2>
       <p class='text-center'><strong>Real-time observational data:</strong></p>
-      <p class='mb-0 ml-0 mr-0'>Buoys</p>
-      <p class='m-0'>Weather stations</p>
-      <p class='m-0'>Airports</p>
-      <p class='m-0'>Visual observations</p>
-      <p class='m-0'>Tide gauges</p>
-      <p class='m-0'>Satellite altimetry</p>
-      <p class='m-0'>Scatterometers</p>
+      <p class='mb-0 ml-0 mr-0'>Buoys, Weather stations,</p>
+      <p class='m-0'>Airports, Visual observations,</p>
+      <p class='m-0'>Tide gauges, Satellite altimetry,</p>
+      <p class='m-0'>Scatterometers, Drifters,</p>
+      <p class='m-0'>Gliders, ARGO Floats,</p>
       <p class='m-0'>SHIP messages</p>
+      <h2 class='mt-3 mb-0 text-center font-weight-bold' id='counter'><%=@total_stations[:total]%></h2>
+      <p class='mb-3 mt-0 text-center'>STATIONS IN THE LAST 5 DAYS</p>
       <p class='m-0 text-center'><strong>ATTENTION: DATA IN GMT</strong></p>
       <h4 class='mt-2 text-center'>CODES AVAILABLE AT:</h3>
     <% end %>
@@ -298,6 +299,7 @@
   <div id="data"
     data-admin="1"
     data-language="<%= @language %>"
+    data-total="<%= @total_stations[:total] %>"
     data-cloudn="<%= ENV['CLOUDINARY_NAME'] %>"
     data-clouds="<%= ENV['CLOUDINARY_SECRET'] %>"
     data-clouda="<%= ENV['CLOUDINARY_KEY'] %>"
@@ -308,6 +310,7 @@
   <div id="data"
     data-admin="0"
     data-language="<%= @language %>"
+    data-total="<%= @total_stations[:total] %>"
     data-cloudn="<%= ENV['CLOUDINARY_NAME'] %>"
     data-clouds="<%= ENV['CLOUDINARY_SECRET'] %>"
     data-clouda="<%= ENV['CLOUDINARY_KEY'] %>"

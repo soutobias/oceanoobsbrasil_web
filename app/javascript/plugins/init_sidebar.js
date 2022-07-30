@@ -4,12 +4,17 @@ const selectLayer = () => {
   const showLayer = document.getElementById('showLayer')
   const waveRadio = document.getElementById('wave-radio')
   const windRadio = document.getElementById('wind-radio')
+  const synopticRadio = document.getElementById('synoptic-radio')
+
   if (showLayer) {
     const windLayers = document.querySelectorAll('.btn-wind')
     const waveLayers = document.querySelectorAll('.btn-wave')
     const synoLayers = document.querySelector('.btn-syno')
 
     synoLayers.addEventListener('click', (event) => {
+      waveRadio.classList.add('inactive-tab');
+      windRadio.classList.add('inactive-tab');
+      synopticRadio.classList.add('inactive-tab');
       if (!event.currentTarget.classList.contains('active')){
         synoLayers.classList.add('active')
         refreshLeaflet();
@@ -22,6 +27,8 @@ const selectLayer = () => {
       wave.addEventListener('click', (event) => {
         if (!event.currentTarget.classList.contains('active')){
           waveRadio.classList.add('inactive-tab');
+          windRadio.classList.add('inactive-tab');
+          synopticRadio.classList.add('inactive-tab');
           waveLayers.forEach((button) => {
             button.classList.remove('active');
           });
@@ -33,7 +40,9 @@ const selectLayer = () => {
     windLayers.forEach((wind) => {
       wind.addEventListener('click', (event) => {
         if (!event.currentTarget.classList.contains('active')){
+          waveRadio.classList.add('inactive-tab');
           windRadio.classList.add('inactive-tab');
+          synopticRadio.classList.add('inactive-tab');
           windLayers.forEach((button) => {
             button.classList.remove('active');
           });

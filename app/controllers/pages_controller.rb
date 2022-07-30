@@ -3,6 +3,8 @@ class PagesController < ApplicationController
 
   def home
     @moons = Moon.where("date_time <  '#{Time.now.utc + (3600*24*15)}' AND date_time > '#{Time.now.utc - (3600*24*15)}'")
+    @total_stations = get_total_stations
+    @moons = Moon.where("date_time <  '#{Time.now.utc + (3600*24*15)}' AND date_time > '#{Time.now.utc - (3600*24*15)}'")
     @language = 'pt-br'
     if params[:language] == "en"
       @language = 'en'
@@ -36,13 +38,34 @@ class PagesController < ApplicationController
           @stations = Station.where(@query)
         end
       else
-        @stations = Station.all
+        @stations = {}
       end
       @station = Station.new
     else
       redirect_to root_path
     end
   end
+
+  private
+
+  def get_total_stations()
+    params = {}
+    begin
+      response = RestClient.get("https://remobsapi.herokuapp.com/api/v1/data_stations/distinct?token=#{ENV["OCEANOBS_API_KEY2"]}")
+      remobs_response = JSON.parse(response)
+      params[:total_stations] = (remobs_response['total_stations'].to_i)
+
+      response = RestClient.get("https://remobsapi.herokuapp.com/api/v1/data_no_stations/distinct?token=#{ENV["OCEANOBS_API_KEY2"]}")
+      remobs_response = JSON.parse(response)
+      params[:total_no_stations] = (remobs_response['total_stations'].to_i)
+
+      params[:total] = params[:total_stations] + params[:total_no_stations]
+      return params
+    rescue
+      return {}
+    end
+  end
+  
 end
 
 
