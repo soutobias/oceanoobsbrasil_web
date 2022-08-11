@@ -19,6 +19,7 @@
     "jquery-ui": "^1.13.0",
     "jquery-ui-slider-pips": "^0.0.1-security",
     "leaflet": "^1.7.1",
+    "leaflet.markercluster": "^1.5.3",
     "leaflet.timeline": "^1.4.3",
     "node-sass": "^7.0.1",
     "plotly": "^1.0.6",

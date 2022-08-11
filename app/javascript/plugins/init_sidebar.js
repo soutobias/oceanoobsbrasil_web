@@ -153,6 +153,8 @@ const selectStation = () => {
         const activeStation = document.querySelector('.active-station')
         const activeData = document.querySelector('.active-data')
         if (activeStation.id === 'no-stations') {
+          document.getElementById('weather-warning').classList.add('inactive-tab')
+          document.getElementById('weather-warning1').classList.add('inactive-tab')
           document.getElementById('moon').classList.add('inactive-tab')
           document.getElementById('moon1').classList.add('inactive-tab')
           document.getElementById('tide').classList.add('inactive-tab')
@@ -168,8 +170,13 @@ const selectStation = () => {
           } else if (activeData.id === 'moon') {
             document.getElementById('moon').classList.remove('active-data')
             document.getElementById('wave').classList.add('active-data')
+          } else if (activeData.id === 'weather-warning') {
+            document.getElementById('weather-warning').classList.remove('active-data')
+            document.getElementById('wave').classList.add('active-data')
           }
         } else {
+          document.getElementById('weather-warning').classList.remove('inactive-tab')
+          document.getElementById('weather-warning1').classList.remove('inactive-tab')
           document.getElementById('tide').classList.remove('inactive-tab')
           document.getElementById('tide1').classList.remove('inactive-tab')
           document.getElementById('fog').classList.remove('inactive-tab')
@@ -211,6 +218,8 @@ const selectStation = () => {
         const activeStation = document.querySelector('.active-station')
         const activeData = document.querySelector('.active-data')
         if (activeStation.id === 'no-stations') {
+          document.getElementById('weather-warning').classList.add('inactive-tab')
+          document.getElementById('weather-warning1').classList.add('inactive-tab')
           document.getElementById('moon').classList.add('inactive-tab')
           document.getElementById('moon1').classList.add('inactive-tab')
           document.getElementById('tide').classList.add('inactive-tab')
@@ -226,8 +235,13 @@ const selectStation = () => {
           } else if (activeData.id === 'moon') {
             document.getElementById('moon').classList.remove('active-data')
             document.getElementById('wave').classList.add('active-data')
+          } else if (activeData.id === 'weather-warning') {
+            document.getElementById('weather-warning').classList.remove('active-data')
+            document.getElementById('wave').classList.add('active-data')
           }
         } else {
+          document.getElementById('weather-warning').classList.remove('inactive-tab')
+          document.getElementById('weather-warning1').classList.remove('inactive-tab')
           document.getElementById('tide').classList.remove('inactive-tab')
           document.getElementById('tide1').classList.remove('inactive-tab')
           document.getElementById('fog').classList.remove('inactive-tab')
@@ -280,10 +294,12 @@ const selectType = () => {
         });
         event.currentTarget.classList.add('active-data');
         const activeData = document.querySelector('.active-data')
-        if (activeData.id === 'moon') {
+        if (activeData.id === 'moon'){
           colorElement.classList.add('inactive-tab');
           moonFull.classList.remove('inactive-tab');
-        } else{
+        } else if (activeData.id === 'weather-warning'){
+          colorElement.classList.add('inactive-tab');
+        } else {
           colorElement.classList.remove('inactive-tab');
         }
         if (activeData.id !== 'wave' && activeData.id !== 'wind') {
@@ -321,6 +337,8 @@ const selectType = () => {
         if (activeData.id === 'moon') {
           colorElement.classList.add('inactive-tab');
           moonFull.classList.remove('inactive-tab');
+        } else if (activeData.id === 'weather-warning'){
+          colorElement.classList.add('inactive-tab');
         } else{
           colorElement.classList.remove('inactive-tab');
         }

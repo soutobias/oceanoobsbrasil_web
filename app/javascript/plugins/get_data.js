@@ -28,6 +28,13 @@ const getData = () => {
             mode: 'cors',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
           })
+      } else if (activeData.id === 'weather-warning') {
+        const url = `https://remobsapi.herokuapp.com/api/v1/weather_warnings?start_date=${startDate}&end_date=${endDate}&token=${token}`
+        return fetch(url,{
+            method: 'GET',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
+          })
       } else {
         const url = `https://remobsapi.herokuapp.com/api/v1/data_stations/last?start_date=${startDate}&end_date=${endDate}&token=${token}`
         return fetch(url,{
@@ -37,12 +44,21 @@ const getData = () => {
           })
       }
     } else {
-      const url = `https://remobsapi.herokuapp.com/api/v1/data_no_stations?start_date=${startDate}&end_date=${endDate}&token=${token}`
-      return fetch(url,{
+      if (activeData.id === 'weather-warning') {
+        const url = `https://remobsapi.herokuapp.com/api/v1/weather_warnings?start_date=${startDate}&end_date=${endDate}&token=${token}`
+        return fetch(url,{
           method: 'GET',
           mode: 'cors',
           headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
         })
+      } else {
+        const url = `https://remobsapi.herokuapp.com/api/v1/data_no_stations?start_date=${startDate}&end_date=${endDate}&token=${token}`
+        return fetch(url,{
+          method: 'GET',
+          mode: 'cors',
+          headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'},
+        })
+      }
     }
   }
 };
