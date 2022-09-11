@@ -6,6 +6,16 @@ const getImage = (startDate) => {
   const dataElement = document.getElementById('data');
   
   if (dataElement) {
+    let url = `http://soutobias.xyz/images/synoptic_charts/${startDate}.png`
+    return url
+  }
+};
+
+const getImage2 = (startDate) => {
+
+  const dataElement = document.getElementById('data');
+  
+  if (dataElement) {
     const cloudn = dataElement.dataset.cloudn;
     const clouds = dataElement.dataset.clouds;
     const clouda = dataElement.dataset.clouda;

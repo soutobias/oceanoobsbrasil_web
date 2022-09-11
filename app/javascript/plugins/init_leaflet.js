@@ -113,7 +113,8 @@ const refreshLeaflet = () => {
 
       const img = getImage(startDate);
       const imageBounds = [[20, -90], [-70, 0]];
-      if (imageExists(img)){
+      console.log(img)
+      if (img){
         L.imageOverlay(img, imageBounds).addTo(mymap);
       } else {
         if (language === 'pt-br'){
