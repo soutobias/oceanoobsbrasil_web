@@ -4,8 +4,24 @@ import 'leaflet.markercluster';
 import { getData } from '../plugins/get_data';
 import { initColor, getColor } from '../plugins/init_color';
 import { getImage } from '../plugins/get_image';
+import { explicit } from 'cloudinary/lib/uploader';
 
 const imageExists = (img) => {
+
+  var http = new XMLHttpRequest();
+  
+
+  http.open('HEAD', img, false);
+  try{
+    http.send();
+  } catch (e){
+    return false
+  }
+
+  return http.status != 404;
+}
+
+const imageExists2 = (img) => {
 
   var http = new XMLHttpRequest();
 
@@ -113,8 +129,7 @@ const refreshLeaflet = () => {
 
       const img = getImage(startDate);
       const imageBounds = [[20, -90], [-70, 0]];
-      console.log(img)
-      if (img){
+      if (imageExists(img)){
         L.imageOverlay(img, imageBounds).addTo(mymap);
       } else {
         if (language === 'pt-br'){
