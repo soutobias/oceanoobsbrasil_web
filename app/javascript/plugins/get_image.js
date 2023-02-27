@@ -6,7 +6,7 @@ const getImage = (startDate) => {
   const dataElement = document.getElementById('data');
   
   if (dataElement) {
-    let url = `https://soutobias.xyz/images/synoptic_charts/${startDate}.png`
+    let url = `http://www.pnboia.org/pictures/${startDate}.png`
     return url
   }
 };
