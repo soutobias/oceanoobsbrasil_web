@@ -79,10 +79,14 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: oceanoobsbrasil_web_production
-  username: oceanoobsbrasil_web
-  password: <%= ENV['OCEANOOBSBRASIL_WEB_DATABASE_PASSWORD'] %>
+  database: user_tobias
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  host: <%= ENV["USER_ACCESS_URL"] %>
+  username: <%= ENV["USER_ACCESS_USR"] %>
+  password: <%= ENV["USER_ACCESS_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
 
 external_oceanoobs: # database you also want to connect to
   database: oceanobs
