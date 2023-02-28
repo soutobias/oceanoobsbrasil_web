@@ -6,12 +6,14 @@ import { initColor, getColor } from '../plugins/init_color';
 import { getImage } from '../plugins/get_image';
 import { explicit } from 'cloudinary/lib/uploader';
 
-const imageExists = (img) => {
+const imageExists2 = (img) => {
 
   var http = new XMLHttpRequest();
   
 
   http.open('HEAD', img, false);
+  http.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  http.setRequestHeader('Access-Control-Allow-Origin', '*');
   try{
     http.send();
   } catch (e){
@@ -21,14 +23,9 @@ const imageExists = (img) => {
   return http.status != 404;
 }
 
-const imageExists2 = (img) => {
+const imageExists = (img) => {
 
-  var http = new XMLHttpRequest();
-
-  http.open('HEAD', `https${img.slice(4,)}`, false);
-  http.send();
-
-  return http.status != 404;
+  return true
 }
 
 const metarea = {
