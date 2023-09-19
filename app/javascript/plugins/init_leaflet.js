@@ -64,17 +64,46 @@ const initLeaflet = () => {
 
     const dataElement = document.getElementById('data');
     const token = dataElement.dataset.mapboxApiKey;
-    const mymap = L.map('mapid', { zoomControl: false }).setView([-19.039108, -38.954733], 4);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    const mapboxLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox/satellite-v9',
         accessToken: token
-    }).addTo(mymap);
+    });
 
-    L.geoJSON(metarea, {
+    var osmHOT = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: ''
+    });
+
+    const metarea = L.geoJSON(metarea, {
       style: metareaStyle
-    }).addTo(mymap);
+    })
+    var overlay = L.layerGroup([metarea]);
+
+    const mymap = L.map('mapid', {
+      zoomControl: false,
+      layers: [mapboxLayer, overlay]
+    }).setView([-19.039108, -38.954733], 4);
+
+    var baseMaps = {
+      "Satellite": mapboxLayer,
+      "OpenStreetMap": osmHOT
+    };
+    
+    var overlayMaps = {
+        "Metarea": metarea
+    };
+
+    var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(mymap);
+
+    // L.tileLayer.wms('https://idem.dhn.mar.mil.br/geoserver/ows?', {
+    //   layers: `smm:metarea_v`,
+    //   format: 'image/png',
+    //   transparent: true,
+    //   version: '1.1.0',
+    //   style: metareaStyle,
+    // }).addTo(mymap);
 
     mapData(mymap);
     const first = document.getElementById('first-full-screen')
