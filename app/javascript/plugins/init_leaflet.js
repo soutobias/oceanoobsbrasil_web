@@ -95,7 +95,7 @@ const initLeaflet = () => {
         "Metarea": metarea
     };
 
-    var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(mymap);
+    var layerControl = L.control.layers(baseMaps, overlayMaps, {position: 'bottomright'}).addTo(mymap);
 
     // L.tileLayer.wms('https://idem.dhn.mar.mil.br/geoserver/ows?', {
     //   layers: `smm:metarea_v`,
