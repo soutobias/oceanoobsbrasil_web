@@ -7,10 +7,11 @@ const getImage = (startDate) => {
   
   if (dataElement) {
     // let url = `https://soutobias.xyz/images/synoptic_charts/${startDate}.png`
-    let url = `http://pnboia.web15f72.uni5.net/pictures/${startDate}.png`
+    let url = `https://pub-abccbaf179514b5080147839a0196765.r2.dev/synoptic_charts/${startDate}.png`
     return url
   }
 };
+
 
 const getImage2 = (startDate) => {
 
